@@ -1,0 +1,18 @@
+group 'org.ligson'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+ext.springVersion = "4.0.4.RELEASE"
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "http://maven.oschina.net/content/groups/public/" }
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    //spring依赖
+    compile "org.springframework:spring-context:${springVersion}"
+}
