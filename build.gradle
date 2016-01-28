@@ -20,10 +20,15 @@ dependencies {
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"
     compile "org.springframework:spring-jdbc:${springVersion}"
+
     //slf4j配置
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
     compile "ch.qos.logback:logback-classic:${logbackVersion}"
     compile "com.google.guava:guava:${guavaVersion}"
     compile "com.alibaba:fastjson:1.2.7"
+
+    //mybatis
+    compile "org.mybatis:mybatis:3.2.8"
+    compile "org.mybatis:mybatis-spring:1.2.1"
 
 }

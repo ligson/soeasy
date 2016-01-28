@@ -1,8 +1,7 @@
-package org.ligson.soeasy.biz.core.common.handler;
+package org.ligson.soeasy.biz.core.datastore;
 
 import com.alibaba.fastjson.JSON;
-import org.ligson.soeasy.biz.core.base.DataStore;
-import org.ligson.soeasy.biz.core.entity.BasicEntity;
+import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +11,8 @@ import java.util.List;
 
 /**
  * Created by ligso on 2016/1/27.
+ *
+ * @author ligson
  */
 public class DataStoreHandler implements Serializable {
 

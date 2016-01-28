@@ -1,4 +1,4 @@
-package org.ligson.soeasy.biz.core.entity;
+package org.ligson.soeasy.biz.core.base.entity;
 
 import java.io.Serializable;
 

@@ -1,10 +1,10 @@
-package org.ligson.soeasy.biz.core.base;
+package org.ligson.soeasy.biz.core.datastore;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
-import org.ligson.soeasy.biz.core.entity.BasicEntity;
+import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
 
 import java.util.ArrayList;
 import java.util.List;
