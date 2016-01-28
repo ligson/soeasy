@@ -91,4 +91,17 @@ public class ColumnInfo {
     public void setLength(int length) {
         this.length = length;
     }
+
+    @Override
+    public String toString() {
+        return "ColumnInfo{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", primaryKey=" + primaryKey +
+                ", remark='" + remark + '\'' +
+                ", defaultValue='" + defaultValue + '\'' +
+                ", nullable=" + nullable +
+                ", length=" + length +
+                '}';
+    }
 }

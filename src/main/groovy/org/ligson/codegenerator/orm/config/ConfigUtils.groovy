@@ -25,7 +25,7 @@ public class ConfigUtils {
         }
     }
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
 
         File file = new File(ConfigUtils.class.getClassLoader().getResource("./cgconf/orm.properties").getFile());
         ConfigUtils configUtils = new ConfigUtils(file);

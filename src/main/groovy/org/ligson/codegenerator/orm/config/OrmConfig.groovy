@@ -121,7 +121,7 @@ public class OrmConfig {
                 '}';
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         OrmConfig ormConfig = OrmConfig.getInstance();
         System.out.println(ormConfig);
     }

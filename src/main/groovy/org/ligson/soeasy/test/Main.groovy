@@ -15,7 +15,7 @@ import java.io.File;
 public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/spring-conf.xml");
         logger.debug("context:{}---", context);
         File file = new File(".");

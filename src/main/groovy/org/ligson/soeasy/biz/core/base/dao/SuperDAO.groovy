@@ -1,7 +1,6 @@
 package org.ligson.soeasy.biz.core.base.dao;
 
 
-import org.apache.ibatis.session.RowBounds;
 import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -10,13 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Map;
-
 
 @Repository
-@SuppressWarnings({"unchecked", "rawtypes"})
 public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
 
     public static final Logger log = LoggerFactory.getLogger(SuperDAO.class);
@@ -47,6 +41,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * (non-Javadoc)
      * @see com.wangyin.payment.tesla.dao.ISuperDAO#update(java.lang.Object)
      */
+
     @Override
     public Integer update(E e) {
         //String statementName = parameterObject.getClass().getSimpleName() + updateStatementSuffix;
@@ -60,6 +55,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * (non-Javadoc)
      * @see com.wangyin.payment.tesla.dao.ISuperDAO#delete(java.lang.Object)
      */
+
     @Override
     public Integer delete(E e) {
         //String statementName = parameterObject.getClass().getSimpleName() + deleteStatementSuffix;
@@ -67,13 +63,13 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         return null;
     }
 
-
     /*
      * 
      * desc:
      * (non-Javadoc)
      * @see com.wangyin.payment.tesla.dao.ISuperDAO#insert(com.wangyin.wallet.common.BasicEntity)
      */
+
     @Override
     public Integer insert(E e) {
         //String statementName = parameterObject.getClass().getSimpleName() + insertStatementSuffix;
@@ -87,6 +83,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * (non-Javadoc)
      * @see com.wangyin.payment.tesla.dao.ISuperDAO#get(java.lang.Object)
      */
+
     @Override
     public E get(E e) {
         //String statementName = parameterObject.getClass().getSimpleName() + selectStatementSuffix;
@@ -94,13 +91,13 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         return null;
     }
 
-
     /*
      *
      * desc:
      * (non-Javadoc)
      * @see com.wangyin.payment.tesla.dao.ISuperDAO#getList(java.lang.Object)
      */
+
     @Override
     public List<E> getList(E e) throws DataAccessException {
         // String statementName = parameterObject.getClass().getSimpleName() + getListStatementSuffix;
@@ -108,12 +105,12 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         return null;
     }
 
-
-    /* 
+    /*
      * desc:
 	 * (non-Javadoc)
 	 * @see com.wangyin.payment.tesla.common.dao.ISuperDAO#batchInsert(java.util.List)
 	 */
+
     @Override
     public int batchInsert(List<E> basicEntityList) {
         //每次I/O提交数量
@@ -152,6 +149,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * (non-Javadoc)
      * @see com.wangyin.payment.tesla.common.dao.ISuperDAO#batchUpdate(java.util.List)
      */
+
     @Override
     public int batchUpdate(List<E> basicEntityList) {
         //每次I/O提交数量
@@ -197,3 +195,4 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
 
 
 }
+

@@ -44,4 +44,13 @@ public class TableInfo implements Serializable {
     public void setColumnInfos(List<ColumnInfo> columnInfos) {
         this.columnInfos = columnInfos;
     }
+
+    @Override
+    public String toString() {
+        return "TableInfo{" +
+                "tableName='" + tableName + '\'' +
+                ", primaryKeyName='" + primaryKeyName + '\'' +
+                ", columnInfos=" + columnInfos +
+                '}';
+    }
 }

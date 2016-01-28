@@ -1,6 +1,7 @@
 group 'org.ligson'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'groovy'
 apply plugin: 'java'
 
 ext.springVersion = "4.2.4.RELEASE"
@@ -11,6 +12,7 @@ ext.guavaVersion = "19.0"
 sourceCompatibility = 1.8
 
 repositories {
+
     maven { url "http://maven.oschina.net/content/groups/public/" }
     mavenCentral()
 }
@@ -30,5 +32,9 @@ dependencies {
     //mybatis
     compile "org.mybatis:mybatis:3.2.8"
     compile "org.mybatis:mybatis-spring:1.2.1"
+
+    //mysql driver
+    compile "mysql:mysql-connector-java:5.1.38"
+
 
 }
