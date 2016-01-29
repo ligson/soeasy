@@ -1,8 +1,10 @@
 group 'org.ligson'
 version '1.0-SNAPSHOT'
 
+//插件
 apply plugin: 'groovy'
-apply plugin: 'java'
+apply plugin: "idea"
+
 
 ext.springVersion = "4.2.4.RELEASE"
 ext.slf4jVersion = "1.7.14"
