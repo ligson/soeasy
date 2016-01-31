@@ -1,4 +1,6 @@
-package org.ligson.codegenerator.orm.config;
+package org.ligson.codegenerator.orm.config
+
+import org.ligson.codegenerator.orm.bean.TableInfo;
 
 import java.io.File;
 
@@ -120,6 +122,7 @@ public class OrmConfig {
                 ", servicePath='" + servicePath + '\'' +
                 '}';
     }
+
 
     public static void main(String[] args) {
         OrmConfig ormConfig = OrmConfig.getInstance();

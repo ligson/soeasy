@@ -75,9 +75,32 @@ public class QueryTools {
         }
     }
 
+    public static String convert2JavaName(String columnName) {
+        String[] names = columnName.split("_");
+        if (names.length == 1) {
+            return columnName;
+        } else {
+            StringBuilder builder = new StringBuilder();
+            names.eachWithIndex { String name, int idx ->
+                if (idx == 0) {
+                    builder.append(name)
+                } else {
+                    builder.append(name.charAt(0).toUpperCase()).append(name.substring(1));
+                }
+            }
+            return builder.toString();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
+        println convert2JavaName("user")
         QueryTools qt = new QueryTools();
         TableInfo ti = qt.getTableInfo();
         System.out.println(ti);
+        // <result column="ID" property="id" jdbcType="BIGINT"/>
+        ti.columnInfos.each { ColumnInfo ci ->
+            String javaPropertyName = convert2JavaName(ci.name);
+            println("<result column=\"${ci.name}\" property=\"${javaPropertyName}\" jdbcType=\"${ci.type}\"/>")
+        }
     }
 }
