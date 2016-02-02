@@ -17,6 +17,10 @@ public class TableInfo implements Serializable {
      */
     private String primaryKeyName;
     /***
+     * 主键类型
+     */
+    private String primaryKeyType;
+    /***
      * 所有的列
      */
     private List<ColumnInfo> columnInfos = new ArrayList<>();
@@ -43,6 +47,14 @@ public class TableInfo implements Serializable {
 
     public void setColumnInfos(List<ColumnInfo> columnInfos) {
         this.columnInfos = columnInfos;
+    }
+
+    String getPrimaryKeyType() {
+        return primaryKeyType
+    }
+
+    void setPrimaryKeyType(String primaryKeyType) {
+        this.primaryKeyType = primaryKeyType
     }
 
     @Override

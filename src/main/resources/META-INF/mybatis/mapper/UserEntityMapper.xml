@@ -130,31 +130,6 @@
             ,STATUS
 	</sql>
 
-    <!--查询字段列表拼装-->
-    <sql id="baseColumnList2">
-        py.ID
-        ,py.ACCOUNT_ID
-        ,py.CREATOR
-        ,py.PERSONAL_ZHY_CODE
-        ,py.NAME
-        ,py.PHONE
-        ,py.SEX
-        ,py.BIZ_ZHY_CODE
-        ,py.ID_CARD
-        ,py.DEPARTMENT
-        ,py.BIRTHDAY
-        ,py.IS_MARRIED
-        ,py.LIVE_ADDRESS
-        ,py.CENSUS_REGISTER_ADDRESS
-        ,py.REMARK
-        ,py.CREATE_TIME
-        ,py.LAST_UPDATE_NO
-        ,py.LAST_UPDATE_USERID
-        ,py.UPDATE_TIME
-        ,py.STATUS
-    </sql>
-
-
     <!--
     方法名称: insert
     调用路径: PersonalYunEntityMapper.insert
