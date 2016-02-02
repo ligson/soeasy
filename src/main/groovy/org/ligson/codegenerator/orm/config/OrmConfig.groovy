@@ -15,6 +15,9 @@ public class OrmConfig {
     private String password;
     private String databaseName;
     private String tableName;
+    private String entityName;
+    private String entityPackage;
+    private String servicePackage;
     private String mapperPath;
     private String servicePath;
     private static OrmConfig ormConfig;
@@ -39,7 +42,9 @@ public class OrmConfig {
             setUrl(config.getValue("url"));
             setUsername(config.getValue("username"));
             setPassword(config.getValue("password"));
-
+            setEntityName(config.getValue("entity_name"));
+            setEntityPackage(config.getValue("entity_package"));
+            setServicePackage(config.getValue("service_package"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,6 +112,30 @@ public class OrmConfig {
 
     public void setServicePath(String servicePath) {
         this.servicePath = servicePath;
+    }
+
+    String getEntityName() {
+        return entityName
+    }
+
+    void setEntityName(String entityName) {
+        this.entityName = entityName
+    }
+
+    String getEntityPackage() {
+        return entityPackage
+    }
+
+    void setEntityPackage(String entityPackage) {
+        this.entityPackage = entityPackage
+    }
+
+    String getServicePackage() {
+        return servicePackage
+    }
+
+    void setServicePackage(String servicePackage) {
+        this.servicePackage = servicePackage
     }
 
     @Override
