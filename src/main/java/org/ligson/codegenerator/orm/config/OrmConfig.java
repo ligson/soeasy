@@ -1,4 +1,4 @@
-package org.ligson.codegenerator.orm.config
+package org.ligson.codegenerator.orm.config;
 
 import org.ligson.codegenerator.orm.bean.TableInfo;
 
@@ -115,27 +115,27 @@ public class OrmConfig {
     }
 
     String getEntityName() {
-        return entityName
+        return entityName;
     }
 
     void setEntityName(String entityName) {
-        this.entityName = entityName
+        this.entityName = entityName;
     }
 
     String getEntityPackage() {
-        return entityPackage
+        return entityPackage;
     }
 
     void setEntityPackage(String entityPackage) {
-        this.entityPackage = entityPackage
+        this.entityPackage = entityPackage;
     }
 
     String getServicePackage() {
-        return servicePackage
+        return servicePackage;
     }
 
     void setServicePackage(String servicePackage) {
-        this.servicePackage = servicePackage
+        this.servicePackage = servicePackage;
     }
 
     @Override

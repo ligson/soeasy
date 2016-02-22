@@ -81,26 +81,29 @@ public class QueryTools {
             return columnName;
         } else {
             StringBuilder builder = new StringBuilder();
-            names.eachWithIndex { String name, int idx ->
+            for (int idx = 0; idx < names.length; idx++) {
+                String name = names[idx];
                 if (idx == 0) {
-                    builder.append(name)
+                    builder.append(name);
                 } else {
-                    builder.append(name.charAt(0).toUpperCase()).append(name.substring(1));
+                    builder.append(Character.toUpperCase(name.charAt(0))).append(name.substring(1));
                 }
             }
+
             return builder.toString();
         }
     }
 
     public static void main(String[] args) throws Exception {
-        println convert2JavaName("user")
+        //println convert2JavaName("user")
         QueryTools qt = new QueryTools();
         TableInfo ti = qt.getTableInfo();
         System.out.println(ti);
         // <result column="ID" property="id" jdbcType="BIGINT"/>
-        ti.columnInfos.each { ColumnInfo ci ->
-            String javaPropertyName = convert2JavaName(ci.name);
-            println("<result column=\"${ci.name}\" property=\"${javaPropertyName}\" jdbcType=\"${ci.type}\"/>")
+        for (ColumnInfo ci : ti.getColumnInfos()) {
+            String javaPropertyName = convert2JavaName(ci.getName());
+            System.out.printf("<result column=\"%s\" property=\"%s\" jdbcType=\"%s\"/>\n", ci.getName(), javaPropertyName, ci.getType());
         }
+
     }
 }

@@ -49,12 +49,12 @@ public class TableInfo implements Serializable {
         this.columnInfos = columnInfos;
     }
 
-    String getPrimaryKeyType() {
-        return primaryKeyType
+    public String getPrimaryKeyType() {
+        return primaryKeyType;
     }
 
-    void setPrimaryKeyType(String primaryKeyType) {
-        this.primaryKeyType = primaryKeyType
+    public void setPrimaryKeyType(String primaryKeyType) {
+        this.primaryKeyType = primaryKeyType;
     }
 
     @Override

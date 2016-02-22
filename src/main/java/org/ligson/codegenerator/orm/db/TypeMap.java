@@ -1,5 +1,7 @@
 package org.ligson.codegenerator.orm.db;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ import java.util.Map;
  * @author ligson
  */
 public class TypeMap {
-    public static Map<String, Class> typeMap = [:];
+    public static Map<String, Class> typeMap = new HashMap<>();
     public static final Class VARCHAR_TYPE = String.class;
     public static final Class DATETIME_TYPE = Date.class;
     public static final Class INT_TYPE = Integer.class;

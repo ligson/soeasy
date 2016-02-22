@@ -2,6 +2,7 @@ group 'org.ligson'
 version '1.0-SNAPSHOT'
 
 //插件
+apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: "idea"
 

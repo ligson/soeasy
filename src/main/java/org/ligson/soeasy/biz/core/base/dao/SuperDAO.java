@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
+import java.util.List;
+
 
 @Repository
 public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {

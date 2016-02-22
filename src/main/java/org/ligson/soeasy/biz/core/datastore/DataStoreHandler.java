@@ -24,7 +24,7 @@ public class DataStoreHandler implements Serializable {
      * @param dataStore
      * @return
      */
-    @Transactional(rollbackFor = [Exception.class])
+    @Transactional(rollbackFor = Exception.class)
     public Boolean save(DataStore dataStore) throws Exception {
         int result = 0;
         if (dataStore == null) {
@@ -63,7 +63,7 @@ public class DataStoreHandler implements Serializable {
         return true;
     }
 
-    @Transactional(rollbackFor = [Exception.class])
+    @Transactional(rollbackFor = Exception.class)
     public Boolean saveInBatch(List<? extends DataStore> dataStoreList) throws Exception {
         int result = 0;
         if (dataStoreList == null || dataStoreList.size() == 0) {
@@ -109,7 +109,7 @@ public class DataStoreHandler implements Serializable {
      * @param dataStore
      * @return
      */
-    @Transactional(rollbackFor = [Exception.class])
+    @Transactional(rollbackFor = Exception.class)
     public Boolean saveForDataMigration(DataStore dataStore) throws Exception {
         int result = 0;
         if (dataStore == null) {
