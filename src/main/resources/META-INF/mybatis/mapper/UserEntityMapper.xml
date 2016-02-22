@@ -179,7 +179,7 @@
         <include refid="baseColumnList"/>
         FROM t_user
         WHERE
-    id = #{id,jdbcType=bigint}
+        id = #{id,jdbcType=bigint}
     </select>
 
     <!--

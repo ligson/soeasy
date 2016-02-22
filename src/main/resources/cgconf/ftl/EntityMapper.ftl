@@ -136,7 +136,7 @@
         <include refid="baseColumnList"/>
         FROM ${tableInfo.tableName}
         WHERE
-    ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
     </select>
 
     <!--
