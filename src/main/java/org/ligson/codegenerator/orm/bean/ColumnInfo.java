@@ -12,9 +12,17 @@ public class ColumnInfo {
      */
     private String name;
     /***
+     * java属性名
+     */
+    private String javaName;
+    /***
      * 数据类型
      */
     private String type;
+    /***
+     * java类型
+     */
+    private Class javaType;
     /***
      * 是否主键
      */
@@ -92,11 +100,29 @@ public class ColumnInfo {
         this.length = length;
     }
 
+    public String getJavaName() {
+        return javaName;
+    }
+
+    public void setJavaName(String javaName) {
+        this.javaName = javaName;
+    }
+
+    public Class getJavaType() {
+        return javaType;
+    }
+
+    public void setJavaType(Class javaType) {
+        this.javaType = javaType;
+    }
+
     @Override
     public String toString() {
         return "ColumnInfo{" +
                 "name='" + name + '\'' +
+                ", javaName='" + javaName + '\'' +
                 ", type='" + type + '\'' +
+                ", javaType=" + javaType +
                 ", primaryKey=" + primaryKey +
                 ", remark='" + remark + '\'' +
                 ", defaultValue='" + defaultValue + '\'' +

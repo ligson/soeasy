@@ -44,7 +44,9 @@ public class TemplateEngine {
                     builder.append(line).append("\n\r");
                 }
             }
-            builder.delete(builder.length() - 2, builder.length());
+            if (builder.length() > 2) {
+                builder.delete(builder.length() - 2, builder.length());
+            }
             reader.close();
             return builder.toString();
         } catch (IOException e) {

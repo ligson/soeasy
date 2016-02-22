@@ -1,3 +1,4 @@
+<#--把数据库字段名转换为java属性名风格-->
 <#function convert2JavaName column_name>
     <#if column_name?index_of("_")!=-1>
         <#assign cols=column_name?split("_")>
@@ -32,7 +33,7 @@
     <!--通用表字段列表-->
 
     <!--通用查询条件组装-->
-    <sql id="whereContation">
+    <sql id="whereCondition">
     <#list tableInfo.columnInfos as columInfo>
         <if test="${convert2JavaName(columInfo.name)} != null">
             AND ${columInfo.name}=${"#"}{${convert2JavaName(columInfo.name)},jdbcType=${columInfo.type}}
@@ -54,7 +55,7 @@
     处理信息: 保存记录
     -->
     <insert id="insert"
-            parameterType="com.sankai.user.entity.PersonalYunEntity">
+            parameterType="${entityPackage}.${entityName}">
         INSERT INTO ${tableInfo.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <#list tableInfo.columnInfos as columnInfo>
@@ -154,7 +155,7 @@
         <include refid="baseColumnList"/>
         FROM ${tableInfo.tableName}
         WHERE 1=1
-        <include refid="whereContation"/>
+        <include refid="whereCondition"/>
         <if test="columnSort != null">
             ORDER BY ${r'${columnSort}'}
         </if>
@@ -173,7 +174,7 @@
             resultType="int">
         SELECT count(1) FROM ${tableInfo.tableName}
         WHERE 1=1
-        <include refid="whereContation"/>
+        <include refid="whereCondition"/>
     </select>
 
     <!--
@@ -189,7 +190,7 @@
         <include refid="baseColumnList"/>
         FROM ${tableInfo.tableName}
         WHERE 1=1
-        <include refid="whereContation"/>
+        <include refid="whereCondition"/>
         <if test="columnSort != null">
             ORDER BY ${r'${columnSort}'}
         </if>

@@ -62,6 +62,8 @@ public class QueryTools {
             columnInfo.setName(columnName);
             columnInfo.setRemark(comment);
             columnInfo.setType(dataType);
+            columnInfo.setJavaName(convert2JavaName(columnName));
+            columnInfo.setJavaType(TypeMap.getType(dataType));
             if ("PRI".equals(key)) {
                 columnInfo.setPrimaryKey(true);
                 tableInfo.setPrimaryKeyName(columnName);

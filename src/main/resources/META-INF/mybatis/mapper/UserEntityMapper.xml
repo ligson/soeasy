@@ -17,7 +17,7 @@
     <!--通用表字段列表-->
 
     <!--通用查询条件组装-->
-    <sql id="whereContation">
+    <sql id="whereCondition">
         <if test="id != null">
             AND id=#{id,jdbcType=bigint}
         </if>
@@ -55,7 +55,7 @@
     处理信息: 保存记录
     -->
     <insert id="insert"
-            parameterType="com.sankai.user.entity.PersonalYunEntity">
+            parameterType="org.ligson.soeasy.entity.UserEntity">
         INSERT INTO t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -197,7 +197,7 @@
         <include refid="baseColumnList"/>
         FROM t_user
         WHERE 1=1
-        <include refid="whereContation"/>
+        <include refid="whereCondition"/>
         <if test="columnSort != null">
             ORDER BY ${columnSort}
         </if>
@@ -216,7 +216,7 @@
             resultType="int">
         SELECT count(1) FROM t_user
         WHERE 1=1
-        <include refid="whereContation"/>
+        <include refid="whereCondition"/>
     </select>
 
     <!--
@@ -232,7 +232,7 @@
         <include refid="baseColumnList"/>
         FROM t_user
         WHERE 1=1
-        <include refid="whereContation"/>
+        <include refid="whereCondition"/>
         <if test="columnSort != null">
             ORDER BY ${columnSort}
         </if>
@@ -240,6 +240,7 @@
     </select>
 
     <!--用户自定义代码开始-->
-    <select id="">1</select>
+
+
     <!--用户自定义代码结束-->
 </mapper>
