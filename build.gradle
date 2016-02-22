@@ -39,5 +39,8 @@ dependencies {
     //mysql driver
     compile "mysql:mysql-connector-java:5.1.38"
 
+    //freemarker
+    compile "org.freemarker:freemarker:2.3.23"
+
 
 }

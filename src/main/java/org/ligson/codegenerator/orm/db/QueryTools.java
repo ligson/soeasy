@@ -1,17 +1,27 @@
 package org.ligson.codegenerator.orm.db;
 
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.Version;
 import org.ligson.codegenerator.orm.bean.ColumnInfo;
 import org.ligson.codegenerator.orm.bean.TableInfo;
+import org.ligson.codegenerator.orm.config.ConfigUtils;
 import org.ligson.codegenerator.orm.config.OrmConfig;
+import org.ligson.codegenerator.orm.template.utils.MapperTemplate;
 
 import static java.util.stream.Collectors.*;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ligson on 2016/1/28.
@@ -55,6 +65,7 @@ public class QueryTools {
             if ("PRI".equals(key)) {
                 columnInfo.setPrimaryKey(true);
                 tableInfo.setPrimaryKeyName(columnName);
+                tableInfo.setPrimaryKeyType(dataType);
             }
             columnInfos.add(columnInfo);
         }
@@ -104,6 +115,8 @@ public class QueryTools {
             String javaPropertyName = convert2JavaName(ci.getName());
             System.out.printf("<result column=\"%s\" property=\"%s\" jdbcType=\"%s\"/>\n", ci.getName(), javaPropertyName, ci.getType());
         }
+
+        MapperTemplate.write(ti);
 
     }
 }

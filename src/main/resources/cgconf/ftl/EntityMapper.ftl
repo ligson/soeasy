@@ -17,7 +17,7 @@
     </#if>
 </#function>
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE ${"mapper"} PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 功能模块:  -->
 <mapper namespace="${entityName}Mapper">
@@ -31,15 +31,11 @@
     </resultMap>
     <!--通用表字段列表-->
 
-    <!--user customize code start-->
-
-    <!--user customize code end  -->
-
     <!--通用查询条件组装-->
     <sql id="whereContation">
     <#list tableInfo.columnInfos as columInfo>
         <if test="${convert2JavaName(columInfo.name)} != null">
-            AND ${tableInfo.primaryKeyName}=#\{${convert2JavaName(columInfo.name)},jdbcType=${columInfo.type}}
+            AND ${columInfo.name}=${"#"}{${convert2JavaName(columInfo.name)},jdbcType=${columInfo.type}}
         </if>
     </#list>
     </sql>
@@ -47,7 +43,7 @@
     <!--查询字段列表拼装-->
     <sql id="baseColumnList">
     <#list tableInfo.columnInfos as columInfo>
-    ${columInfo.name}<#if columInfo_index!=(tableInfo.columnInfos?size-1)>,</#if>
+        ${columInfo.name}<#if columInfo_index!=(tableInfo.columnInfos?size-1)>,</#if>
     </#list>
     </sql>
 
@@ -59,18 +55,18 @@
     -->
     <insert id="insert"
             parameterType="com.sankai.user.entity.PersonalYunEntity">
-        INSERT INTO ${tableName}
+        INSERT INTO ${tableInfo.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
-        <#list tableInfos.columnInfos as columnInfo>
+        <#list tableInfo.columnInfos as columnInfo>
             <if test="${convert2JavaName(columnInfo.name)} != null">
-            ${columnInfo.name},
+                ${columnInfo.name},
             </if>
         </#list>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-        <#list tableInfos.columnInfos as columnInfo>
+        <#list tableInfo.columnInfos as columnInfo>
             <if test="${convert2JavaName(columnInfo.name)} != null">
-                #\{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
+                ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
             </if>
         </#list>
         </trim>
@@ -84,16 +80,16 @@
     -->
     <update id="update"
             parameterType="${entityPackage}.${entityName}">
-        UPDATE ${table_name}
+        UPDATE ${tableInfo.tableName}
         <set>
-        <#list tableInfos.columnInfos as columnInfo>
+        <#list tableInfo.columnInfos as columnInfo>
             <if test="${convert2JavaName(columnInfo.name)} != null">
-            ${columnInfo.name} = #\{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
+                ${columnInfo.name} = ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
             </if>
         </#list>
         </set>
         WHERE
-    ${tableInfo.primaryKeyName} = #\{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
     </update>
 
     <!--
@@ -106,12 +102,12 @@
             parameterType="${entityPackage}.${entityName}">
         UPDATE ${tableInfo.tableName}
         <set>
-        <#list tableInfos.columnInfos as columnInfo>
-        ${columnInfo.name} = #\{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
+        <#list tableInfo.columnInfos as columnInfo>
+            ${columnInfo.name} = ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
         </#list>
         </set>
         WHERE
-    ${tableInfo.primaryKeyName} = #\{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
     </update>
 
     <!--
@@ -124,7 +120,7 @@
             parameterType="${entityPackage}.${entityName}">
         DELETE FROM ${tableInfo.tableName}
         WHERE
-    ${tableInfo.primaryKeyName} = #\{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
     </delete>
 
     <!--
@@ -140,7 +136,7 @@
         <include refid="baseColumnList"/>
         FROM ${tableInfo.tableName}
         WHERE
-    ${tableInfo.primaryKeyName} = #\{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+    ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
     </select>
 
     <!--
@@ -160,7 +156,7 @@
         WHERE 1=1
         <include refid="whereContation"/>
         <if test="columnSort != null">
-            ORDER BY ${columnSort}
+            ORDER BY ${r'${columnSort}'}
         </if>
         <!-- 分页条 -->
         <include refid="CommonEntity.paginationSuffix"/>
@@ -195,8 +191,12 @@
         WHERE 1=1
         <include refid="whereContation"/>
         <if test="columnSort != null">
-            ORDER BY ${columnSort}
+            ORDER BY ${r'${columnSort}'}
         </if>
         limit 0,100
     </select>
+
+    <!--用户自定义代码开始-->
+${userCustomCode}
+    <!--用户自定义代码结束-->
 </mapper>

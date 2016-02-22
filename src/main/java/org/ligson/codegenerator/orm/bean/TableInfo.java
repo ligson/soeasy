@@ -62,6 +62,7 @@ public class TableInfo implements Serializable {
         return "TableInfo{" +
                 "tableName='" + tableName + '\'' +
                 ", primaryKeyName='" + primaryKeyName + '\'' +
+                ", primaryKeyType='" + primaryKeyType + '\'' +
                 ", columnInfos=" + columnInfos +
                 '}';
     }

@@ -114,27 +114,27 @@ public class OrmConfig {
         this.servicePath = servicePath;
     }
 
-    String getEntityName() {
+    public String getEntityName() {
         return entityName;
     }
 
-    void setEntityName(String entityName) {
+    public void setEntityName(String entityName) {
         this.entityName = entityName;
     }
 
-    String getEntityPackage() {
+    public String getEntityPackage() {
         return entityPackage;
     }
 
-    void setEntityPackage(String entityPackage) {
+    public void setEntityPackage(String entityPackage) {
         this.entityPackage = entityPackage;
     }
 
-    String getServicePackage() {
+    public String getServicePackage() {
         return servicePackage;
     }
 
-    void setServicePackage(String servicePackage) {
+    public void setServicePackage(String servicePackage) {
         this.servicePackage = servicePackage;
     }
 
