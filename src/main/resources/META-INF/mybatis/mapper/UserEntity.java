@@ -12,29 +12,30 @@ import java.lang.Integer;
 
 public class UserEntity extends BasicEntity implements Serializable {
     /***
-     * 
+     *
      */
     private BigInteger id;
     /***
-     * 生日
+     *生日
      */
     private Date birth;
     /***
-     * 姓名
+     *姓名
      */
     private String name;
     /***
-     * 密码
+     *密码
      */
     private String password;
     /***
-     * 性别
+     *性别
      */
     private Boolean sex;
     /***
-     * 状态
+     *状态
      */
     private Integer status;
+
 
     public BigInteger getId() {
         return id;
@@ -43,6 +44,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     public void setId(BigInteger id) {
         this.id = id;
     }
+
     public Date getBirth() {
         return birth;
     }
@@ -50,6 +52,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     public void setBirth(BigInteger birth) {
         this.birth = birth;
     }
+
     public String getName() {
         return name;
     }
@@ -57,6 +60,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     public void setName(BigInteger name) {
         this.name = name;
     }
+
     public String getPassword() {
         return password;
     }
@@ -64,6 +68,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     public void setPassword(BigInteger password) {
         this.password = password;
     }
+
     public Boolean getSex() {
         return sex;
     }
@@ -71,6 +76,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     public void setSex(BigInteger sex) {
         this.sex = sex;
     }
+
     public Integer getStatus() {
         return status;
     }
@@ -78,15 +84,16 @@ public class UserEntity extends BasicEntity implements Serializable {
     public void setStatus(BigInteger status) {
         this.status = status;
     }
+
     @Override
     public String toString() {
-    return "UserEntity{" +
-        "id=" + id +
-        ",birth=" + birth +
-        ",name=" + name +
-        ",password=" + password +
-        ",sex=" + sex +
-        ",status=" + status +
-    '}';
+        return "UserEntity{" +
+            "id=" + id +
+            ",birth=" + birth +
+            ",name=" + name +
+            ",password=" + password +
+            ",sex=" + sex +
+            ",status=" + status +
+        '}';
     }
 }
