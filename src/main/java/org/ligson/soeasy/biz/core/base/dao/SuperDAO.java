@@ -1,7 +1,9 @@
 package org.ligson.soeasy.biz.core.base.dao;
 
 
+import org.ligson.soeasy.biz.core.base.entity.BasePageDTO;
 import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
+import org.ligson.soeasy.biz.core.base.entity.Pagination;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +23,10 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
     private static final String pagenationStatementSuffix = "Mapper.getPagenationList";
     private static final String pagenationCountStatementSuffix = "-count";
     private static final String getListStatementSuffix = "Mapper.getList";
-    private static final String selectStatementSuffix = "Mapper.findByPriKey";
+    private static final String selectStatementSuffix = "Mapper.findBy";
     private static final String insertStatementSuffix = "Mapper.insert";
     private static final String updateStatementSuffix = "Mapper.update";
-    private static final String deleteStatementSuffix = "Mapper.deleteByPriKey";
+    private static final String deleteStatementSuffix = "Mapper.delete";
     private static final String getNextIdValStatement = "CommonEntity.getNextIdVal";
     private static final String batchUpdateStatementSuffix = "Mapper.batchUpdate";
     private static final String batchInsertStatementSuffix = "Mapper.batchInsert";
@@ -37,83 +39,78 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * 运行环境的SessionTemplate
      */
     @Autowired
-    private SqlSessionTemplate userSqlSessionTemplate;
+    protected SqlSessionTemplate userSqlSessionTemplate;
 
-    /*
-     * desc:
-     * (non-Javadoc)
-     * @see com.wangyin.payment.tesla.dao.ISuperDAO#update(java.lang.Object)
+    /***
+     * 更新方法
+     *
+     * @param e 实体,主键不能为空
+     * @return 更新的记录数
      */
-
     @Override
     public Integer update(E e) {
-        //String statementName = parameterObject.getClass().getSimpleName() + updateStatementSuffix;
-        //return this.update(statementName, parameterObject);
-        return null;
+        String statementName = e.getClass().getSimpleName() +
+                updateStatementSuffix;
+        return userSqlSessionTemplate.update(statementName, e);
     }
 
-    /*
-     * 
-     * desc:
-     * (non-Javadoc)
-     * @see com.wangyin.payment.tesla.dao.ISuperDAO#delete(java.lang.Object)
+    /***
+     * 删除记录
+     *
+     * @param e 实体条件
+     * @return 删除的记录数
      */
-
     @Override
     public Integer delete(E e) {
-        //String statementName = parameterObject.getClass().getSimpleName() + deleteStatementSuffix;
-        //return this.delete(statementName, parameterObject);
-        return null;
+        String statementName = e.getClass().getSimpleName() +
+                deleteStatementSuffix;
+        return userSqlSessionTemplate.update(statementName, e);
     }
 
-    /*
-     * 
-     * desc:
-     * (non-Javadoc)
-     * @see com.wangyin.payment.tesla.dao.ISuperDAO#insert(com.wangyin.wallet.common.BasicEntity)
+    /***
+     * 插入记录
+     *
+     * @param e 实体
+     * @return 操作记录
      */
-
     @Override
     public Integer insert(E e) {
-        //String statementName = parameterObject.getClass().getSimpleName() + insertStatementSuffix;
-        //return userSqlSessionTemplate.insert(statementName, parameterObject);
-        return null;
+        String statementName = e.getClass().getSimpleName() +
+                insertStatementSuffix;
+        return userSqlSessionTemplate.insert(statementName, e);
     }
 
-    /*
-     * 
-     * desc:
-     * (non-Javadoc)
-     * @see com.wangyin.payment.tesla.dao.ISuperDAO#get(java.lang.Object)
+    /***
+     * 根据条件查询一条记录
+     *
+     * @param e 查询条件
+     * @return 查询的实体
      */
-
     @Override
     public E get(E e) {
-        //String statementName = parameterObject.getClass().getSimpleName() + selectStatementSuffix;
-        //return userSqlSessionTemplate.selectOne(statementName, parameterObject);
-        return null;
+        String statementName = e.getClass().getSimpleName() +
+                selectStatementSuffix;
+        return userSqlSessionTemplate.selectOne(statementName, e);
     }
 
-    /*
+    /***
+     * 返回所有结果
      *
-     * desc:
-     * (non-Javadoc)
-     * @see com.wangyin.payment.tesla.dao.ISuperDAO#getList(java.lang.Object)
+     * @param e 查询条件
+     * @return 返回所有结果
      */
-
     @Override
-    public List<E> getList(E e) throws DataAccessException {
-        // String statementName = parameterObject.getClass().getSimpleName() + getListStatementSuffix;
-        //return userSqlSessionTemplate.selectList(statementName, parameterObject);
-        return null;
+    public List<E> getList(E e) {
+        String statementName = e.getClass().getSimpleName() + getListStatementSuffix;
+        return userSqlSessionTemplate.selectList(statementName, e);
     }
 
-    /*
-     * desc:
-	 * (non-Javadoc)
-	 * @see com.wangyin.payment.tesla.common.dao.ISuperDAO#batchInsert(java.util.List)
-	 */
-
+    /***
+     * 批量插入记录
+     *
+     * @param basicEntityList 列表
+     * @return 插入成功的记录数
+     */
     @Override
     public int batchInsert(List<E> basicEntityList) {
         //每次I/O提交数量
@@ -147,12 +144,12 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         return affectedRows;
     }
 
-    /*
-     * desc:
-     * (non-Javadoc)
-     * @see com.wangyin.payment.tesla.common.dao.ISuperDAO#batchUpdate(java.util.List)
+    /***
+     * 批量更新记录
+     *
+     * @param basicEntityList 批量更新记录
+     * @return 批量更新记录
      */
-
     @Override
     public int batchUpdate(List<E> basicEntityList) {
         //每次I/O提交数量
@@ -186,16 +183,35 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         return affectedRows;
     }
 
+    /*
+    *
+    * desc:
+    * (non-Javadoc)
+    * @see com.wangyin.payment.tesla.dao.ISuperDAO#getPagenationList(java.lang.String, com.wangyin.wallet.common.dto.BasePageDTO)
+    */
     @Override
-    public E findById(BigInteger id) {
-        E entity = userSqlSessionTemplate.selectOne(getStatementName() + selectStatementSuffix, id);
-        return entity;
-    }
+    public Pagination getPagenationList(BasePageDTO baseParamDTO) {
+        /**
+         * 判断pageNum和pageSize
+         */
+        if (baseParamDTO.getPageNum() == null || baseParamDTO.getPageNum().intValue() < 1) {
+            baseParamDTO.setPageNum(1);
+        }
+        if (baseParamDTO.getMax() == null || baseParamDTO.getMax().intValue
+                () <
+                1) {
+            baseParamDTO.setMax(10);
+        }
 
-    private String getStatementName() {
-        return this.getClass().getSimpleName();
-    }
+        String statementName = baseParamDTO.getClass().getSimpleName();
+        // 计算记录起始值和结束值
+        Integer totalCount = (Integer) userSqlSessionTemplate.selectOne(statementName + pagenationCountStatementSuffix, baseParamDTO);
 
+        List resultList = userSqlSessionTemplate.selectList(statementName, baseParamDTO);
+
+        return new Pagination(baseParamDTO.getMax(), baseParamDTO.getPageNum(),
+                totalCount, resultList);
+    }
 
 }
 

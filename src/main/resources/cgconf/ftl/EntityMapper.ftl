@@ -89,8 +89,8 @@
             </if>
         </#list>
         </set>
-        WHERE
-        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </update>
 
     <!--
@@ -107,21 +107,21 @@
             ${columnInfo.name} = ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
         </#list>
         </set>
-        WHERE
-        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </update>
 
     <!--
-    方法名称: deleteByPriKey
-    调用路径:${entityName}Mapper.deleteByPriKey
+    方法名称: delete
+    调用路径:${entityName}Mapper.delete
     开发信息:
     处理信息: 删除记录
     -->
-    <delete id="deleteByPriKey"
+    <delete id="delete"
             parameterType="${entityPackage}.${entityName}">
         DELETE FROM ${tableInfo.tableName}
-        WHERE
-        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </delete>
 
     <!--
@@ -138,6 +138,22 @@
         FROM ${tableInfo.tableName}
         WHERE
         ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
+    </select>
+
+    <!--
+    方法名称: findByPri
+    调用路径: ${entityName}Mapper.findBy
+    开发信息:
+    处理信息: 根据主键查询记录
+    -->
+    <select id="findBy"
+            parameterType="${entityPackage}.${entityName}"
+            resultType="${entityPackage}.${entityName}">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM ${tableInfo.tableName}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </select>
 
     <!--

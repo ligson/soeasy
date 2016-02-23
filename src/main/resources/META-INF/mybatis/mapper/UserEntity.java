@@ -16,23 +16,23 @@ public class UserEntity extends BasicEntity implements Serializable {
      */
     private BigInteger id;
     /***
-     *生日
+     * 生日
      */
     private Date birth;
     /***
-     *姓名
+     * 姓名
      */
     private String name;
     /***
-     *密码
+     * 密码
      */
     private String password;
     /***
-     *性别
+     * 性别
      */
     private Boolean sex;
     /***
-     *状态
+     * 状态
      */
     private Integer status;
 
@@ -88,12 +88,12 @@ public class UserEntity extends BasicEntity implements Serializable {
     @Override
     public String toString() {
         return "UserEntity{" +
-            "id=" + id +
-            ",birth=" + birth +
-            ",name=" + name +
-            ",password=" + password +
-            ",sex=" + sex +
-            ",status=" + status +
-        '}';
+                "id=" + id +
+                ",birth=" + birth +
+                ",name=" + name +
+                ",password=" + password +
+                ",sex=" + sex +
+                ",status=" + status +
+                '}';
     }
 }

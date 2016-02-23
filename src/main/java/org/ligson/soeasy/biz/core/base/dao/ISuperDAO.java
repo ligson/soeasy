@@ -1,7 +1,9 @@
 package org.ligson.soeasy.biz.core.base.dao;
 
 import org.apache.ibatis.session.RowBounds;
+import org.ligson.soeasy.biz.core.base.entity.BasePageDTO;
 import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
+import org.ligson.soeasy.biz.core.base.entity.Pagination;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -73,6 +75,13 @@ public interface ISuperDAO<E extends BasicEntity> {
      */
     public int batchUpdate(List<E> entityList);
 
-    public E findById(BigInteger bigInteger);
+    /***
+     * 分页查询
+     *
+     * @param baseParamDTO 查询条件
+     * @return 查询结果
+     */
+    public Pagination getPagenationList(BasePageDTO
+                                                baseParamDTO);
 
 }

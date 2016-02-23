@@ -10,7 +10,7 @@ import ${columnInfo.javaType.name};
 public class ${entityName} extends BasicEntity implements Serializable {
     <#list tableInfo.columnInfos as columnInfo>
     /***
-     *${columnInfo.remark}
+     * ${columnInfo.remark}
      */
     private ${columnInfo.javaType.simpleName} ${columnInfo.javaName};
     </#list>
@@ -32,11 +32,11 @@ public class ${entityName} extends BasicEntity implements Serializable {
         return "${entityName}{" +
         <#list tableInfo.columnInfos as columnInfo>
             <#if columnInfo_index==0>
-            "${columnInfo.javaName}=" + ${columnInfo.javaName} +
+                "${columnInfo.javaName}=" + ${columnInfo.javaName} +
             <#else>
-            ",${columnInfo.javaName}=" + ${columnInfo.javaName} +
+                ",${columnInfo.javaName}=" + ${columnInfo.javaName} +
             </#if>
         </#list>
-        '}';
+                '}';
     }
 }

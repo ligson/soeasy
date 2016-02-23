@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author ligson
  */
-public class BasicEntity implements Serializable {
+public class BasicEntity extends BasePageDTO implements Serializable {
     private enum Action {
         INSERT("插入"), UPDATE("更新"), FIND("查询"), DELETE("删除");
         private String msg;
