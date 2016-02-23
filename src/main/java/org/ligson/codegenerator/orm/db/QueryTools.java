@@ -8,6 +8,7 @@ import org.ligson.codegenerator.orm.bean.ColumnInfo;
 import org.ligson.codegenerator.orm.bean.TableInfo;
 import org.ligson.codegenerator.orm.config.ConfigUtils;
 import org.ligson.codegenerator.orm.config.OrmConfig;
+import org.ligson.codegenerator.orm.template.utils.EntityTemplate;
 import org.ligson.codegenerator.orm.template.utils.MapperTemplate;
 
 import static java.util.stream.Collectors.*;
@@ -112,13 +113,7 @@ public class QueryTools {
         QueryTools qt = new QueryTools();
         TableInfo ti = qt.getTableInfo();
         System.out.println(ti);
-        // <result column="ID" property="id" jdbcType="BIGINT"/>
-        for (ColumnInfo ci : ti.getColumnInfos()) {
-            String javaPropertyName = convert2JavaName(ci.getName());
-            System.out.printf("<result column=\"%s\" property=\"%s\" jdbcType=\"%s\"/>\n", ci.getName(), javaPropertyName, ci.getType());
-        }
-
         MapperTemplate.write(ti);
-
+        EntityTemplate.write(ti);
     }
 }

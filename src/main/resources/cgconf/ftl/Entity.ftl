@@ -16,10 +16,11 @@ public class ${entityName} extends BasicEntity implements Serializable {
     </#list>
 
     <#list tableInfo.columnInfos as columnInfo>
-    public ${columnInfo.javaType.simpleName} get${columnInfo.javaName}() {
+    <#assign propName=columnInfo.javaName?cap_first/>
+    public ${columnInfo.javaType.simpleName} get${propName}() {
         return ${columnInfo.javaName};
     }
-    public void set${columnInfo.javaName}(BigInteger ${columnInfo.javaName}) {
+    public void set${propName}(BigInteger ${columnInfo.javaName}) {
         this.${columnInfo.javaName} = ${columnInfo.javaName};
     }
     </#list>
