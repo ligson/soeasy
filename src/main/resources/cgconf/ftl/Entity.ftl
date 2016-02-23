@@ -10,8 +10,8 @@ import ${columnInfo.javaType.name};
 public class ${entityName} extends BasicEntity implements Serializable {
     <#list tableInfo.columnInfos as columnInfo>
     /***
-    * ${columnInfo.remark}
-    */
+     * ${columnInfo.remark}
+     */
     private ${columnInfo.javaType.simpleName} ${columnInfo.javaName};
     </#list>
 
@@ -20,6 +20,7 @@ public class ${entityName} extends BasicEntity implements Serializable {
     public ${columnInfo.javaType.simpleName} get${propName}() {
         return ${columnInfo.javaName};
     }
+
     public void set${propName}(BigInteger ${columnInfo.javaName}) {
         this.${columnInfo.javaName} = ${columnInfo.javaName};
     }
