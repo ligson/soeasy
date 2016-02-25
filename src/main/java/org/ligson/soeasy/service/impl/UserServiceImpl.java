@@ -30,9 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity update(UserEntity userEntity) {
-        userDao.update(userEntity);
-        return userDao.findById(userEntity.getId());
+    public int update(UserEntity userEntity) {
+        return userDao.update(userEntity);
     }
 
     @Override

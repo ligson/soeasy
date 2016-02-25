@@ -12,7 +12,7 @@ import java.lang.Integer;
 
 public class UserEntity extends BasicEntity implements Serializable {
     /***
-     *
+     * 
      */
     private BigInteger id;
     /***

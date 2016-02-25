@@ -128,8 +128,8 @@
                 status = #{status,jdbcType=int},
             </if>
         </set>
-        WHERE
-        id = #{id,jdbcType=bigint}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </update>
 
     <!--
@@ -149,21 +149,21 @@
             sex = #{sex,jdbcType=tinyint},
             status = #{status,jdbcType=int},
         </set>
-        WHERE
-        id = #{id,jdbcType=bigint}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </update>
 
     <!--
-    方法名称: deleteByPriKey
-    调用路径:UserEntityMapper.deleteByPriKey
+    方法名称: delete
+    调用路径:UserEntityMapper.delete
     开发信息:
     处理信息: 删除记录
     -->
-    <delete id="deleteByPriKey"
+    <delete id="delete"
             parameterType="org.ligson.soeasy.entity.UserEntity">
         DELETE FROM t_user
-        WHERE
-        id = #{id,jdbcType=bigint}
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </delete>
 
     <!--
@@ -180,6 +180,22 @@
         FROM t_user
         WHERE
         id = #{id,jdbcType=bigint}
+    </select>
+
+    <!--
+    方法名称: findByPri
+    调用路径: UserEntityMapper.findBy
+    开发信息:
+    处理信息: 根据主键查询记录
+    -->
+    <select id="findBy"
+            parameterType="org.ligson.soeasy.entity.UserEntity"
+            resultType="org.ligson.soeasy.entity.UserEntity">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM t_user
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </select>
 
     <!--
@@ -240,6 +256,7 @@
     </select>
 
     <!--用户自定义代码开始-->
+
 
 
 

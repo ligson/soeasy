@@ -12,7 +12,7 @@ public interface UserService {
 
     public List<UserEntity> find(UserEntity userEntity);
 
-    public UserEntity update(UserEntity userEntity);
+    public int update(UserEntity userEntity);
 
     public void remove(UserEntity userEntity);
 }
