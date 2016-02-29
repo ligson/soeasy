@@ -1,22 +1,3 @@
-<#--把数据库字段名转换为java属性名风格-->
-<#function convert2JavaName column_name>
-    <#if column_name?index_of("_")!=-1>
-        <#assign cols=column_name?split("_")>
-        <#assign returnValue="">
-        <#list cols as col>
-            <#if col_index==0>
-                <#assign returnValue=col>
-            <#else>
-                <#assign upperChar=col?substring(0,1)?upper_case>
-                <#assign rightValue=upperChar+col?substring(1)>
-                <#assign returnValue=(returnValue+rightValue)>
-            </#if>
-        </#list>
-        <#return returnValue>
-    <#else>
-        <#return column_name>
-    </#if>
-</#function>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE ${"mapper"} PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
@@ -26,25 +7,25 @@
     <!--通用表字段列表-->
     <resultMap id="BaseResultMap"
                type="${entityPackage}.${entityName}">
-    <#list tableInfo.columnInfos as columInfo>
-        <result column="${columInfo.name}" property="${convert2JavaName(columInfo.name)}" jdbcType="${columInfo.type}"/>
+    <#list tableInfo.columnInfos as columnInfo>
+        <result column="${columnInfo.name}" property="${columnInfo.javaName}" jdbcType="${columnInfo.type}"/>
     </#list>
     </resultMap>
     <!--通用表字段列表-->
 
     <!--通用查询条件组装-->
     <sql id="whereCondition">
-    <#list tableInfo.columnInfos as columInfo>
-        <if test="${convert2JavaName(columInfo.name)} != null">
-            AND ${columInfo.name}=${"#"}{${convert2JavaName(columInfo.name)},jdbcType=${columInfo.type}}
+    <#list tableInfo.columnInfos as columnInfo>
+        <if test="${columnInfo.javaName} != null">
+            AND ${columnInfo.name}=${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}}
         </if>
     </#list>
     </sql>
 
     <!--查询字段列表拼装-->
     <sql id="baseColumnList">
-    <#list tableInfo.columnInfos as columInfo>
-        ${columInfo.name}<#if columInfo_index!=(tableInfo.columnInfos?size-1)>,</#if>
+    <#list tableInfo.columnInfos as columnInfo>
+    ${columnInfo.name}<#if columnInfo_index!=(tableInfo.columnInfos?size-1)>,</#if>
     </#list>
     </sql>
 
@@ -59,15 +40,15 @@
         INSERT INTO ${tableInfo.tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <#list tableInfo.columnInfos as columnInfo>
-            <if test="${convert2JavaName(columnInfo.name)} != null">
-                ${columnInfo.name},
+            <if test="${columnInfo.javaName} != null">
+            ${columnInfo.name},
             </if>
         </#list>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
         <#list tableInfo.columnInfos as columnInfo>
-            <if test="${convert2JavaName(columnInfo.name)} != null">
-                ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
+            <if test="${columnInfo.javaName} != null">
+            ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}},
             </if>
         </#list>
         </trim>
@@ -84,8 +65,8 @@
         UPDATE ${tableInfo.tableName}
         <set>
         <#list tableInfo.columnInfos as columnInfo>
-            <if test="${convert2JavaName(columnInfo.name)} != null">
-                ${columnInfo.name} = ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
+            <if test="${columnInfo.javaName} != null">
+            ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}},
             </if>
         </#list>
         </set>
@@ -104,7 +85,7 @@
         UPDATE ${tableInfo.tableName}
         <set>
         <#list tableInfo.columnInfos as columnInfo>
-            ${columnInfo.name} = ${"#"}{${convert2JavaName(columnInfo.name)},jdbcType=${columnInfo.type}},
+        ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}},
         </#list>
         </set>
         WHERE 1=1
@@ -125,23 +106,7 @@
     </delete>
 
     <!--
-    方法名称: findByPriKey
-    调用路径: ${entityName}Mapper.findByPriKey
-    开发信息:
-    处理信息: 根据主键查询记录
-    -->
-    <select id="findByPriKey"
-            parameterType="${entityPackage}.${entityName}"
-            resultType="${entityPackage}.${entityName}">
-        SELECT
-        <include refid="baseColumnList"/>
-        FROM ${tableInfo.tableName}
-        WHERE
-        ${tableInfo.primaryKeyName} = ${"#"}{${tableInfo.primaryKeyName},jdbcType=${tableInfo.primaryKeyType}}
-    </select>
-
-    <!--
-    方法名称: findByPri
+    方法名称: findBy
     调用路径: ${entityName}Mapper.findBy
     开发信息:
     处理信息: 根据主键查询记录
@@ -151,6 +116,22 @@
             resultType="${entityPackage}.${entityName}">
         SELECT
         <include refid="baseColumnList"/>
+        FROM ${tableInfo.tableName}
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </select>
+
+    <!--
+    方法名称: countBy
+    调用路径: ${entityName}Mapper.countBy
+    开发信息:
+    处理信息: 根据主键统计记录
+    -->
+    <select id="countBy"
+            parameterType="${entityPackage}.${entityName}"
+            resultType="${entityPackage}.${entityName}">
+        SELECT
+        count(1)
         FROM ${tableInfo.tableName}
         WHERE 1=1
         <include refid="whereCondition"/>

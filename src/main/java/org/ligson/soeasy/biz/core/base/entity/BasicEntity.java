@@ -1,6 +1,7 @@
 package org.ligson.soeasy.biz.core.base.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 /**
  * Created by ligso on 2016/1/27.
@@ -9,6 +10,20 @@ import java.io.Serializable;
  * @author ligson
  */
 public class BasicEntity extends BasePageDTO implements Serializable {
+    /**
+     * 实体主键
+     */
+    private BigInteger id;
+    /***
+     * 是否要分页
+     */
+    private Boolean pageAble;
+
+    /**
+     * 列排序
+     */
+    private String columnSort;
+
     private enum Action {
         INSERT("插入"), UPDATE("更新"), FIND("查询"), DELETE("删除");
         private String msg;
@@ -72,11 +87,28 @@ public class BasicEntity extends BasePageDTO implements Serializable {
         this.max = max;
     }
 
-    public String primaryKey() {
-        throw new IllegalArgumentException("Invalid operation - getPrimaryKey()!");
+    public Boolean getPageAble() {
+        return pageAble;
     }
 
-    public String className() {
-        throw new IllegalArgumentException("Invalid operation - getClassName()!");
+    public void setPageAble(Boolean pageAble) {
+        this.pageAble = pageAble;
     }
+
+    public String getColumnSort() {
+        return columnSort;
+    }
+
+    public void setColumnSort(String columnSort) {
+        this.columnSort = columnSort;
+    }
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
 }

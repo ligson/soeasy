@@ -80,6 +80,13 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         return userSqlSessionTemplate.insert(statementName, e);
     }
 
+    @Override
+    public E get(BigInteger id) {
+        BasicEntity entity = new BasicEntity();
+        entity.setId(id);
+        return findBy((E) entity);
+    }
+
     /***
      * 根据条件查询一条记录
      *
@@ -87,7 +94,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * @return 查询的实体
      */
     @Override
-    public E get(E e) {
+    public E findBy(E e) {
         String statementName = e.getClass().getSimpleName() +
                 selectStatementSuffix;
         return userSqlSessionTemplate.selectOne(statementName, e);
@@ -100,9 +107,14 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      * @return 返回所有结果
      */
     @Override
-    public List<E> getList(E e) {
+    public List<E> findAllBy(E e) {
         String statementName = e.getClass().getSimpleName() + getListStatementSuffix;
         return userSqlSessionTemplate.selectList(statementName, e);
+    }
+
+    @Override
+    public Integer countBy(E entity) {
+        return userSqlSessionTemplate.selectOne(entity.getClass().getSimpleName() + "Mapper.countBy", entity);
     }
 
     /***

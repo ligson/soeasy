@@ -12,20 +12,12 @@ import java.util.Date;
  * @author ligson
  */
 public class UserEntity extends BasicEntity implements Serializable {
-    private BigInteger id;
+
     private Date birth;
     private String name;
     private String password;
     private Boolean sex;
     private Integer status;
-
-    public BigInteger getId() {
-        return id;
-    }
-
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
 
     public Date getBirth() {
         return birth;
@@ -70,7 +62,6 @@ public class UserEntity extends BasicEntity implements Serializable {
     @Override
     public String toString() {
         return "UserEntity{" +
-                "id=" + id +
                 ", birth=" + birth +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +

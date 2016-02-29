@@ -1,7 +1,9 @@
 package org.ligson.soeasy.test;
 
+import org.ligson.soeasy.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,5 +22,9 @@ public class Main {
         logger.debug("context:{}---", context);
         File file = new File(".");
         System.out.println(file.getAbsolutePath());
+
+        //SpringApplication.run(context,args);
+        UserService userService = (UserService) context.getBean("userServiceImpl");
+        System.out.println(userService);
     }
 }

@@ -28,12 +28,12 @@ public class DataStore {
     }
 
     public BasicEntity putEntity(BasicEntity entity) {
-        return bigTable.put(entity.className(), entity.primaryKey(), entity);
+        return bigTable.put(entity.getClass().getSimpleName(), "id", entity);
     }
 
     public void putEntityList(List<? extends BasicEntity> entityList) {
         for (BasicEntity basic : entityList) {
-            bigTable.put(basic.className(), basic.primaryKey(), basic);
+            bigTable.put(basic.getClass().getSimpleName(), "id", basic);
         }
     }
 
@@ -54,12 +54,12 @@ public class DataStore {
     }
 
     public BasicEntity removeEntity(BasicEntity entity) {
-        bigTable.remove(entity.className(), entity.primaryKey());
+        bigTable.remove(entity.getClass().getSimpleName(), "id");
         return entity;
     }
 
     public boolean containsEntity(BasicEntity entity) {
-        return bigTable.contains(entity.className(), entity.primaryKey());
+        return bigTable.contains(entity.getClass().getSimpleName(), "id");
     }
 
     public boolean containsValue(BasicEntity entity) {
@@ -68,12 +68,12 @@ public class DataStore {
 
 
     public BasicEntity updateEntity(BasicEntity entity) {
-        BasicEntity node = bigTable.get(entity.className(), entity.primaryKey());
+        BasicEntity node = bigTable.get(entity.getClass().getSimpleName(), "id");
         if (node != null)
             return node;
 
         throw new RuntimeException("Update Entity error - entity is not in data store. Class name=" +
-                entity.className() + ",primary key=" + entity.primaryKey());
+                entity.getClass().getSimpleName() + ",primary key=id");
     }
 
     public List<? extends BasicEntity> getEntityList(BasicEntity entity) {
@@ -84,11 +84,11 @@ public class DataStore {
 
         List<BasicEntity> finalList = new ArrayList<BasicEntity>();
         for (BasicEntity basic : entityList) {
-            BasicEntity node = bigTable.get(basic.className(), basic.primaryKey());
+            BasicEntity node = bigTable.get(basic.getClass().getSimpleName(), "id");
             if (node != null) {
                 finalList.add(node);
             } else {
-                bigTable.put(basic.className(), basic.primaryKey(), basic);
+                bigTable.put(basic.getClass().getSimpleName(), "id", basic);
                 finalList.add(basic);
             }
         }
@@ -99,11 +99,11 @@ public class DataStore {
     public List<? extends BasicEntity> updateEntityList(List<? extends BasicEntity> entityList) {
         List<BasicEntity> finalList = new ArrayList<BasicEntity>();
         for (BasicEntity basic : entityList) {
-            BasicEntity node = bigTable.get(basic.className(), basic.primaryKey());
+            BasicEntity node = bigTable.get(basic.getClass().getSimpleName(), "id");
             if (node != null) {
                 finalList.add(node);
             } else {
-                bigTable.put(basic.className(), basic.primaryKey(), basic);
+                bigTable.put(basic.getClass().getSimpleName(), "id", basic);
                 finalList.add(basic);
             }
         }
@@ -130,11 +130,11 @@ public class DataStore {
 
     public List<? extends BasicEntity> getNewEntityList(BasicEntity entity) {
         List<BasicEntity> finalList = new ArrayList<BasicEntity>();
-        Map<String, BasicEntity> row = bigTable.row(entity.className());
+        Map<String, BasicEntity> row = bigTable.row(entity.getClass().getSimpleName());
         for (String key : row.keySet()) {
             BasicEntity be = row.get(key);
             //for the newly create but not inserted into db entity
-            if (be.canInsert() && be.primaryKey().startsWith(entity.primaryKey())) {
+            if (be.canInsert()) {
                 finalList.add(be);
             }
         }

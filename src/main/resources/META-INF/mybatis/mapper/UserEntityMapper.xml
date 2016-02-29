@@ -167,23 +167,7 @@
     </delete>
 
     <!--
-    方法名称: findByPriKey
-    调用路径: UserEntityMapper.findByPriKey
-    开发信息:
-    处理信息: 根据主键查询记录
-    -->
-    <select id="findByPriKey"
-            parameterType="org.ligson.soeasy.entity.UserEntity"
-            resultType="org.ligson.soeasy.entity.UserEntity">
-        SELECT
-        <include refid="baseColumnList"/>
-        FROM t_user
-        WHERE
-        id = #{id,jdbcType=bigint}
-    </select>
-
-    <!--
-    方法名称: findByPri
+    方法名称: findBy
     调用路径: UserEntityMapper.findBy
     开发信息:
     处理信息: 根据主键查询记录
@@ -196,6 +180,7 @@
         FROM t_user
         WHERE 1=1
         <include refid="whereCondition"/>
+        limit 0,1
     </select>
 
     <!--
@@ -258,16 +243,5 @@
     <!--用户自定义代码开始-->
 
 
-
-
-
-
-
-
-
-
-
-
-
     <!--用户自定义代码结束-->
 </mapper>

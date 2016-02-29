@@ -42,13 +42,19 @@ public interface ISuperDAO<E extends BasicEntity> {
      */
     public Integer insert(E entity);
 
+    /***
+     * @param id
+     * @return
+     */
+    public E get(BigInteger id);
+
     /**
      * 描述: 系统默认根据主键查询唯一记录
      *
      * @param entity 实体参数查询条件（需包含主键信息）
      * @return
      */
-    public E get(E entity);
+    public E findBy(E entity);
 
     /**
      * 描述: 系统默认根据实体参数查询满足条件的记录
@@ -56,7 +62,15 @@ public interface ISuperDAO<E extends BasicEntity> {
      * @param entity 实体参数查询条件
      * @return
      */
-    public List<E> getList(E entity);
+    public List<E> findAllBy(E entity);
+
+    /***
+     * 按照条件统计
+     *
+     * @param entity
+     * @return
+     */
+    public Integer countBy(E entity);
 
 
     /**
