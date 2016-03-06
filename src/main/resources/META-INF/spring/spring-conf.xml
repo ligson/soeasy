@@ -10,13 +10,15 @@
                      http://www.springframework.org/schema/tx
                      http://www.springframework.org/schema/tx/spring-tx.xsd
                      http://www.springframework.org/schema/aop
-                     http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+                     http://www.springframework.org/schema/aop/spring-aop.xsd
+                     http://www.springframework.org/schema/context
+                     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
     <context:annotation-config/>
     <context:component-scan base-package="org.ligson.soeasy"/>
-    <context:property-placeholder location="classpath:*.properties"/>
-    <util:properties id="mailConfig" location="classpath:conf/mail.properties"/>
-    <util:properties id="smsConfig" location="classpath:conf/sms.properties"/>
-    <util:properties id="cfg" location="classpath:conf/config.properties"/>
-    <util:properties id="dubboCofig" location="classpath:conf/dubbo.properties"/>
+    <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true" />
+    <util:properties id="cfg" location="classpath:config.properties"/>
+    <import resource="spring-mybatis.xml"/>
 
 </beans>

@@ -25,7 +25,7 @@
     <logger name="slf4j2" level="ERROR"/>
     <logger name="org.ligson.soeasy" level="DEBUG"/>
     <!--根logger控制-->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

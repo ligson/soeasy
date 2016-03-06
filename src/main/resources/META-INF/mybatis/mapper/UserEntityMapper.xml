@@ -7,12 +7,12 @@
     <!--通用表字段列表-->
     <resultMap id="BaseResultMap"
                type="org.ligson.soeasy.entity.UserEntity">
-        <result column="id" property="id" jdbcType="bigint"/>
-        <result column="birth" property="birth" jdbcType="datetime"/>
-        <result column="name" property="name" jdbcType="varchar"/>
-        <result column="password" property="password" jdbcType="varchar"/>
-        <result column="sex" property="sex" jdbcType="tinyint"/>
-        <result column="status" property="status" jdbcType="int"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="birth" property="birth" jdbcType="TIMESTAMP"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
     </resultMap>
     <!--通用表字段列表-->
 
@@ -22,7 +22,7 @@
             AND id=#{id,jdbcType=bigint}
         </if>
         <if test="birth != null">
-            AND birth=#{birth,jdbcType=datetime}
+            AND birth=#{birth,jdbcType=TIMESTAMP}
         </if>
         <if test="name != null">
             AND name=#{name,jdbcType=varchar}
@@ -82,7 +82,7 @@
                 #{id,jdbcType=bigint},
             </if>
             <if test="birth != null">
-                #{birth,jdbcType=datetime},
+                #{birth,jdbcType=TIMESTAMP},
             </if>
             <if test="name != null">
                 #{name,jdbcType=varchar},
@@ -113,7 +113,7 @@
                 id = #{id,jdbcType=bigint},
             </if>
             <if test="birth != null">
-                birth = #{birth,jdbcType=datetime},
+                birth = #{birth,jdbcType=TIMESTAMP},
             </if>
             <if test="name != null">
                 name = #{name,jdbcType=varchar},
@@ -143,7 +143,7 @@
         UPDATE t_user
         <set>
             id = #{id,jdbcType=bigint},
-            birth = #{birth,jdbcType=datetime},
+            birth = #{birth,jdbcType=TIMESTAMP},
             name = #{name,jdbcType=varchar},
             password = #{password,jdbcType=varchar},
             sex = #{sex,jdbcType=tinyint},

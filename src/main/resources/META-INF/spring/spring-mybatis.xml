@@ -18,12 +18,12 @@
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
 	<!-- dataSource -->
-  
-	<!-- 配置数据源 Druid --> <!-- 这里不需要配置destroy-method，因为bboss持久层在jvm退出时会自动调用数据源的close方法 -->
+    <context:property-placeholder location="classpath:config.properties" />
+    <!-- 配置数据源 Druid --> <!-- 这里不需要配置destroy-method，因为bboss持久层在jvm退出时会自动调用数据源的close方法 -->
 	<bean name="userDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${url}"/>
-		<property name="username" value="${username}"/>
+		<property name="username" value="${username1}"/>
 		<property name="password" value="${password}"/>
 		<property name="filters" value="stat" />
 		<property name="maxActive" value="100" />

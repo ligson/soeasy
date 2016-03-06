@@ -25,6 +25,8 @@ dependencies {
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"
     compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.aspectj:aspectjrt:1.8.8"
+    compile "org.aspectj:aspectjweaver:1.8.8"
 
     //slf4j配置
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -37,7 +39,7 @@ dependencies {
     compile "org.mybatis:mybatis-spring:1.2.1"
 
     //mysql driver
-    compile "mysql:mysql-connector-java:5.1.38"
+    compile "mysql:mysql-connector-java:5.0.4"
 
     //freemarker
     compile "org.freemarker:freemarker:2.3.23"
