@@ -59,6 +59,12 @@ public class TemplateEngine {
         String code = null;
         if (destFile.exists()) {
             code = getUserCustomCode(destFile);
+        }else{
+            try {
+                destFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (code == null) {
             code = "";

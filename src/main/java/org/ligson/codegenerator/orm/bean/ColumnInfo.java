@@ -18,7 +18,11 @@ public class ColumnInfo {
     /***
      * 数据类型
      */
-    private String type;
+    private String dbType;
+    /***
+     * orm类型
+     */
+    private String ormType;
     /***
      * java类型
      */
@@ -52,12 +56,15 @@ public class ColumnInfo {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getDbType() {
+        return dbType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDbType(String dbType) {
+        this.dbType = dbType;
+        if (dbType.equalsIgnoreCase("int")) {
+            this.dbType = "INTEGER";
+        }
     }
 
     public boolean isPrimaryKey() {
@@ -116,12 +123,21 @@ public class ColumnInfo {
         this.javaType = javaType;
     }
 
+    public String getOrmType() {
+        return ormType;
+    }
+
+    public void setOrmType(String ormType) {
+        this.ormType = ormType;
+    }
+
     @Override
     public String toString() {
         return "ColumnInfo{" +
                 "name='" + name + '\'' +
                 ", javaName='" + javaName + '\'' +
-                ", type='" + type + '\'' +
+                ", dbType='" + dbType + '\'' +
+                ", ormType='" + ormType + '\'' +
                 ", javaType=" + javaType +
                 ", primaryKey=" + primaryKey +
                 ", remark='" + remark + '\'' +

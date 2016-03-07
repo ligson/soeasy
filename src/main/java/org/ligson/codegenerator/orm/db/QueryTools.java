@@ -1,28 +1,17 @@
 package org.ligson.codegenerator.orm.db;
 
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
-import freemarker.template.Version;
 import org.ligson.codegenerator.orm.bean.ColumnInfo;
 import org.ligson.codegenerator.orm.bean.TableInfo;
-import org.ligson.codegenerator.orm.config.ConfigUtils;
 import org.ligson.codegenerator.orm.config.OrmConfig;
 import org.ligson.codegenerator.orm.template.utils.EntityTemplate;
 import org.ligson.codegenerator.orm.template.utils.MapperTemplate;
 
-import static java.util.stream.Collectors.*;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ligson on 2016/1/28.
@@ -51,7 +40,7 @@ public class QueryTools {
         List<ColumnInfo> columnInfos = new ArrayList<>();
         while (rs.next()) {
             String columnName = rs.getString(1);
-            String dataType = rs.getString(2);
+            String dataType = rs.getString(2).toUpperCase();
             Integer max = rs.getInt(3);
             String defaultValue = rs.getString(4);
             String comment = rs.getString(5);
@@ -62,7 +51,7 @@ public class QueryTools {
             columnInfo.setLength(max);
             columnInfo.setName(columnName);
             columnInfo.setRemark(comment);
-            columnInfo.setType(dataType);
+            columnInfo.setDbType(dataType);
             columnInfo.setJavaName(convert2JavaName(columnName));
             columnInfo.setJavaType(TypeMap.getType(dataType));
             if ("PRI".equals(key)) {

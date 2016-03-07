@@ -20,6 +20,7 @@ public class OrmConfig {
     private String servicePackage;
     private String mapperPath;
     private String servicePath;
+    private String entityPath;
     private static OrmConfig ormConfig;
 
     public static synchronized OrmConfig getInstance() {
@@ -38,6 +39,7 @@ public class OrmConfig {
             setDriverName(config.getValue("driver_name"));
             setServicePath(config.getValue("service_path"));
             setMapperPath(config.getValue("mapper_path"));
+            setEntityPath(config.getValue("entity_path"));
 
             setUrl(config.getValue("url"));
             setUsername(config.getValue("username"));
@@ -138,6 +140,14 @@ public class OrmConfig {
         this.servicePackage = servicePackage;
     }
 
+    public String getEntityPath() {
+        return entityPath;
+    }
+
+    public void setEntityPath(String entityPath) {
+        this.entityPath = entityPath;
+    }
+
     @Override
     public String toString() {
         return "OrmConfig{" +
@@ -147,8 +157,12 @@ public class OrmConfig {
                 ", password='" + password + '\'' +
                 ", databaseName='" + databaseName + '\'' +
                 ", tableName='" + tableName + '\'' +
+                ", entityName='" + entityName + '\'' +
+                ", entityPackage='" + entityPackage + '\'' +
+                ", servicePackage='" + servicePackage + '\'' +
                 ", mapperPath='" + mapperPath + '\'' +
                 ", servicePath='" + servicePath + '\'' +
+                ", entityPath='" + entityPath + '\'' +
                 '}';
     }
 

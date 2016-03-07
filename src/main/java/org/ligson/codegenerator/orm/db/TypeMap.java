@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by ligso on 2016/1/30.
+ *
  * @author ligson
  */
 public class TypeMap {
@@ -16,15 +17,16 @@ public class TypeMap {
     public static final Class INT_TYPE = Integer.class;
     public static final Class TINYINT_TYPE = Boolean.class;
     public static final Class BIGINT_TYPE = BigInteger.class;
+
     static {
-        typeMap.put("varchar", VARCHAR_TYPE);
-        typeMap.put("datetime", DATETIME_TYPE);
-        typeMap.put("int", INT_TYPE);
-        typeMap.put("tinyint", TINYINT_TYPE);
-        typeMap.put("bigint", BIGINT_TYPE);
+        typeMap.put("VARCHAR", VARCHAR_TYPE);
+        typeMap.put("TIMESTAMP", DATETIME_TYPE);
+        typeMap.put("INT", INT_TYPE);
+        typeMap.put("TINYINT", TINYINT_TYPE);
+        typeMap.put("BIGINT", BIGINT_TYPE);
     }
 
     public static Class getType(String type) {
-        return typeMap.get(type.toLowerCase());
+        return typeMap.get(type.toUpperCase());
     }
 }

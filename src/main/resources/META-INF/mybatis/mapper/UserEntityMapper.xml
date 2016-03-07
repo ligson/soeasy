@@ -8,7 +8,8 @@
     <resultMap id="BaseResultMap"
                type="org.ligson.soeasy.entity.UserEntity">
         <result column="id" property="id" jdbcType="BIGINT"/>
-        <result column="birth" property="birth" jdbcType="TIMESTAMP"/>
+        <result column="birth" property="birth" jdbcType="TIMESTAMP"
+                javaType="java.sql.Timestamp" />
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="TINYINT"/>
@@ -19,33 +20,33 @@
     <!--通用查询条件组装-->
     <sql id="whereCondition">
         <if test="id != null">
-            AND id=#{id,jdbcType=bigint}
+            AND id=#{id,jdbcType=BIGINT}
         </if>
         <if test="birth != null">
             AND birth=#{birth,jdbcType=TIMESTAMP}
         </if>
         <if test="name != null">
-            AND name=#{name,jdbcType=varchar}
+            AND name=#{name,jdbcType=VARCHAR}
         </if>
         <if test="password != null">
-            AND password=#{password,jdbcType=varchar}
+            AND password=#{password,jdbcType=VARCHAR}
         </if>
         <if test="sex != null">
-            AND sex=#{sex,jdbcType=tinyint}
+            AND sex=#{sex,jdbcType=TINYINT}
         </if>
         <if test="status != null">
-            AND status=#{status,jdbcType=int}
+            AND status=#{status,jdbcType=INTEGER}
         </if>
     </sql>
 
     <!--查询字段列表拼装-->
     <sql id="baseColumnList">
-        id,
-        birth,
-        name,
-        password,
-        sex,
-        status
+    id,
+    birth,
+    name,
+    password,
+    sex,
+    status
     </sql>
 
     <!--
@@ -59,42 +60,42 @@
         INSERT INTO t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                id,
+            id,
             </if>
             <if test="birth != null">
-                birth,
+            birth,
             </if>
             <if test="name != null">
-                name,
+            name,
             </if>
             <if test="password != null">
-                password,
+            password,
             </if>
             <if test="sex != null">
-                sex,
+            sex,
             </if>
             <if test="status != null">
-                status,
+            status,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=bigint},
+            #{id,jdbcType=BIGINT},
             </if>
             <if test="birth != null">
-                #{birth,jdbcType=TIMESTAMP},
+            #{birth,jdbcType=TIMESTAMP},
             </if>
             <if test="name != null">
-                #{name,jdbcType=varchar},
+            #{name,jdbcType=VARCHAR},
             </if>
             <if test="password != null">
-                #{password,jdbcType=varchar},
+            #{password,jdbcType=VARCHAR},
             </if>
             <if test="sex != null">
-                #{sex,jdbcType=tinyint},
+            #{sex,jdbcType=TINYINT},
             </if>
             <if test="status != null">
-                #{status,jdbcType=int},
+            #{status,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -110,22 +111,22 @@
         UPDATE t_user
         <set>
             <if test="id != null">
-                id = #{id,jdbcType=bigint},
+            id = #{id,jdbcType=BIGINT},
             </if>
             <if test="birth != null">
-                birth = #{birth,jdbcType=TIMESTAMP},
+            birth = #{birth,jdbcType=TIMESTAMP},
             </if>
             <if test="name != null">
-                name = #{name,jdbcType=varchar},
+            name = #{name,jdbcType=VARCHAR},
             </if>
             <if test="password != null">
-                password = #{password,jdbcType=varchar},
+            password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="sex != null">
-                sex = #{sex,jdbcType=tinyint},
+            sex = #{sex,jdbcType=TINYINT},
             </if>
             <if test="status != null">
-                status = #{status,jdbcType=int},
+            status = #{status,jdbcType=INTEGER},
             </if>
         </set>
         WHERE 1=1
@@ -142,12 +143,12 @@
             parameterType="org.ligson.soeasy.entity.UserEntity">
         UPDATE t_user
         <set>
-            id = #{id,jdbcType=bigint},
-            birth = #{birth,jdbcType=TIMESTAMP},
-            name = #{name,jdbcType=varchar},
-            password = #{password,jdbcType=varchar},
-            sex = #{sex,jdbcType=tinyint},
-            status = #{status,jdbcType=int},
+        id = #{id,jdbcType=BIGINT},
+        birth = #{birth,jdbcType=TIMESTAMP},
+        name = #{name,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
         </set>
         WHERE 1=1
         <include refid="whereCondition"/>
@@ -180,7 +181,22 @@
         FROM t_user
         WHERE 1=1
         <include refid="whereCondition"/>
-        limit 0,1
+    </select>
+
+    <!--
+    方法名称: countBy
+    调用路径: UserEntityMapper.countBy
+    开发信息:
+    处理信息: 根据主键统计记录
+    -->
+    <select id="countBy"
+            parameterType="org.ligson.soeasy.entity.UserEntity"
+            resultType="org.ligson.soeasy.entity.UserEntity">
+        SELECT
+        count(1)
+        FROM t_user
+        WHERE 1=1
+        <include refid="whereCondition"/>
     </select>
 
     <!--
@@ -241,7 +257,6 @@
     </select>
 
     <!--用户自定义代码开始-->
-
 
     <!--用户自定义代码结束-->
 </mapper>

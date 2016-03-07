@@ -8,7 +8,7 @@
     <resultMap id="BaseResultMap"
                type="${entityPackage}.${entityName}">
     <#list tableInfo.columnInfos as columnInfo>
-        <result column="${columnInfo.name}" property="${columnInfo.javaName}" jdbcType="${columnInfo.type}"/>
+        <result column="${columnInfo.name}" property="${columnInfo.javaName}" jdbcType="${columnInfo.dbType}"/>
     </#list>
     </resultMap>
     <!--通用表字段列表-->
@@ -17,7 +17,7 @@
     <sql id="whereCondition">
     <#list tableInfo.columnInfos as columnInfo>
         <if test="${columnInfo.javaName} != null">
-            AND ${columnInfo.name}=${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}}
+            AND ${columnInfo.name}=${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.dbType}}
         </if>
     </#list>
     </sql>
@@ -48,7 +48,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
         <#list tableInfo.columnInfos as columnInfo>
             <if test="${columnInfo.javaName} != null">
-            ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}},
+            ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.dbType}},
             </if>
         </#list>
         </trim>
@@ -66,7 +66,7 @@
         <set>
         <#list tableInfo.columnInfos as columnInfo>
             <if test="${columnInfo.javaName} != null">
-            ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}},
+            ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.dbType}},
             </if>
         </#list>
         </set>
@@ -85,7 +85,7 @@
         UPDATE ${tableInfo.tableName}
         <set>
         <#list tableInfo.columnInfos as columnInfo>
-        ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.type}},
+        ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.dbType}},
         </#list>
         </set>
         WHERE 1=1

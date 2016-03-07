@@ -11,10 +11,10 @@ import java.util.Date;
  */
 public class IdUtils {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssS");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
     public static BigInteger randomId() {
-        int n = randomNum(5);
+        int n = randomNum(3);
         String number = sdf.format(new Date()) + n;
 
         BigInteger bigInteger = new BigInteger(number);
