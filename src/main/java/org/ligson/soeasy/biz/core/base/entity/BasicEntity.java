@@ -13,7 +13,7 @@ public class BasicEntity extends BasePageDTO implements Serializable {
     /**
      * 实体主键
      */
-    private BigInteger id;
+    protected BigInteger id;
     /***
      * 是否要分页
      */

@@ -8,8 +8,7 @@
     <resultMap id="BaseResultMap"
                type="org.ligson.soeasy.entity.UserEntity">
         <result column="id" property="id" jdbcType="BIGINT"/>
-        <result column="birth" property="birth" jdbcType="TIMESTAMP"
-                javaType="java.sql.Timestamp" />
+        <result column="birth" property="birth" jdbcType="TIMESTAMP"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="TINYINT"/>
@@ -258,5 +257,12 @@
 
     <!--用户自定义代码开始-->
 
+
+
+
+
+
+
+
     <!--用户自定义代码结束-->
 </mapper>

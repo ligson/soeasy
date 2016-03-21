@@ -10,7 +10,7 @@
 	</sql>
 	
 	<sql id="paginationSuffix">
-		)A LIMIT #{startIdx,jdbcType=DECIMAL},#{pageSize,jdbcType=DECIMAL}
+		)A LIMIT #{offset,jdbcType=DECIMAL},#{max,jdbcType=DECIMAL}
 	</sql>
 	
 </mapper>

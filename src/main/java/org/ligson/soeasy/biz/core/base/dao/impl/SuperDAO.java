@@ -215,10 +215,14 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
             baseParamDTO.setMax(10);
         }
 
-        String statementName = baseParamDTO.getClass().getSimpleName();
+        String clzName = baseParamDTO.getClass().getSimpleName();
+        String countStatementName = clzName + pagenationStatementSuffix +
+                pagenationCountStatementSuffix;
+        String statementName = clzName + pagenationStatementSuffix;
         // 计算记录起始值和结束值
-        Integer totalCount = (Integer) userSqlSessionTemplate.selectOne(statementName + pagenationCountStatementSuffix, baseParamDTO);
-
+        Integer totalCount = (Integer) userSqlSessionTemplate.selectOne
+                (countStatementName, baseParamDTO);
+        log.debug(statementName);
         List resultList = userSqlSessionTemplate.selectList(statementName, baseParamDTO);
 
         return new Pagination(baseParamDTO.getMax(), baseParamDTO.getPageNum(),

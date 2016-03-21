@@ -19,4 +19,6 @@ public interface BaseService<T extends BasicEntity> {
     public void delete(T t);
 
     public void update(T t);
+
+    public void add(T t);
 }

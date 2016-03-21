@@ -1,5 +1,6 @@
 package org.ligson.soeasy.test;
 
+import org.ligson.soeasy.biz.core.base.entity.Pagination;
 import org.ligson.soeasy.entity.UserEntity;
 import org.ligson.soeasy.service.UserService;
 import org.slf4j.Logger;
@@ -31,23 +32,32 @@ public class Main {
             userEntity.setPassword("password");
             userEntity.setSex(true);
             userEntity.setStatus(1);
-            //userService.
-            //userEntity = userService.findAllBy(userEntity);
+            userService.add(userEntity);
             Thread.sleep(10);
-            //System.out.println(userEntity);
+            System.out.println(userEntity);
         }
     }
 
-    public static void query() throws  Exception{
+    public static void query() throws Exception {
         UserEntity userEntity = new UserEntity();
         userEntity.setPageNum(1);
         userEntity.setOffset(0);
         userEntity.setMax(10);
+        //userEntity.setSex(true);
+       // userEntity.setStatus(1);
+        Pagination<UserEntity> pagination = userService.findAllBy(userEntity);
+        System.out.println(pagination.getTotalCount());
+        System.out.println(pagination.getDatas());
+        for(UserEntity entity :pagination.getDatas()){
+            System.out.println(entity.getId());
+        }
         //List<UserEntity> entity = userService.find(new UserEntity());
         //System.out.println(entity);
     }
 
     public static void main(String[] args) throws Exception {
         query();
+        //insert();
+
     }
 }

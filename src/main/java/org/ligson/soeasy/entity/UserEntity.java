@@ -71,10 +71,16 @@ public class UserEntity extends BasicEntity implements Serializable {
     @Override
     public String toString() {
         return "UserEntity{" +
+               "id=" + id +
+
                ",birth=" + birth +
+
                ",name=" + name +
+
                ",password=" + password +
+
                ",sex=" + sex +
+
                ",status=" + status +
                '}';
     }

@@ -35,16 +35,12 @@ ${"    "}@Override
 ${"    "}public String toString() {
 ${"        "}return "${entityName}{" +
 <#list tableInfo.columnInfos as columnInfo>
+    <#assign propName=columnInfo.javaName?cap_first/>
     <#if columnInfo_index==0>
-        <#if columnInfo.name != 'id'>
-            <#assign propName=columnInfo.javaName?cap_first/>
 ${"               "}"${columnInfo.javaName}=" + ${columnInfo.javaName} +
-        </#if>
     <#else>
-        <#if columnInfo.name != 'id'>
-            <#assign propName=columnInfo.javaName?cap_first/>
+
 ${"               "}",${columnInfo.javaName}=" + ${columnInfo.javaName} +
-        </#if>
     </#if>
 </#list>
 ${"               "}'}';

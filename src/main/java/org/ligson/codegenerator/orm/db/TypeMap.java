@@ -26,7 +26,18 @@ public class TypeMap {
         typeMap.put("BIGINT", BIGINT_TYPE);
     }
 
+    public static String getKey(String type) {
+        if (type.equalsIgnoreCase("DATETIME")) {
+            return "TIMESTAMP";
+        } else {
+            return type;
+        }
+    }
+
     public static Class getType(String type) {
+        if (type.equalsIgnoreCase("DATETIME")) {
+            return DATETIME_TYPE;
+        }
         return typeMap.get(type.toUpperCase());
     }
 }
