@@ -23,9 +23,21 @@
     </logger>
     <!--slf4j2包下的类在ERROR级别时候传递到root logger中-->
     <logger name="slf4j2" level="ERROR"/>
+    <!-- 打印 db相关日志，包括sql -->
+    <logger name="com.ibatis" level="DEBUG"/>
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG"/>
+    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"/>
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <logger name="java.sql.ResultSet" level="DEBUG"/>
     <logger name="org.ligson.soeasy" level="DEBUG"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="UserEntityMapper" level="DEBUG"/>
+
     <!--根logger控制-->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

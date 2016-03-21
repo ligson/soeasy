@@ -23,7 +23,7 @@
 	<bean name="userDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${url}"/>
-		<property name="username" value="${username1}"/>
+		<property name="username" value="${user_name}"/>
 		<property name="password" value="${password}"/>
 		<property name="filters" value="stat" />
 		<property name="maxActive" value="100" />
