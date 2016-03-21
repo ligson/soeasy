@@ -1,6 +1,7 @@
-package org.ligson.soeasy.biz.core.base.dao;
+package org.ligson.soeasy.biz.core.base.dao.impl;
 
 
+import org.ligson.soeasy.biz.core.base.dao.ISuperDAO;
 import org.ligson.soeasy.biz.core.base.entity.BasePageDTO;
 import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
 import org.ligson.soeasy.biz.core.base.entity.Pagination;
@@ -8,7 +9,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;

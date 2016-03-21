@@ -31,16 +31,20 @@ public class Main {
             userEntity.setPassword("password");
             userEntity.setSex(true);
             userEntity.setStatus(1);
-            userEntity = userService.register(userEntity);
+            //userService.
+            //userEntity = userService.findAllBy(userEntity);
             Thread.sleep(10);
             //System.out.println(userEntity);
         }
     }
 
     public static void query() throws  Exception{
-
-        List<UserEntity> entity = userService.find(new UserEntity());
-        System.out.println(entity);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setPageNum(1);
+        userEntity.setOffset(0);
+        userEntity.setMax(10);
+        //List<UserEntity> entity = userService.find(new UserEntity());
+        //System.out.println(entity);
     }
 
     public static void main(String[] args) throws Exception {

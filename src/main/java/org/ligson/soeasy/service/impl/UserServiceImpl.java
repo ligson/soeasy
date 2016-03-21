@@ -1,41 +1,25 @@
 package org.ligson.soeasy.service.impl;
 
+import org.ligson.soeasy.biz.core.base.dao.ISuperDAO;
+import org.ligson.soeasy.biz.core.base.entity.Pagination;
+import org.ligson.soeasy.biz.core.base.service.impl.BaseServiceImpl;
 import org.ligson.soeasy.dao.UserDao;
 import org.ligson.soeasy.entity.UserEntity;
 import org.ligson.soeasy.service.UserService;
-import org.ligson.soeasy.utils.IdUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by ligson on 2016/1/28.
  */
 @Service(value = "userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements UserService {
     @Resource
     private UserDao userDao;
 
     @Override
-    public UserEntity register(UserEntity userEntity) {
-        userEntity.setId(IdUtils.randomId());
-        userDao.insert(userEntity);
-        return userEntity;
-    }
-
-    @Override
-    public List<UserEntity> find(UserEntity userEntity) {
-        return userDao.findAllBy(userEntity);
-    }
-
-    @Override
-    public int update(UserEntity userEntity) {
-        return userDao.update(userEntity);
-    }
-
-    @Override
-    public void remove(UserEntity userEntity) {
-        userDao.delete(userEntity);
+    public ISuperDAO<UserEntity> getDao() {
+        return userDao;
     }
 }
