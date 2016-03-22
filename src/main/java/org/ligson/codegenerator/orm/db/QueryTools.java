@@ -40,7 +40,7 @@ public class QueryTools {
         List<ColumnInfo> columnInfos = new ArrayList<>();
         while (rs.next()) {
             String columnName = rs.getString(1);
-            String dataType = rs.getString(2).toUpperCase();
+            String dbType = rs.getString(2).toUpperCase();
             Integer max = rs.getInt(3);
             String defaultValue = rs.getString(4);
             String comment = rs.getString(5);
@@ -52,13 +52,14 @@ public class QueryTools {
             columnInfo.setName(columnName);
             columnInfo.setRemark(comment);
 
-            columnInfo.setDbType(TypeMap.getKey(dataType));
+            columnInfo.setDbType(dbType);
             columnInfo.setJavaName(convert2JavaName(columnName));
-            columnInfo.setJavaType(TypeMap.getType(dataType));
+            columnInfo.setJavaType(TypeMap.getJavaType(dbType));
+            columnInfo.setOrmType(TypeMap.getOrmType(dbType));
             if ("PRI".equals(key)) {
                 columnInfo.setPrimaryKey(true);
                 tableInfo.setPrimaryKeyName(columnName);
-                tableInfo.setPrimaryKeyType(dataType);
+                tableInfo.setPrimaryKeyType(dbType);
             }
             columnInfos.add(columnInfo);
         }
