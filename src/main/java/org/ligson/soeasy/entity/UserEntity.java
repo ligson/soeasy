@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class UserEntity extends BasicEntity implements Serializable {
     /***
-     *
+     * id
      */
     private BigInteger id;
     /***
