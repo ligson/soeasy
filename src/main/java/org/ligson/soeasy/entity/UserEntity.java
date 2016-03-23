@@ -7,26 +7,32 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public class UserEntity extends BasicEntity implements Serializable {
+
     /***
      * id
      */
     private BigInteger id;
+
     /***
      * 生日
      */
     private Date birth;
+
     /***
      * 姓名
      */
     private String name;
+
     /***
      * 密码
      */
     private String password;
+
     /***
      * 性别
      */
     private Boolean sex;
+
     /***
      * 状态
      */

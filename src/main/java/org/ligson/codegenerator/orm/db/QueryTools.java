@@ -30,6 +30,8 @@ public class QueryTools {
     }
 
     public TableInfo getTableInfo() throws Exception {
+        //ALTER TABLE account_center4.login_log COMMENT '登录日志表';
+        //#SELECT TABLE_NAME,TABLE_COMMENT FROM information_schema.`TABLES` where TABLE_SCHEMA='account_center3'
         String sql = "SELECT cols.COLUMN_NAME,cols.DATA_TYPE,cols.CHARACTER_MAXIMUM_LENGTH,cols.COLUMN_DEFAULT,cols.COLUMN_COMMENT,cols.COLUMN_KEY FROM information_schema.`COLUMNS` cols where cols.TABLE_NAME=? AND cols.TABLE_SCHEMA=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, ormConfig.getTableName());

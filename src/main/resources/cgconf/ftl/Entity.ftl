@@ -11,6 +11,7 @@ import ${columnInfo.javaType.name};
 
 public class ${entityName} extends BasicEntity implements Serializable {
 <#list tableInfo.columnInfos as columnInfo>
+
 ${"    "}/***
 ${"     "}* ${((columnInfo.remark)?length>0)?string(columnInfo.remark,columnInfo.javaName)}
 ${"     "}*/
