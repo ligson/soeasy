@@ -154,8 +154,8 @@
         FROM ${tableInfo.tableName}
         WHERE 1=1
         <include refid="whereCondition"/>
-        <if test="columnSort != null">
-            ORDER BY ${r'${columnSort}'}
+        <if test="sort != null and order != null">
+            ORDER BY ${r'${sort}'} ${r'${order}'}
         </if>
         <!-- 分页条 -->
         <include refid="CommonEntity.paginationSuffix"/>
@@ -189,8 +189,8 @@
         FROM ${tableInfo.tableName}
         WHERE 1=1
         <include refid="whereCondition"/>
-        <if test="columnSort != null">
-            ORDER BY ${r'${columnSort}'}
+        <if test="sort != null and order != null">
+            ORDER BY ${r'${sort}'} ${r'${order}'}
         </if>
         limit 0,100
     </select>

@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -44,20 +45,26 @@ public class Main {
         userEntity.setOffset(0);
         userEntity.setMax(10);
         //userEntity.setSex(true);
-       // userEntity.setStatus(1);
+        // userEntity.setStatus(1);
         Pagination<UserEntity> pagination = userService.findAllBy(userEntity);
         System.out.println(pagination.getTotalCount());
         System.out.println(pagination.getDatas());
-        for(UserEntity entity :pagination.getDatas()){
-            System.out.println(entity.getId());
+        for (UserEntity entity : pagination.getDatas()) {
+            //System.out.println(entity.getp);
         }
         //List<UserEntity> entity = userService.find(new UserEntity());
         //System.out.println(entity);
     }
 
-    public static void main(String[] args) throws Exception {
-        query();
-        //insert();
+    public static void get() {
+        //2016032117550140
+        UserEntity entity = userService.get(new BigInteger("2016032117550140"));
+        System.out.println(entity);
+    }
 
+    public static void main(String[] args) throws Exception {
+        //query();
+        //insert();
+        get();
     }
 }

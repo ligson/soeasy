@@ -58,8 +58,7 @@ public class QueryTools {
             columnInfo.setOrmType(TypeMap.getOrmType(dbType));
             if ("PRI".equals(key)) {
                 columnInfo.setPrimaryKey(true);
-                tableInfo.setPrimaryKeyName(columnName);
-                tableInfo.setPrimaryKeyType(dbType);
+                tableInfo.setPrimaryKey(columnInfo);
             }
             columnInfos.add(columnInfo);
         }

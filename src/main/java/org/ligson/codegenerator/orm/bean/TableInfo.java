@@ -13,13 +13,9 @@ public class TableInfo implements Serializable {
      */
     private String tableName;
     /***
-     * 主键名
+     * 主键
      */
-    private String primaryKeyName;
-    /***
-     * 主键类型
-     */
-    private String primaryKeyType;
+    private ColumnInfo primaryKey;
     /***
      * 所有的列
      */
@@ -33,13 +29,6 @@ public class TableInfo implements Serializable {
         this.tableName = tableName;
     }
 
-    public String getPrimaryKeyName() {
-        return primaryKeyName;
-    }
-
-    public void setPrimaryKeyName(String primaryKeyName) {
-        this.primaryKeyName = primaryKeyName;
-    }
 
     public List<ColumnInfo> getColumnInfos() {
         return columnInfos;
@@ -49,20 +38,19 @@ public class TableInfo implements Serializable {
         this.columnInfos = columnInfos;
     }
 
-    public String getPrimaryKeyType() {
-        return primaryKeyType;
+    public ColumnInfo getPrimaryKey() {
+        return primaryKey;
     }
 
-    public void setPrimaryKeyType(String primaryKeyType) {
-        this.primaryKeyType = primaryKeyType;
+    public void setPrimaryKey(ColumnInfo primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
     @Override
     public String toString() {
         return "TableInfo{" +
                 "tableName='" + tableName + '\'' +
-                ", primaryKeyName='" + primaryKeyName + '\'' +
-                ", primaryKeyType='" + primaryKeyType + '\'' +
+                ", primaryKey=" + primaryKey +
                 ", columnInfos=" + columnInfos +
                 '}';
     }

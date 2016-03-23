@@ -9,67 +9,33 @@ import java.math.BigInteger;
  *
  * @author ligson
  */
+@SuppressWarnings("unused")
 public class BasicEntity extends BasePageDTO implements Serializable {
-    /**
-     * 实体主键
-     */
-    protected BigInteger id;
+
     /***
      * 是否要分页
      */
     private Boolean pageAble;
 
-    /**
-     * 列排序
+    /***
+     * 排序字段
      */
-    private String columnSort;
+    private String sort;
 
-    private enum Action {
-        INSERT("插入"), UPDATE("更新"), FIND("查询"), DELETE("删除");
-        private String msg;
+    /***
+     * 排序顺序
+     */
+    private String order = "ASC";
 
-        private Action(String msg) {
-            this.msg = msg;
-        }
-    }
-
-    private Enum _action_;
-
+    /**
+     * limit offset
+     */
     private Integer offset = 0;
+
+    /***
+     * limit max
+     */
     private Integer max = 10;
-
-    public void markInsert() {
-        _action_ = Action.INSERT;
-    }
-
-    public void markUpdate() {
-        _action_ = Action.UPDATE;
-    }
-
-    public void markFind() {
-        _action_ = Action.FIND;
-    }
-
-    public void markDelete() {
-        _action_ = Action.DELETE;
-    }
-
-    public boolean canInsert() {
-        return _action_ == Action.INSERT;
-    }
-
-    public boolean canUpdate() {
-        return _action_ == Action.UPDATE;
-    }
-
-    public boolean canDelete() {
-        return _action_ == Action.DELETE;
-    }
-
-    public boolean canFind() {
-        return _action_ == Action.FIND;
-    }
-
 
     public Integer getOffset() {
         return offset;
@@ -95,20 +61,21 @@ public class BasicEntity extends BasePageDTO implements Serializable {
         this.pageAble = pageAble;
     }
 
-    public String getColumnSort() {
-        return columnSort;
+    /***
+     * 主键字段
+     *
+     * @return 主键名
+     */
+    public String primaryKey() {
+        return "id";
     }
 
-    public void setColumnSort(String columnSort) {
-        this.columnSort = columnSort;
+    /***
+     * 主键类型
+     *
+     * @return 主键类型
+     */
+    public Class primaryType() {
+        return BigInteger.class;
     }
-
-    public BigInteger getId() {
-        return id;
-    }
-
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
 }

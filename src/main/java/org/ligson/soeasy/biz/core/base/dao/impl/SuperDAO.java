@@ -11,6 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -20,16 +24,15 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
 
     public static final Logger log = LoggerFactory.getLogger(SuperDAO.class);
 
-    private static final String pagenationStatementSuffix = "Mapper.getPagenationList";
-    private static final String pagenationCountStatementSuffix = "-count";
-    private static final String getListStatementSuffix = "Mapper.getList";
-    private static final String selectStatementSuffix = "Mapper.findBy";
-    private static final String insertStatementSuffix = "Mapper.insert";
-    private static final String updateStatementSuffix = "Mapper.update";
-    private static final String deleteStatementSuffix = "Mapper.delete";
-    private static final String getNextIdValStatement = "CommonEntity.getNextIdVal";
-    private static final String batchUpdateStatementSuffix = "Mapper.batchUpdate";
-    private static final String batchInsertStatementSuffix = "Mapper.batchInsert";
+    private static final String pageSuffix = "Mapper.getPagenationList";
+    private static final String pageCountSuffix = "-count";
+    private static final String getListSuffix = "Mapper.getList";
+    private static final String findBySuffix = "Mapper.findBy";
+    private static final String insertSuffix = "Mapper.insert";
+    private static final String updateSuffix = "Mapper.update";
+    private static final String deleteSuffix = "Mapper.delete";
+    private static final String batchUpdateSuffix = "Mapper.batchUpdate";
+    private static final String batchInsertSuffix = "Mapper.batchInsert";
 
     /**
      * 批量sql单次执行的数量
@@ -50,7 +53,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
     @Override
     public Integer update(E e) {
         String statementName = e.getClass().getSimpleName() +
-                updateStatementSuffix;
+                updateSuffix;
         return userSqlSessionTemplate.update(statementName, e);
     }
 
@@ -63,7 +66,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
     @Override
     public Integer delete(E e) {
         String statementName = e.getClass().getSimpleName() +
-                deleteStatementSuffix;
+                deleteSuffix;
         return userSqlSessionTemplate.update(statementName, e);
     }
 
@@ -76,15 +79,24 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
     @Override
     public Integer insert(E e) {
         String statementName = e.getClass().getSimpleName() +
-                insertStatementSuffix;
+                insertSuffix;
         return userSqlSessionTemplate.insert(statementName, e);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public E get(BigInteger id) {
-        BasicEntity entity = new BasicEntity();
-        entity.setId(id);
-        return findBy((E) entity);
+        try {
+            Class clazz = getGenericType(0);
+            Object object = clazz.newInstance();
+            Field field = clazz.getDeclaredField("id");
+            Method method = clazz.getDeclaredMethod("setId", field.getType());
+            method.invoke(object, id);
+            return findBy((E) object);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /***
@@ -96,7 +108,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
     @Override
     public E findBy(E e) {
         String statementName = e.getClass().getSimpleName() +
-                selectStatementSuffix;
+                findBySuffix;
         return userSqlSessionTemplate.selectOne(statementName, e);
     }
 
@@ -108,7 +120,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
      */
     @Override
     public List<E> findAllBy(E e) {
-        String statementName = e.getClass().getSimpleName() + getListStatementSuffix;
+        String statementName = e.getClass().getSimpleName() + getListSuffix;
         return userSqlSessionTemplate.selectList(statementName, e);
     }
 
@@ -132,7 +144,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         try {
             if (basicEntityList != null && basicEntityList.size() > 0) {
                 String statementName = basicEntityList.get(0).getClass().getSimpleName();
-                statementName = statementName + batchInsertStatementSuffix;
+                statementName = statementName + batchInsertSuffix;
                 int rowSize = basicEntityList.size();//数据总量
                 int fromIndex = 0;//起始序号
                 int endIndex = 0;//结束序号
@@ -171,7 +183,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         try {
             if (basicEntityList != null && basicEntityList.size() > 0) {
                 String statementName = basicEntityList.get(0).getClass().getSimpleName();
-                statementName = statementName + batchUpdateStatementSuffix;
+                statementName = statementName + batchUpdateSuffix;
                 int rowSize = basicEntityList.size();//数据总量
                 int fromIndex = 0;//起始序号
                 int endIndex = 0;//结束序号
@@ -216,9 +228,9 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
         }
 
         String clzName = baseParamDTO.getClass().getSimpleName();
-        String countStatementName = clzName + pagenationStatementSuffix +
-                pagenationCountStatementSuffix;
-        String statementName = clzName + pagenationStatementSuffix;
+        String countStatementName = clzName + pageSuffix +
+                pageCountSuffix;
+        String statementName = clzName + pageSuffix;
         // 计算记录起始值和结束值
         Integer totalCount = (Integer) userSqlSessionTemplate.selectOne
                 (countStatementName, baseParamDTO);
@@ -227,6 +239,22 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
 
         return new Pagination(baseParamDTO.getMax(), baseParamDTO.getPageNum(),
                 totalCount, resultList);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Class getGenericType(int index) {
+        Type genType = getClass().getGenericSuperclass();
+        if (!(genType instanceof ParameterizedType)) {
+            return Object.class;
+        }
+        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+        if (index >= params.length || index < 0) {
+            throw new RuntimeException("Index outof bounds");
+        }
+        if (!(params[index] instanceof Class)) {
+            return Object.class;
+        }
+        return (Class) params[index];
     }
 
 }

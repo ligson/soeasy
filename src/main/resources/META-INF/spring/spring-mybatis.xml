@@ -4,87 +4,85 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="
-          http://www.springframework.org/schema/beans
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-       http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util-3.1.xsd
+
+
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	
-	<!-- dataSource -->
-    <context:property-placeholder location="classpath:config.properties" />
+
+    <!-- dataSource -->
+    <context:property-placeholder location="classpath:config.properties"/>
     <!-- 配置数据源 Druid --> <!-- 这里不需要配置destroy-method，因为bboss持久层在jvm退出时会自动调用数据源的close方法 -->
-	<bean name="userDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="${url}"/>
-		<property name="username" value="${user_name}"/>
-		<property name="password" value="${password}"/>
-		<property name="filters" value="stat" />
-		<property name="maxActive" value="100" />
-		<property name="initialSize" value="1" />
-		<property name="maxWait" value="60000" />
-		<property name="minIdle" value="1" />
-		<property name="timeBetweenEvictionRunsMillis" value="3000" />
-		<property name="minEvictableIdleTimeMillis" value="300000" />
-		<property name="validationQuery" value="SELECT 1 from dual" />
-		<property name="testWhileIdle" value="true" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testOnReturn" value="false" />
-		<property name="poolPreparedStatements" value="true" />
-		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
-	</bean>
-	
-	
-	<!-- C3P0数据源-->
-	 <!-- <bean id="userDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-        <property name="driverClass" value="${jdbc_driver}" />  
-        <property name="jdbcUrl" value="${jdbc_url}" />  
-        <property name="user" value="${jdbc_name}" />  
-        <property name="password" value="${jdbc_pwd}" /> 
-        <property name="minPoolSize" value="${jdbc_minPoolSize}" />  
-        <property name="maxPoolSize" value="${jdbc_maxPoolSize}" />  
-        <property name="idleConnectionTestPeriod" value="${jdbc_idleConnectionTestPeriod}" />  
-        <property name="maxIdleTime" value="${jdbc_maxIdleTime}" /> 
-        <property name="acquireIncrement" value="${jdbc_acquireIncrement}" />  
-        <property name="acquireRetryAttempts" value="${jdbc_acquireRetryAttempts}" />
-        <property name="acquireRetryDelay" value="${jdbc_acquireRetryDelay}" />  
-        <property name="maxStatements" value="0"/>  
-        <property name="checkoutTimeout" value="100"/>  
-    </bean>  -->
-  
-  
-  <!-- dataSource -->
-
-  <!-- mybatis -->
-  <bean id="userSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="dataSource" ref="userDataSource" />
-    <property name="configLocation" value="classpath:META-INF/mybatis/mybatis-config.xml" />
-    <property name="mapperLocations">
-      <list>
-        <value>classpath:META-INF/mybatis/mapper/*Mapper.xml</value>
-        <value>classpath:META-INF/mybatis/ReuseSQL.xml</value>
-      </list>
-    </property>
-  </bean>
-
-  <!-- 配置Mybatis模版 -->
-  <bean id="userSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-    <constructor-arg index="0" ref="userSqlSessionFactory"/>
-    <!-- 执行方式，SIMPLE, REUSE, BATCH
-    <constructor-arg index="1" value="BATCH" />-->
-  </bean>
-  <!-- mybatis -->
-  
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="userDataSource"/>
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user_name}"/>
+        <property name="password" value="${password}"/>
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="100"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="3000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 1 from dual"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
     </bean>
-    
+
+
+    <!-- C3P0数据源-->
+    <!-- <bean id="userDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+       <property name="driverClass" value="${jdbc_driver}" />
+       <property name="jdbcUrl" value="${jdbc_url}" />
+       <property name="user" value="${jdbc_name}" />
+       <property name="password" value="${jdbc_pwd}" />
+       <property name="minPoolSize" value="${jdbc_minPoolSize}" />
+       <property name="maxPoolSize" value="${jdbc_maxPoolSize}" />
+       <property name="idleConnectionTestPeriod" value="${jdbc_idleConnectionTestPeriod}" />
+       <property name="maxIdleTime" value="${jdbc_maxIdleTime}" />
+       <property name="acquireIncrement" value="${jdbc_acquireIncrement}" />
+       <property name="acquireRetryAttempts" value="${jdbc_acquireRetryAttempts}" />
+       <property name="acquireRetryDelay" value="${jdbc_acquireRetryDelay}" />
+       <property name="maxStatements" value="0"/>
+       <property name="checkoutTimeout" value="100"/>
+   </bean>  -->
+
+
+    <!-- dataSource -->
+
+    <!-- mybatis -->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:META-INF/mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:META-INF/mybatis/mapper/*Mapper.xml</value>
+                <value>classpath:META-INF/mybatis/ReuseSQL.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置Mybatis模版 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+        <!-- 执行方式，SIMPLE, REUSE, BATCH
+        <constructor-arg index="1" value="BATCH" />-->
+    </bean>
+    <!-- mybatis -->
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
             <tx:method name="insert*" propagation="REQUIRED" isolation="READ_COMMITTED"/>
@@ -103,8 +101,8 @@
         <aop:pointcut id="txPointcut" expression="execution(* org.ligson.soeasy.service..*.*(..))"/>
         <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
     </aop:config>
-    
-    <tx:annotation-driven transaction-manager="txManager" />
-    
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+
 
 </beans>

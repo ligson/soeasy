@@ -46,9 +46,10 @@ public abstract class BaseServiceImpl<T extends BasicEntity> implements BaseServ
 
     @Override
     public void add(T t) {
-        if (t.getId() == null) {
+        /*if (t.getId() == null) {
             t.setId(IdUtils.randomId());
-        }
+        }*/
+
         getDao().insert(t);
     }
 }

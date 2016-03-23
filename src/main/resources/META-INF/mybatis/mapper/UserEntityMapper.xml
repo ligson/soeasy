@@ -220,8 +220,8 @@
         FROM t_user
         WHERE 1=1
         <include refid="whereCondition"/>
-        <if test="columnSort != null">
-            ORDER BY ${columnSort}
+        <if test="sort != null and order != null">
+            ORDER BY ${sort} ${order}
         </if>
         <!-- 分页条 -->
         <include refid="CommonEntity.paginationSuffix"/>
@@ -255,13 +255,22 @@
         FROM t_user
         WHERE 1=1
         <include refid="whereCondition"/>
-        <if test="columnSort != null">
-            ORDER BY ${columnSort}
+        <if test="sort != null and order != null">
+            ORDER BY ${sort} ${order}
         </if>
         limit 0,100
     </select>
 
     <!--用户自定义代码开始-->
+
+
+
+
+
+
+
+
+
 
 
     <!--用户自定义代码结束-->
