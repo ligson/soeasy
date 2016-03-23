@@ -34,18 +34,18 @@ public class UserEntity extends BasicEntity implements Serializable {
 
 
     /***
-     * 获取
+     * 获取id
      *
-     * @return
+     * @return 获取id
      */
     public BigInteger getId() {
         return id;
     }
 
     /***
-     * 设置
+     * 设置id
      *
-     * @param id
+     * @param id id
      */
     public void setId(BigInteger id) {
         this.id = id;
@@ -54,7 +54,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     /***
      * 获取生日
      *
-     * @return 生日
+     * @return 获取生日
      */
     public Date getBirth() {
         return birth;
@@ -72,7 +72,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     /***
      * 获取姓名
      *
-     * @return 姓名
+     * @return 获取姓名
      */
     public String getName() {
         return name;
@@ -90,7 +90,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     /***
      * 获取密码
      *
-     * @return 密码
+     * @return 获取密码
      */
     public String getPassword() {
         return password;
@@ -108,7 +108,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     /***
      * 获取性别
      *
-     * @return 性别
+     * @return 获取性别
      */
     public Boolean getSex() {
         return sex;
@@ -126,7 +126,7 @@ public class UserEntity extends BasicEntity implements Serializable {
     /***
      * 获取状态
      *
-     * @return 状态
+     * @return 获取状态
      */
     public Integer getStatus() {
         return status;

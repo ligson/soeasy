@@ -12,8 +12,8 @@ import ${columnInfo.javaType.name};
 public class ${entityName} extends BasicEntity implements Serializable {
 <#list tableInfo.columnInfos as columnInfo>
 ${"    "}/***
-${"    "}* ${columnInfo.remark}
-${"    "}*/
+${"     "}* ${columnInfo.remark}
+${"     "}*/
 ${"    "}private ${columnInfo.javaType.simpleName} ${columnInfo.javaName};
 </#list>
 
@@ -21,18 +21,18 @@ ${"    "}private ${columnInfo.javaType.simpleName} ${columnInfo.javaName};
     <#assign propName=columnInfo.javaName?cap_first/>
 
 ${"    "}/***
-${"     "}* 获取${columnInfo.remark}
+${"     "}* 获取${((columnInfo.remark)?length>0)?string(columnInfo.remark,columnInfo.javaName)}
 ${"     "}*
-${"     "}* @return ${columnInfo.remark}
+${"     "}* @return 获取${((columnInfo.remark)?length>0)?string(columnInfo.remark,columnInfo.javaName)}
 ${"     "}*/
 ${"    "}public ${columnInfo.javaType.simpleName} get${propName}() {
 ${"        "}return ${columnInfo.javaName};
 ${"    "}}
 
 ${"    "}/***
-${"     "}* 设置${columnInfo.remark}
+${"     "}* 设置${((columnInfo.remark)?length>0)?string(columnInfo.remark,columnInfo.javaName)}
 ${"     "}*
-${"     "}* @param ${columnInfo.javaName} ${columnInfo.remark}
+${"     "}* @param ${columnInfo.javaName} ${((columnInfo.remark)?length>0)?string(columnInfo.remark,columnInfo.javaName)}
 ${"     "}*/
 ${"    "}public void set${propName}(${columnInfo.javaType.simpleName} ${columnInfo
 .javaName}) {
@@ -66,10 +66,10 @@ ${"        "}return "${entityName}{" +
 <#list tableInfo.columnInfos as columnInfo>
     <#assign propName=columnInfo.javaName?cap_first/>
     <#if columnInfo_index==0>
-    ${"               "}"${columnInfo.javaName}=" + ${columnInfo.javaName} +
+${"                 "}"${columnInfo.javaName}=" + ${columnInfo.javaName} +
     <#else>
 
-    ${"               "}",${columnInfo.javaName}=" + ${columnInfo.javaName} +
+${"                 "}",${columnInfo.javaName}=" + ${columnInfo.javaName} +
     </#if>
 </#list>
 ${"               "}'}';
