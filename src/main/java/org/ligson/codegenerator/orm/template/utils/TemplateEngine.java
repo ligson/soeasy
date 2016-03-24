@@ -48,6 +48,9 @@ public class TemplateEngine {
                 builder.delete(builder.length() - 2, builder.length());
             }
             reader.close();
+            if (builder.toString().equals("\n\r")) {
+                return null;
+            }
             return builder.toString();
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,7 +62,7 @@ public class TemplateEngine {
         String code = null;
         if (destFile.exists()) {
             code = getUserCustomCode(destFile);
-        }else{
+        } else {
             try {
                 destFile.createNewFile();
             } catch (IOException e) {
