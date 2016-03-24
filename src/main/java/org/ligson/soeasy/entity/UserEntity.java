@@ -1,6 +1,7 @@
 package org.ligson.soeasy.entity;
 
-import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
+
+import org.ligson.fw.entity.BasicEntity;
 
 import java.io.Serializable;
 import java.math.BigInteger;

@@ -139,8 +139,8 @@
     </select>
 
     <!--
-    方法名称: getPagenationList
-    调用路径: ${entityName}Mapper.getPagenationList
+    方法名称: getPaginationList
+    调用路径: ${entityName}Mapper.getPaginationList
     开发信息:
     处理信息: 分页查询记录
     -->
@@ -162,8 +162,8 @@
     </select>
 
     <!--
-    方法名称: getPagenationList-count
-    调用路径: ${entityName}Mapper.getPagenationList-count
+    方法名称: getPaginationList-count
+    调用路径: ${entityName}Mapper.getPaginationList-count
     开发信息:
     处理信息: 查询记录数
     -->

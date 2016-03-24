@@ -1,12 +1,11 @@
 package org.ligson.soeasy.dao;
 
-import org.ligson.soeasy.biz.core.base.dao.impl.SuperDAO;
+import org.ligson.fw.dao.BaseDao;
 import org.ligson.soeasy.entity.UserEntity;
-import org.springframework.stereotype.Repository;
 
 /**
- * Created by ligson on 2016/1/28.
+ * Created by ligson on 2016/3/24.
+ * UserEntity
  */
-@Repository
-public class UserDao extends SuperDAO<UserEntity> {
+public interface UserDao extends BaseDao<UserEntity> {
 }

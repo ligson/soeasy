@@ -1,18 +1,15 @@
 package org.ligson.soeasy.test;
 
-import org.ligson.soeasy.biz.core.base.entity.Pagination;
+import org.ligson.fw.entity.Pagination;
 import org.ligson.soeasy.entity.UserEntity;
 import org.ligson.soeasy.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.File;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by ligso on 2016/1/27.

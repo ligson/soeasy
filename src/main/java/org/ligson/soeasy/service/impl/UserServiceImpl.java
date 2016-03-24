@@ -1,9 +1,8 @@
 package org.ligson.soeasy.service.impl;
 
-import org.ligson.soeasy.biz.core.base.dao.ISuperDAO;
-import org.ligson.soeasy.biz.core.base.entity.Pagination;
-import org.ligson.soeasy.biz.core.base.service.impl.BaseServiceImpl;
-import org.ligson.soeasy.dao.UserDao;
+import org.ligson.fw.dao.BaseDao;
+import org.ligson.fw.service.impl.BaseServiceImpl;
+import org.ligson.soeasy.dao.impl.UserDaoImpl;
 import org.ligson.soeasy.entity.UserEntity;
 import org.ligson.soeasy.service.UserService;
 import org.springframework.stereotype.Service;
@@ -16,10 +15,10 @@ import javax.annotation.Resource;
 @Service(value = "userService")
 public class UserServiceImpl extends BaseServiceImpl<UserEntity> implements UserService {
     @Resource
-    private UserDao userDao;
+    private UserDaoImpl userDao;
 
     @Override
-    public ISuperDAO<UserEntity> getDao() {
+    public BaseDao<UserEntity> getDao() {
         return userDao;
     }
 }

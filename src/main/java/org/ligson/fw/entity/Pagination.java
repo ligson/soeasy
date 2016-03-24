@@ -1,11 +1,12 @@
-package org.ligson.soeasy.biz.core.base.entity;
+package org.ligson.fw.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * 描述: 分页
+ *
  * @version V1.0
  */
 public class Pagination<P> implements Serializable {
@@ -13,16 +14,6 @@ public class Pagination<P> implements Serializable {
      *
      */
     private static final long serialVersionUID = -681184866199665872L;
-
-    /**
-     * 默认分页大小
-     */
-    public static final int DEFAULT_PAGE_SIZE = 20;
-
-    /**
-     * 默认页码
-     */
-    public static final int DEFAULT_PAGE_NUM = 1;
 
     /**
      * 分页使用的参数，分页大小
@@ -47,7 +38,7 @@ public class Pagination<P> implements Serializable {
     /**
      * 查询结果数据
      */
-    private List<P> datas = null;
+    private List<P> datas = new ArrayList<>();
 
     public Pagination(int pageSize, int pageNum, int totalCount, List<P> datas) {
         this.pageSize = pageSize;

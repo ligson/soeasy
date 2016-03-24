@@ -1,7 +1,7 @@
 package org.ligson.soeasy.service;
 
-import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
-import org.ligson.soeasy.biz.core.base.service.BaseService;
+import org.ligson.fw.entity.BasicEntity;
+import org.ligson.fw.service.BaseService;
 import org.ligson.soeasy.entity.UserEntity;
 
 /**

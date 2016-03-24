@@ -1,4 +1,4 @@
-package org.ligson.soeasy.biz.core.base.entity;
+package org.ligson.fw.entity;
 
 import java.io.Serializable;
 
@@ -6,27 +6,28 @@ import java.io.Serializable;
  * Created by ligson on 2016/2/23.
  * 分页工具类
  */
-public class BasePageDTO implements Serializable {
-    /***
-     * limit offset,max
+public class BasePageDto implements Serializable {
+    /**
+     * limit offset
      */
-    private Integer offset;
+    private Integer offset = 0;
+
     /***
-     * 页大小
+     * limit max
      */
-    private Integer max;
+    private Integer max = 10;
     /***
      * 当前第几页
      */
-    private Integer pageNum;
+    private Integer pageNum = 1;
     /***
      * 总记录数
      */
-    private Integer totalCount;
+    private Integer totalCount = 0;
     /***
      * 总页数
      */
-    private Integer totalPageCount;
+    private Integer totalPageCount = 0;
 
     public Integer getOffset() {
         return offset;

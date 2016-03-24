@@ -1,30 +1,28 @@
-package org.ligson.soeasy.biz.core.base.dao.impl;
+package org.ligson.fw.dao.impl;
 
 
-import org.ligson.soeasy.biz.core.base.dao.ISuperDAO;
-import org.ligson.soeasy.biz.core.base.entity.BasePageDTO;
-import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
-import org.ligson.soeasy.biz.core.base.entity.Pagination;
+import org.ligson.fw.dao.BaseDao;
+import org.ligson.fw.entity.BasePageDto;
+import org.ligson.fw.entity.BasicEntity;
+import org.ligson.fw.entity.Pagination;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.math.BigInteger;
 import java.util.List;
 
 
 @Repository
-public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
+public class BaseDaoImpl<E extends BasicEntity> implements BaseDao<E> {
 
-    public static final Logger log = LoggerFactory.getLogger(SuperDAO.class);
+    public static final Logger log = LoggerFactory.getLogger(BaseDaoImpl.class);
 
-    private static final String pageSuffix = "Mapper.getPagenationList";
+    private static final String pageSuffix = "Mapper.getPaginationList";
     private static final String pageCountSuffix = "-count";
     private static final String getListSuffix = "Mapper.getList";
     private static final String findBySuffix = "Mapper.findBy";
@@ -85,12 +83,16 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public E get(BigInteger id) {
+    public E get(Object id) {
         try {
             Class clazz = getGenericType(0);
             Object object = clazz.newInstance();
-            Field field = clazz.getDeclaredField("id");
-            Method method = clazz.getDeclaredMethod("setId", field.getType());
+            Method reflectKeyMethod = clazz.getDeclaredMethod("primaryKey");
+            Method reflectKeyTypeMethod = clazz.getDeclaredMethod("primaryKeyType");
+            String primaryKey = reflectKeyMethod.invoke(object).toString();
+            String keyName = primaryKey.substring(0, 1).toUpperCase() + primaryKey.substring(1);
+            Class keyType = (Class) reflectKeyTypeMethod.invoke(object);
+            Method method = clazz.getDeclaredMethod("set" + keyName, keyType);
             method.invoke(object, id);
             return findBy((E) object);
         } catch (Exception e) {
@@ -149,7 +151,7 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
                 int fromIndex = 0;//起始序号
                 int endIndex = 0;//结束序号
                 log.debug("批量执行插入【" + statementName + "】开始：" + System.currentTimeMillis());
-                for (int i = 0; i == 0 || i < Math.ceil(Double.valueOf(Integer.valueOf(rowSize / singleNum))); i++) {
+                for (int i = 0; i == 0 || i < Math.ceil((double) (rowSize / singleNum)); i++) {
                     endIndex = (i + 1) * singleNum;//默认结束序号滚动一页
                     if (endIndex >= rowSize) {//如结束序号大于等于数据总量时，把数据总量赋值给结束序列
                         endIndex = rowSize;
@@ -211,33 +213,38 @@ public class SuperDAO<E extends BasicEntity> implements ISuperDAO<E> {
     *
     * desc:
     * (non-Javadoc)
-    * @see com.wangyin.payment.tesla.dao.ISuperDAO#getPagenationList(java.lang.String, com.wangyin.wallet.common.dto.BasePageDTO)
     */
     @Override
-    public Pagination getPagenationList(BasePageDTO baseParamDTO) {
+    public Pagination<E> getPaginationList(E e) {
+        BasePageDto basePageDto = null;
+        if (e != null) {
+            basePageDto = e;
+        }
+        if (basePageDto == null) {
+            return null;
+        }
         /**
          * 判断pageNum和pageSize
          */
-        if (baseParamDTO.getPageNum() == null || baseParamDTO.getPageNum().intValue() < 1) {
-            baseParamDTO.setPageNum(1);
+        if (basePageDto.getPageNum() == null || basePageDto.getPageNum() < 1) {
+            basePageDto.setPageNum(1);
         }
-        if (baseParamDTO.getMax() == null || baseParamDTO.getMax().intValue
-                () <
+        if (basePageDto.getMax() == null || basePageDto.getMax() <
                 1) {
-            baseParamDTO.setMax(10);
+            basePageDto.setMax(10);
         }
 
-        String clzName = baseParamDTO.getClass().getSimpleName();
+        String clzName = basePageDto.getClass().getSimpleName();
         String countStatementName = clzName + pageSuffix +
                 pageCountSuffix;
         String statementName = clzName + pageSuffix;
         // 计算记录起始值和结束值
-        Integer totalCount = (Integer) userSqlSessionTemplate.selectOne
-                (countStatementName, baseParamDTO);
+        Integer totalCount = userSqlSessionTemplate.selectOne
+                (countStatementName, basePageDto);
         log.debug(statementName);
-        List resultList = userSqlSessionTemplate.selectList(statementName, baseParamDTO);
+        List<E> resultList = userSqlSessionTemplate.selectList(statementName, basePageDto);
 
-        return new Pagination(baseParamDTO.getMax(), baseParamDTO.getPageNum(),
+        return new Pagination<>(basePageDto.getMax(), basePageDto.getPageNum(),
                 totalCount, resultList);
     }
 

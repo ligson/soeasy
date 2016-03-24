@@ -1,13 +1,10 @@
-package org.ligson.soeasy.biz.core.base.service.impl;
+package org.ligson.fw.service.impl;
 
 
-import org.ligson.soeasy.biz.core.base.dao.ISuperDAO;
-import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
-import org.ligson.soeasy.biz.core.base.entity.Pagination;
-import org.ligson.soeasy.biz.core.base.service.BaseService;
-import org.ligson.soeasy.utils.IdUtils;
-
-import java.math.BigInteger;
+import org.ligson.fw.dao.BaseDao;
+import org.ligson.fw.entity.BasicEntity;
+import org.ligson.fw.entity.Pagination;
+import org.ligson.fw.service.BaseService;
 
 /**
  * Created by ligson on 2016/3/21.
@@ -15,17 +12,17 @@ import java.math.BigInteger;
  */
 public abstract class BaseServiceImpl<T extends BasicEntity> implements BaseService<T> {
 
-    public abstract ISuperDAO<T> getDao();
+    public abstract BaseDao<T> getDao();
 
     @Override
-    public T get(BigInteger id) {
-        return getDao().get(id);
+    public T get(Object primaryKey) {
+        return getDao().get(primaryKey);
     }
 
     @Override
     @SuppressWarnings(value = "unchecked")
     public Pagination<T> findAllBy(T o) {
-        return getDao().getPagenationList(o);
+        return getDao().getPaginationList(o);
     }
 
     @Override
@@ -46,10 +43,6 @@ public abstract class BaseServiceImpl<T extends BasicEntity> implements BaseServ
 
     @Override
     public void add(T t) {
-        /*if (t.getId() == null) {
-            t.setId(IdUtils.randomId());
-        }*/
-
         getDao().insert(t);
     }
 }
