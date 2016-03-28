@@ -1,7 +1,5 @@
 # Package Files #
-*.class
 .gradle
-.gradle/
 *.jar
 *.war
 *.ear
