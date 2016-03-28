@@ -1,4 +1,4 @@
-package org.ligson.codegenerator.orm.bean;
+package org.ligson.cg.orm.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;

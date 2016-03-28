@@ -1,6 +1,6 @@
 package org.ligson.soeasy.utils;
 
-import org.ligson.codegenerator.orm.template.utils.TemplateEngine;
+import org.ligson.cg.orm.template.utils.TemplateEngine;
 
 import java.io.File;
 

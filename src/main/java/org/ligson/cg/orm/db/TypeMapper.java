@@ -1,4 +1,4 @@
-package org.ligson.codegenerator.orm.db;
+package org.ligson.cg.orm.db;
 
 import java.util.ArrayList;
 import java.util.List;

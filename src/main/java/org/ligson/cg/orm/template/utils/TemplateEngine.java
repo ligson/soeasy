@@ -1,4 +1,4 @@
-package org.ligson.codegenerator.orm.template.utils;
+package org.ligson.cg.orm.template.utils;
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;

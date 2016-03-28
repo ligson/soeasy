@@ -1,10 +1,10 @@
-package org.ligson.codegenerator.orm.db;
+package org.ligson.cg.orm.db;
 
-import org.ligson.codegenerator.orm.bean.ColumnInfo;
-import org.ligson.codegenerator.orm.bean.TableInfo;
-import org.ligson.codegenerator.orm.config.OrmConfig;
-import org.ligson.codegenerator.orm.template.utils.EntityTemplate;
-import org.ligson.codegenerator.orm.template.utils.MapperTemplate;
+import org.ligson.cg.orm.bean.ColumnInfo;
+import org.ligson.cg.orm.bean.TableInfo;
+import org.ligson.cg.orm.config.OrmConfig;
+import org.ligson.cg.orm.template.utils.EntityTemplate;
+import org.ligson.cg.orm.template.utils.MapperTemplate;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

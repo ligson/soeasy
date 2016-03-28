@@ -1,4 +1,4 @@
-package org.ligson.codegenerator.orm.bean;
+package org.ligson.cg.orm.bean;
 
 /**
  * Created by ligson on 2016/1/28.

@@ -1,4 +1,4 @@
-package org.ligson.codegenerator.orm.config;
+package org.ligson.cg.orm.config;
 
 import java.io.File;
 import java.io.FileInputStream;

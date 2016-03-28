@@ -45,4 +45,9 @@ public abstract class BaseServiceImpl<T extends BasicEntity> implements BaseServ
     public void add(T t) {
         getDao().insert(t);
     }
+
+    @Override
+    public T findBy(T t) {
+        return getDao().findBy(t);
+    }
 }

@@ -1,14 +1,13 @@
-package org.ligson.soeasy.entity;
-
-
-import org.ligson.fw.entity.BasicEntity;
+package org.ligson.soeasy.api.vo;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
-public class UserEntity extends BasicEntity implements Serializable {
-
+/**
+ * Created by ligson on 2016/3/28.
+ */
+public class User implements Serializable {
     /***
      * id
      */

@@ -1,7 +1,7 @@
-package org.ligson.codegenerator.orm.template.utils;
+package org.ligson.cg.orm.template.utils;
 
-import org.ligson.codegenerator.orm.bean.TableInfo;
-import org.ligson.codegenerator.orm.config.OrmConfig;
+import org.ligson.cg.orm.config.OrmConfig;
+import org.ligson.cg.orm.bean.TableInfo;
 
 import java.io.File;
 import java.util.HashMap;

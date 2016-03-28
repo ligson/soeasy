@@ -160,6 +160,7 @@ public abstract class AbstractBiz<Q extends BaseRequestDto, R extends BaseRespon
     public void setSuccessResult() {
         Result<R> responseDtoResult = Result.getSuccessResult(responseDto);
         context.setResult(responseDtoResult);
+        responseDto.setSuccess(true);
     }
 
     public void setFailureResult(FailureCodeEnum failureCodeEnum) {

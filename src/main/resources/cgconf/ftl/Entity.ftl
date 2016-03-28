@@ -1,6 +1,6 @@
 package ${entityPackage};
 
-import org.ligson.soeasy.biz.core.base.entity.BasicEntity;
+import org.ligson.fw.entity.BasicEntity;
 
 import java.io.Serializable;
 <#list tableInfo.columnInfos as columnInfo>

@@ -1,6 +1,4 @@
-package org.ligson.codegenerator.orm.config;
-
-import org.ligson.codegenerator.orm.bean.TableInfo;
+package org.ligson.cg.orm.config;
 
 import java.io.File;
 

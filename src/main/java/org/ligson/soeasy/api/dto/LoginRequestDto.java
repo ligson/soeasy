@@ -10,6 +10,7 @@ import org.ligson.soeasy.api.enums.user.LoginNameTypeEnum;
 public class LoginRequestDto extends BaseRequestDto {
     private String loginName;
     private LoginNameTypeEnum loginNameTypeEnum;
+    private String password;
 
     public String getLoginName() {
         return loginName;
@@ -23,7 +24,24 @@ public class LoginRequestDto extends BaseRequestDto {
         return loginNameTypeEnum;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setLoginNameTypeEnum(LoginNameTypeEnum loginNameTypeEnum) {
         this.loginNameTypeEnum = loginNameTypeEnum;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginRequestDto{" +
+                "loginName='" + loginName + '\'' +
+                ", loginNameTypeEnum=" + loginNameTypeEnum +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

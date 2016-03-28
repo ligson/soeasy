@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50611
-Source Host           : localhost:3306
-Source Database       : se
+Source Server         : 10.0.0.252_3306
+Source Server Version : 50627
+Source Host           : 10.0.0.252:3306
+Source Database       : pay_center
 
 Target Server Type    : MYSQL
-Target Server Version : 50611
+Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2016-01-30 14:44:53
+Date: 2016-03-28 14:01:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,5 +26,7 @@ CREATE TABLE `t_user` (
   `password` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT '密码',
   `sex` tinyint(1) DEFAULT NULL COMMENT '性别',
   `status` int(11) DEFAULT NULL COMMENT '状态',
+  `mobile` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
+  `email` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

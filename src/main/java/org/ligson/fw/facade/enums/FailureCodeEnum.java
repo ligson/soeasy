@@ -12,6 +12,9 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class FailureCodeEnum {
 
+    private static Map<String, FailureCodeEnum> codeMap = new HashMap<>();
+    private static Logger logger = LoggerFactory.getLogger(FailureCodeEnum.class);
+
 
     /***
      * -------------------------服务异常------------------------------
@@ -59,9 +62,6 @@ public class FailureCodeEnum {
      */
     public static final FailureCodeEnum E_PERSIST_40001 = new FailureCodeEnum("E_PERSIST_40001", "数据持久化异常");
 
-    private static Map<String, FailureCodeEnum> codeMap = new HashMap<>();
-
-    private static Logger logger = LoggerFactory.getLogger(FailureCodeEnum.class);
 
     /**
      * 默认构造
@@ -75,12 +75,14 @@ public class FailureCodeEnum {
         if (codeMap.containsKey(code)) {
             logger.error("错误代码已经被使用(code:{},msg:{})", code, msg);
         }
-        String[] codeArray = code.split("_");
-        if (codeArray.length != 3) {
-            logger.warn("错误代码格式不正确(正确格式:XX_XX_XXXXX),{}", code);
-        } else {
-            if (codeArray[2].length() != 5) {
-                logger.warn("错误代码格式不正确,最后数字不是五位,{}", codeArray[2]);
+        if (!code.equals("SERVICE_EXCEPTION")) {
+            String[] codeArray = code.split("_");
+            if (codeArray.length != 3) {
+                logger.warn("错误代码格式不正确(正确格式:XX_XX_XXXXX),{}", code);
+            } else {
+                if (codeArray[2].length() != 5) {
+                    logger.warn("错误代码格式不正确,最后数字不是五位,{}", codeArray[2]);
+                }
             }
         }
         codeMap.put(code, this);

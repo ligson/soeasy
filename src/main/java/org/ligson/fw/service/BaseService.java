@@ -15,6 +15,8 @@ public interface BaseService<T extends BasicEntity> {
 
     Pagination<T> findAllBy(T t);
 
+    T findBy(T t);
+
     int countBy(T t);
 
     void delete(T t);
