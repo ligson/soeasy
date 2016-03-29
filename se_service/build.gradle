@@ -1,6 +1,8 @@
 group 'org.ligson'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'application'
+mainClassName = "org.ligson.se.dubbo.main.DubboMain"
 ext {
     springVersion = "4.2.4.RELEASE"
     aspectjVersion = "1.8.8"
