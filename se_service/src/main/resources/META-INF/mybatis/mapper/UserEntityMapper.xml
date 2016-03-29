@@ -56,14 +56,14 @@
 
     <!--查询字段列表拼装-->
     <sql id="baseColumnList">
-    id,
-    birth,
-    name,
-    password,
-    sex,
-    status,
-    mobile,
-    email
+        id,
+        birth,
+        name,
+        password,
+        sex,
+        status,
+        mobile,
+        email
     </sql>
 
     <!--

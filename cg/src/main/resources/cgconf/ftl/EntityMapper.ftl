@@ -26,7 +26,7 @@
     <!--查询字段列表拼装-->
     <sql id="baseColumnList">
     <#list tableInfo.columnInfos as columnInfo>
-    ${columnInfo.name}<#if columnInfo_index!=(tableInfo.columnInfos?size-1)>,</#if>
+    ${"    "}${columnInfo.name}<#if columnInfo_index!=(tableInfo.columnInfos?size-1)>,</#if>
     </#list>
     </sql>
 
@@ -42,14 +42,14 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
         <#list tableInfo.columnInfos as columnInfo>
             <if test="${columnInfo.javaName} != null">
-            ${columnInfo.name},
+            ${"    "}${columnInfo.name},
             </if>
         </#list>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
         <#list tableInfo.columnInfos as columnInfo>
             <if test="${columnInfo.javaName} != null">
-            ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.ormType}},
+            ${"    "}${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.ormType}},
             </if>
         </#list>
         </trim>
@@ -67,7 +67,7 @@
         <set>
         <#list tableInfo.columnInfos as columnInfo>
             <if test="${columnInfo.javaName} != null">
-            ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.ormType}},
+            ${"    "}${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.ormType}},
             </if>
         </#list>
         </set>
@@ -86,7 +86,7 @@
         UPDATE ${tableInfo.tableName}
         <set>
         <#list tableInfo.columnInfos as columnInfo>
-        ${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.ormType}},
+        ${"    "}${columnInfo.name} = ${"#"}{${columnInfo.javaName},jdbcType=${columnInfo.ormType}},
         </#list>
         </set>
         WHERE 1=1
