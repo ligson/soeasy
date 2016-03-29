@@ -1,7 +1,7 @@
 group 'org.ligson'
 version '1.0-SNAPSHOT'
 
-extensions {
+ext {
     mysqlVersion = "5.1.29"
     freemarkerVersion = "2.3.23"
 }

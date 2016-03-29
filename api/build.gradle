@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 
 
-extensions {
+ext {
     springVersion = "4.2.4.RELEASE"
     aspectjVersion = "1.8.8"
     mybatisVersion = "3.2.8"
