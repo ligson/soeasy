@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50627
 File Encoding         : 65001
 
-Date: 2016-03-28 14:01:31
+Date: 2016-03-29 12:36:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,5 +28,6 @@ CREATE TABLE `t_user` (
   `status` int(11) DEFAULT NULL COMMENT '状态',
   `mobile` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
   `email` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '邮箱',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户表';

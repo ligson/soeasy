@@ -32,7 +32,7 @@ public class QueryTools {
 
     public TableInfo getTableInfo() throws Exception {
         //ALTER TABLE account_center4.login_log COMMENT '登录日志表';
-        //#SELECT TABLE_NAME,TABLE_COMMENT FROM information_schema.`TABLES` where TABLE_SCHEMA='account_center3'
+        //SELECT TABLE_NAME,TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_NAME='t_user' AND TABLE_SCHEMA='pay_center';
         String sql = "SELECT cols.COLUMN_NAME,cols.DATA_TYPE,cols.CHARACTER_MAXIMUM_LENGTH,cols.COLUMN_DEFAULT,cols.COLUMN_COMMENT,cols.COLUMN_KEY FROM information_schema.`COLUMNS` cols where cols.TABLE_NAME=? AND cols.TABLE_SCHEMA=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, ormConfig.getTableName());
@@ -67,6 +67,16 @@ public class QueryTools {
         }
         tableInfo.setColumnInfos(columnInfos);
         rs.close();
+
+        sql = "SELECT TABLE_NAME,TABLE_COMMENT FROM information_schema.`TABLES` WHERE TABLE_NAME='" + ormConfig.getTableName() + "' AND TABLE_SCHEMA='" + ormConfig.getDatabaseName() + "'";
+        ps = connection.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            String remark = rs.getString("TABLE_COMMENT");
+            tableInfo.setRemark(remark);
+        }
+        rs.close();
+
         return tableInfo;
     }
 

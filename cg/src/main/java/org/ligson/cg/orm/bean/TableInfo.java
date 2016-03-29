@@ -6,12 +6,17 @@ import java.util.List;
 
 /**
  * Created by ligson on 2016/1/28.
+ * 数据表模型
  */
 public class TableInfo implements Serializable {
     /***
      * 表名
      */
     private String tableName;
+    /***
+     * 表注释
+     */
+    private String remark;
     /***
      * 主键
      */
@@ -46,10 +51,19 @@ public class TableInfo implements Serializable {
         this.primaryKey = primaryKey;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     @Override
     public String toString() {
         return "TableInfo{" +
                 "tableName='" + tableName + '\'' +
+                ", remark='" + remark + '\'' +
                 ", primaryKey=" + primaryKey +
                 ", columnInfos=" + columnInfos +
                 '}';

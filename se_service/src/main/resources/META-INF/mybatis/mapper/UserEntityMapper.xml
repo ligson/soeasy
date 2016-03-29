@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<!-- 功能模块:  -->
+<!-- 用户表  -->
 <mapper namespace="UserEntityMapper">
 
     <!--通用表字段列表-->
@@ -23,6 +23,8 @@
                 jdbcType="VARCHAR"/>
         <result column="email" property="email"
                 jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"
+                jdbcType="TIMESTAMP"/>
     </resultMap>
     <!--通用表字段列表-->
 
@@ -52,6 +54,9 @@
         <if test="email != null">
             AND email=#{email,jdbcType=VARCHAR}
         </if>
+        <if test="createTime != null">
+            AND create_time=#{createTime,jdbcType=TIMESTAMP}
+        </if>
     </sql>
 
     <!--查询字段列表拼装-->
@@ -63,7 +68,8 @@
         sex,
         status,
         mobile,
-        email
+        email,
+        create_time
     </sql>
 
     <!--
@@ -100,6 +106,9 @@
             <if test="email != null">
                 email,
             </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -125,6 +134,9 @@
             </if>
             <if test="email != null">
                 #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -163,6 +175,9 @@
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
             </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
         </set>
         WHERE 1=1
         <include refid="whereCondition"/>
@@ -186,6 +201,7 @@
             status = #{status,jdbcType=INTEGER},
             mobile = #{mobile,jdbcType=VARCHAR},
             email = #{email,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
         </set>
         WHERE 1=1
         <include refid="whereCondition"/>

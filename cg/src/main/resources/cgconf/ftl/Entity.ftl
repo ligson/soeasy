@@ -9,6 +9,9 @@ import ${columnInfo.javaType.name};
 </#if>
 </#list>
 
+/***
+ * ${((tableInfo.remark)?length>0)?string(tableInfo.remark,tableInfo.tableName)}
+ */
 public class ${entityName} extends BasicEntity implements Serializable {
 <#list tableInfo.columnInfos as columnInfo>
 

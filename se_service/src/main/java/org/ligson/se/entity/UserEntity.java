@@ -5,7 +5,11 @@ import org.ligson.fw.entity.BasicEntity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Date;
 
+/***
+ * 用户表
+ */
 public class UserEntity extends BasicEntity implements Serializable {
 
     /***
@@ -47,6 +51,11 @@ public class UserEntity extends BasicEntity implements Serializable {
      * 邮箱
      */
     private String email;
+
+    /***
+     * 创建日期
+     */
+    private Date createTime;
 
 
     /***
@@ -193,6 +202,24 @@ public class UserEntity extends BasicEntity implements Serializable {
         this.email = email;
     }
 
+    /***
+     * 获取创建日期
+     *
+     * @return 获取创建日期
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /***
+     * 设置创建日期
+     *
+     * @param createTime 创建日期
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
 
     @Override
     public String toString() {
@@ -212,6 +239,8 @@ public class UserEntity extends BasicEntity implements Serializable {
                 ",mobile=" + mobile +
 
                 ",email=" + email +
+
+                ",createTime=" + createTime +
                 '}';
     }
 }
