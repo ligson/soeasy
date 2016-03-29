@@ -3,8 +3,37 @@ subprojects {
     apply plugin: 'java'
     apply plugin: "idea"
 
+    //jdk编译版本
+    sourceCompatibility = 1.8
+
     repositories {
         maven { url "http://maven.oschina.net/content/groups/public/" }
         mavenCentral()
+    }
+
+    extensions {
+        slf4jVersion = "1.7.14"
+        logbackVersion = "1.1.3"
+        guavaVersion = "19.0"
+        fastjsonVersion = "1.2.7"
+        commonsCodecVersion = "1.9"
+        junitVersion = "4.9"
+    }
+    dependencies {
+        //slf4j配置
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+        compile "ch.qos.logback:logback-classic:${logbackVersion}"
+
+        //google java工具类
+        compile "com.google.guava:guava:${guavaVersion}"
+
+        //fastjson
+        compile "com.alibaba:fastjson:${fastjsonVersion}"
+
+        //codec
+        compile "commons-codec:commons-codec:${commonsCodecVersion}"
+
+        //junit
+        testCompile "junit:junit:${junitVersion}"
     }
 }
