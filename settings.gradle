@@ -1,2 +1,6 @@
 rootProject.name = 'soeasy'
+include 'fw'
+include 'api'
+include 'se'
+include 'cg'
 
