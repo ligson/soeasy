@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'application'
 mainClassName = "org.ligson.se.dubbo.main.DubboMain"
+applicationDefaultJvmArgs = ["-Dgreeting.language=zh"]
 ext {
     springVersion = "4.2.4.RELEASE"
     aspectjVersion = "1.8.8"
@@ -42,4 +43,33 @@ dependencies {
     compile "com.alibaba:dubbo:${dubboVersion}"
     compile "com.101tec:zkclient:0.4"
 
+}
+
+sourceSets {
+    main {
+        resources {
+            exclude '**'
+        }
+    }
+}
+
+task copyConf {
+    doLast {
+        copy {
+            from sourceSets.main.resources.srcDirs
+            //println("${buildDir}/install/${project.name}/conf")
+            into "${buildDir}/conf"
+        }
+    }
+
+}
+
+applicationDistribution.from(copyConf) {
+    into ""
+}
+
+assemble{
+    doFirst {
+        println("-----------")
+    }
 }
