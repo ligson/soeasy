@@ -12,7 +12,7 @@ ext {
 }
 
 dependencies {
-    compile project(':api')
+    compile project(':se_api')
 
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"
