@@ -130,7 +130,7 @@
     -->
     <select id="countBy"
             parameterType="${entityPackage}.${entityName}"
-            resultType="${entityPackage}.${entityName}">
+            resultType="java.lang.Integer">
         SELECT
         count(1)
         FROM ${tableInfo.tableName}

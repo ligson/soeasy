@@ -5,6 +5,8 @@ import org.ligson.cg.orm.bean.TableInfo;
 import org.ligson.cg.orm.config.OrmConfig;
 import org.ligson.cg.orm.utils.EntityTemplate;
 import org.ligson.cg.orm.utils.MapperTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.sql.Connection;
@@ -20,6 +22,7 @@ import java.util.List;
 public class QueryTools {
     private static Connection connection;
     private static OrmConfig ormConfig = OrmConfig.getInstance();
+    private static Logger logger = LoggerFactory.getLogger(QueryTools.class);
 
     static {
         try {
@@ -89,8 +92,10 @@ public class QueryTools {
         super.finalize();
         if (connection != null) {
             connection.close();
+            logger.info("数据库断开连接");
         }
     }
+
 
     public static String convert2JavaName(String columnName) {
         String[] names = columnName.split("_");
@@ -117,8 +122,10 @@ public class QueryTools {
         TableInfo ti = qt.getTableInfo();
         System.out.println(ti);
         MapperTemplate.write(ti);
+        logger.info("实体Mapper生成成功.....");
         EntityTemplate.write(ti);
-        File file = new File(".");
-        System.out.println(file.getAbsolutePath());
+        logger.info("实体生成成功.....");
+        qt = null;
+        System.gc();
     }
 }

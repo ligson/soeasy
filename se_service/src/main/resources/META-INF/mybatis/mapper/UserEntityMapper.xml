@@ -244,7 +244,7 @@
     -->
     <select id="countBy"
             parameterType="org.ligson.se.entity.UserEntity"
-            resultType="org.ligson.se.entity.UserEntity">
+            resultType="java.lang.Integer">
         SELECT
         count(1)
         FROM t_user

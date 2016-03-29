@@ -19,6 +19,33 @@
     <context:component-scan base-package="org.ligson.se"/>
     <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
     <util:properties id="cfg" location="classpath:config.properties"/>
+    <util:properties id="dubboCofig" location="classpath:dubbo.properties"/>
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:dubbo.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+
     <import resource="spring-mybatis.xml"/>
+
+    <!-- advisor=pointcut+advice -->
+    <bean id="invokeInterceptor" class="org.ligson.se.interceptor.BizInterceptor"/>
+    <bean id="methodInvokeAdvisor"
+          class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="invokeInterceptor"/>
+        <property name="patterns">
+            <list>
+                <!-- 切入包名中含impl字符的类主要为了捕获实现接口的类 -->
+                <value>org.ligson.se.biz.user.*Biz.operation</value>
+            </list>
+        </property>
+    </bean>
 
 </beans>
