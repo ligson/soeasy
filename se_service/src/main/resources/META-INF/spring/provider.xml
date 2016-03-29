@@ -11,7 +11,7 @@
 
 
     <dubbo:application name="${dubbo.application.name}"/>
-    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}"/>
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" register="${dubbo.registry.enable}"/>
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
     <dubbo:provider timeout="${dubbo.provider.timeout}"/>
 
