@@ -3,9 +3,10 @@ package org.ligson.cg.orm.db;
 import org.ligson.cg.orm.bean.ColumnInfo;
 import org.ligson.cg.orm.bean.TableInfo;
 import org.ligson.cg.orm.config.OrmConfig;
-import org.ligson.cg.orm.template.utils.EntityTemplate;
-import org.ligson.cg.orm.template.utils.MapperTemplate;
+import org.ligson.cg.orm.utils.EntityTemplate;
+import org.ligson.cg.orm.utils.MapperTemplate;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -107,5 +108,7 @@ public class QueryTools {
         System.out.println(ti);
         MapperTemplate.write(ti);
         EntityTemplate.write(ti);
+        File file = new File(".");
+        System.out.println(file.getAbsolutePath());
     }
 }

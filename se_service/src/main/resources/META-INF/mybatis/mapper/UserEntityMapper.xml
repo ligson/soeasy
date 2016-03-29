@@ -6,7 +6,7 @@
 
     <!--通用表字段列表-->
     <resultMap id="BaseResultMap"
-               type="org.ligson.org.ligson.se.entity.UserEntity">
+               type="org.ligson.se.entity.UserEntity">
         <result column="id" property="id"
                 jdbcType="BIGINT"/>
         <result column="birth" property="birth"
@@ -56,14 +56,14 @@
 
     <!--查询字段列表拼装-->
     <sql id="baseColumnList">
-        id,
-        birth,
-        name,
-        password,
-        sex,
-        status,
-        mobile,
-        email
+    id,
+    birth,
+    name,
+    password,
+    sex,
+    status,
+    mobile,
+    email
     </sql>
 
     <!--
@@ -73,7 +73,7 @@
     处理信息: 保存记录
     -->
     <insert id="insert"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity">
         INSERT INTO t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -136,7 +136,7 @@
     处理信息: 修改记录
     -->
     <update id="update"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity">
         UPDATE t_user
         <set>
             <if test="id != null">
@@ -175,7 +175,7 @@
     处理信息: 修改记录
     -->
     <update id="updateBak"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity">
         UPDATE t_user
         <set>
             id = #{id,jdbcType=BIGINT},
@@ -198,7 +198,7 @@
     处理信息: 删除记录
     -->
     <delete id="delete"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity">
         DELETE FROM t_user
         WHERE 1=1
         <include refid="whereCondition"/>
@@ -211,8 +211,8 @@
     处理信息: 根据主键查询记录
     -->
     <select id="findBy"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity"
-            resultType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity"
+            resultType="org.ligson.se.entity.UserEntity">
         SELECT
         <include refid="baseColumnList"/>
         FROM t_user
@@ -227,8 +227,8 @@
     处理信息: 根据主键统计记录
     -->
     <select id="countBy"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity"
-            resultType="java.lang.Integer">
+            parameterType="org.ligson.se.entity.UserEntity"
+            resultType="org.ligson.se.entity.UserEntity">
         SELECT
         count(1)
         FROM t_user
@@ -243,8 +243,8 @@
     处理信息: 分页查询记录
     -->
     <select id="getPagenationList"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity"
-            resultType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity"
+            resultType="org.ligson.se.entity.UserEntity">
         <!-- 分页条 -->
         <include refid="CommonEntity.paginationPrefix"/>
         SELECT
@@ -266,7 +266,7 @@
     处理信息: 查询记录数
     -->
     <select id="getPagenationList-count"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity"
+            parameterType="org.ligson.se.entity.UserEntity"
             resultType="int">
         SELECT count(1) FROM t_user
         WHERE 1=1
@@ -280,8 +280,8 @@
     处理信息: 根据条件查询记录
     -->
     <select id="getList"
-            parameterType="org.ligson.org.ligson.se.entity.UserEntity"
-            resultType="org.ligson.org.ligson.se.entity.UserEntity">
+            parameterType="org.ligson.se.entity.UserEntity"
+            resultType="org.ligson.se.entity.UserEntity">
         SELECT
         <include refid="baseColumnList"/>
         FROM t_user

@@ -16,8 +16,8 @@
                      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="org.ligson.soeasy"/>
-    <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true" />
+    <context:component-scan base-package="org.ligson.se"/>
+    <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
     <util:properties id="cfg" location="classpath:config.properties"/>
     <import resource="spring-mybatis.xml"/>
 

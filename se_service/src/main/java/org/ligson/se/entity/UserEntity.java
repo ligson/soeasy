@@ -1,6 +1,5 @@
 package org.ligson.se.entity;
 
-
 import org.ligson.fw.entity.BasicEntity;
 
 import java.io.Serializable;

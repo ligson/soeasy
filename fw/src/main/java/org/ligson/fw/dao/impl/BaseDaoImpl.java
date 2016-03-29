@@ -87,8 +87,8 @@ public class BaseDaoImpl<E extends BasicEntity> implements BaseDao<E> {
         try {
             Class clazz = getGenericType(0);
             Object object = clazz.newInstance();
-            Method reflectKeyMethod = clazz.getDeclaredMethod("primaryKey");
-            Method reflectKeyTypeMethod = clazz.getDeclaredMethod("primaryKeyType");
+            Method reflectKeyMethod = clazz.getMethod("primaryKey");
+            Method reflectKeyTypeMethod = clazz.getMethod("primaryKeyType");
             String primaryKey = reflectKeyMethod.invoke(object).toString();
             String keyName = primaryKey.substring(0, 1).toUpperCase() + primaryKey.substring(1);
             Class keyType = (Class) reflectKeyTypeMethod.invoke(object);
