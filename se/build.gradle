@@ -12,7 +12,7 @@ ext {
 }
 
 dependencies {
-    compile project(':fw')
+    compile project(':api')
 
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"
