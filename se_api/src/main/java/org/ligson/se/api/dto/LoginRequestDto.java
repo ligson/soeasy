@@ -1,6 +1,7 @@
 package org.ligson.se.api.dto;
 
 import org.ligson.fw.facade.base.dto.BaseRequestDto;
+import org.ligson.fw.facade.utils.annotation.Param;
 import org.ligson.se.api.enums.user.LoginNameTypeEnum;
 
 /**
@@ -8,8 +9,12 @@ import org.ligson.se.api.enums.user.LoginNameTypeEnum;
  * 登录请求
  */
 public class LoginRequestDto extends BaseRequestDto {
+
+    @Param(name = "登陆名", required = true)
     private String loginName;
+    @Param(name = "登陆名类型", required = true)
     private LoginNameTypeEnum loginNameTypeEnum;
+    @Param(name = "密码", required = true)
     private String password;
 
     public String getLoginName() {

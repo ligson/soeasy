@@ -13,6 +13,7 @@ ext {
     druidVersion = "1.0.0"
     springBootVersion = "1.3.2.RELEASE"
     dubboVersion = "2.5.3"
+    zkclientVersion = "0.4"
 }
 
 dependencies {
@@ -41,35 +42,73 @@ dependencies {
 
     //dubbo
     compile "com.alibaba:dubbo:${dubboVersion}"
-    compile "com.101tec:zkclient:0.4"
+    compile "com.101tec:zkclient:${zkclientVersion}"
 
 }
 
-sourceSets {
-    main {
-        resources {
-            exclude '**'
-        }
-    }
+//排除resources文件
+jar {
+    exclude '**/*.properties', '**/*.xml', '**/*.vm', '**/*.txt', "**/META-INF/spring/**", "**/META-INF/mybatis/**"
+}
+
+//默认编译时文件编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
 task copyConf {
     doLast {
         copy {
             from sourceSets.main.resources.srcDirs
-            //println("${buildDir}/install/${project.name}/conf")
             into "${buildDir}/conf"
         }
     }
 
 }
 
+//自定义zip目录
+installDist {
+    doLast {
+        copy {
+            from "${buildDir}/conf"
+            into "${buildDir}/install/${project.name}/conf"
+        }
+    }
+}
+
 applicationDistribution.from(copyConf) {
     into ""
 }
 
-assemble{
-    doFirst {
-        println("-----------")
+//自定义启动脚本
+startScripts {
+    doLast {
+        delete("${buildDir}/scripts/${project.name}")
+        delete("${buildDir}/scripts/${project.name}.bat")
+        copy {
+            from "${projectDir}/src/main/bin"
+            into "${buildDir}/scripts"
+        }
     }
 }
+
+//打包之前先执行installDist
+distTar {
+    doFirst {
+        installDist.execute()
+    }
+}
+distZip {
+    doFirst {
+        installDist.execute()
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from { "${buildDir}/install/${project.name}" }
+        }
+    }
+}
+

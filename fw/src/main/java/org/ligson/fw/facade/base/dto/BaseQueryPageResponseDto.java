@@ -1,5 +1,6 @@
 package org.ligson.fw.facade.base.dto;
 
+
 /**
  * 描述: 分页
  *

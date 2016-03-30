@@ -5,12 +5,20 @@ import org.ligson.fw.facade.base.dto.BaseRequestDto;
 import org.ligson.fw.facade.base.dto.BaseResponseDto;
 import org.ligson.fw.facade.base.result.Result;
 import org.ligson.fw.facade.enums.FailureCodeEnum;
+import org.ligson.fw.facade.utils.annotation.Param;
+import org.ligson.fw.utils.validator.DataValidator;
+import org.ligson.fw.utils.validator.EmailValidator;
+import org.ligson.fw.utils.validator.PhoneValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -101,37 +109,146 @@ public abstract class AbstractBiz<Q extends BaseRequestDto, R extends BaseRespon
         return context.getResult();
     }
 
+    private boolean requestParamCheck() {
+        Field[] fields = requestDto.getClass().getFields();
+        for (Field field : fields) {
+            Object value = null;
+            String name = field.getName();
+            try {
+                String javaName = name.substring(0, 1).toUpperCase() + name.substring(1);
+                String getMethodName = "get" + javaName;
+                Method method = requestDto.getClass().getMethod(getMethodName);
+                value = method.invoke(requestDto);
+            } catch (Exception e) {
+                continue;
+            }
+            Annotation[] annotations = field.getDeclaredAnnotations();
+            for (Annotation annotation : annotations) {
+                if (annotation instanceof Param) {
+                    Param param = (Param) annotation;
+                    if (param.required()) {
+                        if (value == null) {
+                            logger.warn("请求参数{}不允许为空", name);
+                            setFailureResult(FailureCodeEnum.E_PARAM_00001);
+                            return false;
+                        }
+                    }
+                    if (value != null) {
+                        if (param.email()) {
+                            if (!EmailValidator.isValidEmail(value.toString())) {
+                                logger.warn("请求参数{}的值({})不是一个有效的邮箱格式", name, value);
+                                setFailureResult(FailureCodeEnum.E_PARAM_10007);
+                                return false;
+                            }
+                        }
+                        if (param.mobile()) {
+                            if (!PhoneValidator.isMobile(value.toString())) {
+                                logger.warn("请求参数{}的值({})不是一个有效的手机号格式", name, value);
+                                setFailureResult(FailureCodeEnum.E_PARAM_10005);
+                                return false;
+                            }
+                        }
+                        if (param.integer()) {
+                            if (!DataValidator.isIntege(value.toString())) {
+                                logger.warn("请求参数{}的值({})不是一个正整数格式", name, value);
+                                setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                return false;
+                            }
+                        }
+                        if (param.regexp() != null) {
+                            if (!value.toString().matches(param.regexp())) {
+                                logger.warn("请求参数{}的值{}与正则({})格式不一致", name, value, param.regexp());
+                                setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                return false;
+                            }
+                        }
+                        if (param.inList() != null) {
+                            int idx = Arrays.binarySearch(param.inList(), value);
+                            if (idx == -1) {
+                                logger.warn("请求参数{}的值{}不在范围({})内格式不一致", name, value, Arrays.toString(param.inList()));
+                                setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                return false;
+                            }
+                        }
+                        if (param.minLen() != -1) {
+                            if (value.toString().length() < param.minLen()) {
+                                logger.warn("请求参数{}的值{}的长度不能小于{}", name, value, param.minLen());
+                                setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                return false;
+                            }
+                        }
+                        if (param.maxLen() != -1) {
+                            if (value.toString().length() > param.maxLen()) {
+                                logger.warn("请求参数{}的值{}的长度不能大于{}", name, value, param.maxLen());
+                                setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                return false;
+                            }
+                        }
+
+                        //TODO -1这个边界不对,思路需要重新想想
+                        if (DataValidator.isNum(value.toString())) {
+                            int num = Integer.parseInt(value.toString());
+                            if (param.min() != -1) {
+                                if (num < param.min()) {
+                                    logger.warn("请求参数{}的值{}不能小于{}", name, value, param.min());
+                                    setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                    return false;
+                                }
+                            }
+                            if (param.max() != -1) {
+                                if (num > param.max()) {
+                                    logger.warn("请求参数{}的值{}不能大于{}", name, value, param.max());
+                                    setFailureResult(FailureCodeEnum.E_PARAM_00004);
+                                    return false;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+
+        }
+        return true;
+    }
+
     /**
      * 业务处理
      */
     private void operate() {
-        Boolean paramCheck;
-        Boolean bizCheck;
-        Boolean txnPreProcessing;
-        Boolean persistence;
+        logger.debug("======================>基本参数检查开始");
+        boolean requestParamCheck = requestParamCheck();
+        if (!requestParamCheck) {
+            logger.debug("======================>基本参数检查失败,开始返回");
+            return;
+        }
+        logger.debug("======================>基本参数检查成功");
+
         logger.debug("======================>参数检查开始");
-        paramCheck = paramCheck();
+        Boolean paramCheck = paramCheck();
         if (paramCheck != null && !paramCheck) {
             logger.debug("======================>参数检查失败,开始返回");
             return;
         }
         logger.debug("======================>参数检查成功");
         logger.debug("======================>业务检查开始");
-        bizCheck = bizCheck();
+        Boolean bizCheck = bizCheck();
         if (bizCheck != null && !bizCheck) {
             logger.debug("======================>业务检查失败,开始返回");
             return;
         }
         logger.debug("======================>业务检查成功");
         logger.debug("======================>业务处理开始");
-        txnPreProcessing = txnPreProcessing();
+        Boolean txnPreProcessing = txnPreProcessing();
         if (txnPreProcessing != null && !txnPreProcessing) {
             logger.debug("======================>业务处理完成,开始返回");
             return;
         }
         logger.debug("======================>业务处理完成");
         logger.debug("======================>持久化开始");
-        persistence = persistence();
+        Boolean persistence = persistence();
         if (persistence != null && !persistence) {
             logger.debug("======================>持久化完成,开始返回");
             return;

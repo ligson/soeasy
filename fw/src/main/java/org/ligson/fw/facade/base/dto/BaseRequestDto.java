@@ -1,5 +1,7 @@
 package org.ligson.fw.facade.base.dto;
 
+import org.ligson.fw.facade.utils.annotation.Param;
+
 /**
  * 请求实体基础类
  */
@@ -8,11 +10,13 @@ public class BaseRequestDto extends BaseDto {
     /**
      * 版本号
      */
-    private String version;
+    @Param(name = "版本号", required = false)
+    private String version = "0.0.0";
     /**
      * 字符集
      */
-    private String charset;
+    @Param(name = "字符集", required = false)
+    private String charset = "UTF-8";
 
     public String getVersion() {
         return version;

@@ -27,6 +27,7 @@ public class FailureCodeEnum {
     public static final FailureCodeEnum E_PARAM_00001 = new FailureCodeEnum("E_PARAM_00001", "请求参数不能为空");
     public static final FailureCodeEnum E_PARAM_00002 = new FailureCodeEnum("E_PARAM_00002", "请求版本号不能为空");
     public static final FailureCodeEnum E_PARAM_00003 = new FailureCodeEnum("E_PARAM_00003", "字符集不能为空");
+    public static final FailureCodeEnum E_PARAM_00004 = new FailureCodeEnum("E_PARAM_00004", "请求参数格式错误");
 
     /***
      * -------------------------参数校验错误码(1开头)------------------------------

@@ -1,6 +1,7 @@
 package org.ligson.se.api.dto;
 
 import org.ligson.fw.facade.base.dto.BaseRequestDto;
+import org.ligson.fw.facade.utils.annotation.Param;
 
 import java.util.Date;
 
@@ -11,31 +12,37 @@ public class RegisterRequestDto extends BaseRequestDto {
     /***
      * 生日
      */
+    @Param(name = "生日", required = false)
     private Date birth;
 
     /***
      * 姓名
      */
+    @Param(name = "姓名", required = false, minLen = 2, maxLen = 20)
     private String name;
 
     /***
      * 密码
      */
+    @Param(name = "密码", required = true)
     private String password;
 
     /***
      * 性别
      */
+    @Param(name = "性别", required = false)
     private Boolean sex;
 
     /***
      * 手机号
      */
+    @Param(name = "手机号", required = false, mobile = true)
     private String mobile;
 
     /***
      * 邮箱
      */
+    @Param(name = "邮箱", required = false, email = true)
     private String email;
 
     /***

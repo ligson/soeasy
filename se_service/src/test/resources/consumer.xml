@@ -7,6 +7,7 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <dubbo:application name="${dubbo.application.name}"/>
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
 
     <!-- 账户 -->
