@@ -1,4 +1,4 @@
-package org.ligson.fw.core.utils.annotation;
+package org.ligson.fw.core.facade.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

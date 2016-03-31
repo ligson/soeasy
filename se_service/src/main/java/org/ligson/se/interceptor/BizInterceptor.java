@@ -6,7 +6,7 @@ import org.ligson.fw.core.biz.AbstractBiz;
 import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
 import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.fw.core.facade.enums.FailureCodeEnum;
-import org.ligson.fw.core.utils.annotation.Api;
+import org.ligson.fw.core.facade.annotation.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
