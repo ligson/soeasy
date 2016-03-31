@@ -1,4 +1,4 @@
-group 'org.ligson'
+group 'org.ligson.cg'
 version '1.0-SNAPSHOT'
 
 ext {

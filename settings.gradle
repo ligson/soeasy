@@ -4,5 +4,6 @@ include 'fw_facade'
 include 'fw_string'
 include 'se_api'
 include 'se_service'
+include 'se_web'
 include 'cg'
 

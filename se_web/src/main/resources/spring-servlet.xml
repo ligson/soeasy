@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.1.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+    <!-- 处理静态资源 -->
+    <mvc:resources mapping="/js/**" location="/assets/js/"/>
+    <mvc:resources mapping="/images/**" location="/assets/images/"/>
+    <mvc:resources mapping="/css/**" location="/assets/css/"/>
+    <mvc:default-servlet-handler/>
+    <!--<mvc:view-controller path="/" view-name="redirect:/index.html"/>-->
+    <!-- 处理静态资源 end -->
+
+    <!-- 定义JSP视图解析器 -->
+    <!-- <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/" /> <property name="suffix" value=".jsp"
+        /> </bean> -->
+
+
+    <bean id="bmcConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:conf/config.properties"/>
+    </bean>
+
+
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/json;charset=utf-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 支持上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="10485760000"/>
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+    <mvc:annotation-driven/>
+
+    <!-- 设置使用注解的类所在的jar包 -->
+    <context:component-scan base-package="org.ligson.coderstar2.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.user.admin.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.user.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.system.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.question.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.question.admin.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.article.admin.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.article.controllers"/>
+    <context:component-scan base-package="org.ligson.coderstar2.pay.admin.controllers"/>
+
+</beans>
