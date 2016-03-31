@@ -13,6 +13,7 @@ ext {
 
 dependencies {
     compile project(':fw_facade')
+    compile project(':fw_string')
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"
     compile "org.springframework:spring-jdbc:${springVersion}"

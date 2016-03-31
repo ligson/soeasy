@@ -1,4 +1,4 @@
-package org.ligson.fw.core.utils.encode;
+package org.ligson.fw.string.encode;
 
 import org.apache.commons.codec.binary.Hex;
 

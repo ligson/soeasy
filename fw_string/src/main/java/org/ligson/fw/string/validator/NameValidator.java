@@ -1,4 +1,4 @@
-package org.ligson.fw.core.utils.validator;
+package org.ligson.fw.string.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

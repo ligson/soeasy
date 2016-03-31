@@ -6,9 +6,9 @@ import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
 import org.ligson.fw.core.facade.base.dto.BaseResponseDto;
 import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.fw.core.facade.enums.FailureCodeEnum;
-import org.ligson.fw.core.utils.validator.EmailValidator;
-import org.ligson.fw.core.utils.validator.IdcardValidator;
-import org.ligson.fw.core.utils.validator.PhoneValidator;
+import org.ligson.fw.string.validator.EmailValidator;
+import org.ligson.fw.string.validator.IdcardValidator;
+import org.ligson.fw.string.validator.PhoneValidator;
 import org.springframework.util.StringUtils;
 
 /**
