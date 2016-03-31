@@ -1,7 +1,7 @@
 package org.ligson.se.dao;
 
 
-import org.ligson.fw.dao.BaseDao;
+import org.ligson.fw.core.dao.BaseDao;
 import org.ligson.se.entity.UserEntity;
 
 /**

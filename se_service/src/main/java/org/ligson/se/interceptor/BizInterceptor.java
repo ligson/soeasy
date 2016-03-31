@@ -2,11 +2,11 @@ package org.ligson.se.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.ligson.fw.biz.AbstractBiz;
-import org.ligson.fw.facade.base.dto.BaseRequestDto;
-import org.ligson.fw.facade.base.result.Result;
-import org.ligson.fw.facade.enums.FailureCodeEnum;
-import org.ligson.fw.utils.annotation.Api;
+import org.ligson.fw.core.biz.AbstractBiz;
+import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
+import org.ligson.fw.core.facade.base.result.Result;
+import org.ligson.fw.core.facade.enums.FailureCodeEnum;
+import org.ligson.fw.core.utils.annotation.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -22,6 +22,7 @@ public class BizInterceptor implements MethodInterceptor {
     private static final String PERFIX = "=============>";
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         Object target = methodInvocation.getThis();
         if (target instanceof AbstractBiz) {

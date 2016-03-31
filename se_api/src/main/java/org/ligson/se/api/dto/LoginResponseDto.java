@@ -1,6 +1,6 @@
 package org.ligson.se.api.dto;
 
-import org.ligson.fw.facade.base.dto.BaseResponseDto;
+import org.ligson.fw.core.facade.base.dto.BaseResponseDto;
 
 /**
  * Created by ligson on 2016/3/24.

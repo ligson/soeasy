@@ -1,7 +1,6 @@
 package base;
 
-import org.junit.Test;
-import org.ligson.fw.facade.base.result.Result;
+import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.se.api.UserApi;
 import org.ligson.se.service.UserService;
 import org.slf4j.Logger;

@@ -1,0 +1,35 @@
+group 'org.ligson'
+version '1.0-SNAPSHOT'
+
+ext {
+    springVersion = "4.2.4.RELEASE"
+    aspectjVersion = "1.8.8"
+    mybatisVersion = "3.2.8"
+    mybatisSpringVersion = "1.2.1"
+    mysqlVersion = "5.1.29"
+    druidVersion = "1.0.0"
+    springBootVersion = "1.3.2.RELEASE"
+}
+
+dependencies {
+    compile project(':fw_facade')
+    //spring依赖
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.aspectj:aspectjrt:${aspectjVersion}"
+    compile "org.aspectj:aspectjweaver:${aspectjVersion}"
+
+    //mybatis
+    compile "org.mybatis:mybatis:${mybatisVersion}"
+    compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+
+    //mysql driver
+    compile "mysql:mysql-connector-java:${mysqlVersion}"
+
+    //druid
+    compile "com.alibaba:druid:${druidVersion}"
+
+    //spring-boot
+    compile "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+
+}

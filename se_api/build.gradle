@@ -9,7 +9,7 @@ ext {
 
 
 dependencies {
-    compile project(':fw')
+    compile project(':fw_facade')
 
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"

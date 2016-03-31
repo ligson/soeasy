@@ -1,7 +1,7 @@
 package org.ligson.se.api.dto;
 
-import org.ligson.fw.facade.base.dto.BaseRequestDto;
-import org.ligson.fw.facade.utils.annotation.Param;
+import org.ligson.fw.core.facade.base.dto.BaseRequestDto;
+import org.ligson.fw.core.facade.annotation.Param;
 
 import java.util.Date;
 

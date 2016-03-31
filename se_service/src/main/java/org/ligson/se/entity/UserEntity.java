@@ -1,10 +1,9 @@
 package org.ligson.se.entity;
 
-import org.ligson.fw.entity.BasicEntity;
+import org.ligson.fw.core.entity.BasicEntity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Date;
 import java.util.Date;
 
 /***

@@ -1,5 +1,6 @@
 rootProject.name = 'soeasy'
-include 'fw'
+include 'fw_core'
+include 'fw_facade'
 include 'se_api'
 include 'se_service'
 include 'cg'

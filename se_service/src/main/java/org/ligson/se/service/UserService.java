@@ -1,7 +1,7 @@
 package org.ligson.se.service;
 
 
-import org.ligson.fw.service.BaseService;
+import org.ligson.fw.core.service.BaseService;
 import org.ligson.se.entity.UserEntity;
 
 /**

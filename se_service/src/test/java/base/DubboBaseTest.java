@@ -1,6 +1,6 @@
 package base;
 
-import org.ligson.fw.facade.base.result.Result;
+import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.se.api.UserApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

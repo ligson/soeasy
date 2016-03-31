@@ -1,6 +1,6 @@
 package org.ligson.se.api.enums;
 
-import org.ligson.fw.facade.enums.FailureCodeEnum;
+import org.ligson.fw.core.facade.enums.FailureCodeEnum;
 
 /**
  * Created by ligson on 2016/3/24.

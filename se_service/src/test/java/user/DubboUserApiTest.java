@@ -2,8 +2,8 @@ package user;
 
 import base.DubboBaseTest;
 import org.junit.Test;
-import org.ligson.fw.facade.base.result.Result;
-import org.ligson.fw.utils.encode.HashHelper;
+import org.ligson.fw.core.facade.base.result.Result;
+import org.ligson.fw.core.utils.encode.HashHelper;
 import org.ligson.se.api.dto.LoginRequestDto;
 import org.ligson.se.api.dto.LoginResponseDto;
 import org.ligson.se.api.dto.RegisterRequestDto;

@@ -1,6 +1,6 @@
 package org.ligson.se.api.dto;
 
-import org.ligson.fw.facade.base.dto.BaseResponseDto;
+import org.ligson.fw.core.facade.base.dto.BaseResponseDto;
 import org.ligson.se.api.vo.User;
 
 /**

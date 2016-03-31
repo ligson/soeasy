@@ -1,9 +1,9 @@
 package org.ligson.se.biz.user;
 
-import org.ligson.fw.biz.AbstractBiz;
-import org.ligson.fw.biz.paramcheck.CommonParamCheck;
-import org.ligson.fw.facade.enums.FailureCodeEnum;
-import org.ligson.fw.utils.annotation.Api;
+import org.ligson.fw.core.biz.AbstractBiz;
+import org.ligson.fw.core.biz.paramcheck.CommonParamCheck;
+import org.ligson.fw.core.facade.enums.FailureCodeEnum;
+import org.ligson.fw.core.utils.annotation.Api;
 import org.ligson.se.api.dto.LoginRequestDto;
 import org.ligson.se.api.dto.LoginResponseDto;
 import org.ligson.se.api.enums.FailCodeEnum;

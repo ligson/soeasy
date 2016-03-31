@@ -1,7 +1,7 @@
 package org.ligson.se.api;
 
 
-import org.ligson.fw.facade.base.result.Result;
+import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.se.api.dto.LoginRequestDto;
 import org.ligson.se.api.dto.LoginResponseDto;
 import org.ligson.se.api.dto.RegisterRequestDto;

@@ -18,6 +18,7 @@ ext {
 
 dependencies {
     compile project(':se_api')
+    compile project(':fw_core')
 
     //spring依赖
     compile "org.springframework:spring-context:${springVersion}"

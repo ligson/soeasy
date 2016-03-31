@@ -36,4 +36,8 @@ subprojects {
         //junit
         testCompile "junit:junit:${junitVersion}"
     }
+    //编码乱码
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
 }

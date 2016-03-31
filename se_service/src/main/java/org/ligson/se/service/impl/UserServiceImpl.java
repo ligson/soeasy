@@ -1,7 +1,7 @@
 package org.ligson.se.service.impl;
 
-import org.ligson.fw.dao.BaseDao;
-import org.ligson.fw.service.impl.BaseServiceImpl;
+import org.ligson.fw.core.dao.BaseDao;
+import org.ligson.fw.core.service.impl.BaseServiceImpl;
 import org.ligson.se.dao.impl.UserDaoImpl;
 import org.ligson.se.entity.UserEntity;
 import org.ligson.se.service.UserService;
