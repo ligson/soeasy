@@ -26,6 +26,7 @@
     <!-- <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/jsp/" /> <property name="suffix" value=".jsp"
         /> </bean> -->
+    <import resource="spring-velocity.xml"/>
 
 
     <bean id="bmcConfig"
@@ -62,14 +63,6 @@
     <mvc:annotation-driven/>
 
     <!-- 设置使用注解的类所在的jar包 -->
-    <context:component-scan base-package="org.ligson.coderstar2.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.user.admin.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.user.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.system.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.question.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.question.admin.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.article.admin.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.article.controllers"/>
-    <context:component-scan base-package="org.ligson.coderstar2.pay.admin.controllers"/>
+    <context:component-scan base-package="org.ligson.soeasy.web"/>
 
 </beans>

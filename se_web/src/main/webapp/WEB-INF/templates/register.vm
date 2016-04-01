@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册</title>
+</head>
+<body>
+<form action="/register.do" method="post">
+    <input type="hidden" name="loginNameTypeEnum" value="NAME"/>
+    name:<input type="text" name="loginName" value=""/><br/>
+    password:<input type="text" name="password" value=""/><br/>
+    <input type="submit" value="注册"/>
+</form>
+</body>
+</html>

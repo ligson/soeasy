@@ -3,7 +3,7 @@ package user;
 import base.BaseTest;
 import org.junit.Test;
 import org.ligson.fw.core.facade.base.result.Result;
-import org.ligson.fw.core.utils.encode.HashHelper;
+import org.ligson.fw.string.encode.HashHelper;
 import org.ligson.se.api.dto.LoginRequestDto;
 import org.ligson.se.api.dto.LoginResponseDto;
 import org.ligson.se.api.dto.RegisterRequestDto;
