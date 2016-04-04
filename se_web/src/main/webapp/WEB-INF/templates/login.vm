@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>登录</title>
-</head>
-<body>
 <form action="/login.do" method="post">
     <input type="hidden" name="loginNameTypeEnum" value="NAME"/>
     name:<input type="text" name="loginName" value=""/><br/>
     password:<input type="text" name="password" value=""/><br/>
     <input type="submit" value="登录"/>
 </form>
-</body>
-</html>

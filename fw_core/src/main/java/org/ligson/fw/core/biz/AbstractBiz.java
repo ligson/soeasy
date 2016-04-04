@@ -193,7 +193,12 @@ public abstract class AbstractBiz<Q extends BaseRequestDto, R extends BaseRespon
                         }
 
                         //TODO -1这个边界不对,思路需要重新想想
-                        if (DataValidator.isNum(value.toString())) {
+                        if ((param.min() != -1) || (param.max() != -1)) {
+                            if (!DataValidator.isNum(value.toString())) {
+                                logger.warn("请求参数{}的值({})不是一个整数格式", name, value);
+                                setFailureResult(FailureCodeEnum.E_PARAM_00004, FailureCodeEnum.E_PARAM_00004.getMsg() + ":" + name);
+                                return false;
+                            }
                             int num = Integer.parseInt(value.toString());
                             if (param.min() != -1) {
                                 if (num < param.min()) {

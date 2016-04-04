@@ -1,0 +1,10 @@
+#*VelocityLayoutServlet*#
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+$!screen_content
+</body>
+</html>
