@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--freemarker 模板继承配置 -->
+    <bean id="block"
+          class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/>
+    <bean id="override"
+          class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>
+    <bean id="extends"
+          class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
+    <bean id="freemarkerConfigurer"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/ftl/"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- <property name="configLocation" ref="bmcConfig"></property> -->
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">${ftl.template_update_delay}</prop>
+                <prop key="locale">${ftl.locale}</prop>
+                <prop key="datetime_format">${ftl.datetime_format}</prop>
+                <prop key="date_format">${ftl.date_format}</prop>
+                <prop key="number_format">${ftl.number_format}</prop>
+                <prop key="classic_compatible">true</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="block" value-ref="block"/>
+                <entry key="override" value-ref="override"/>
+                <entry key="extends" value-ref="extends"/>
+                <entry key="basePath" value="${appconfig.domain}/"/>
+                <entry key="assetsPath" value="${appconfig.domain}/"/>
+                <entry key="appName" value="${appconfig.name}"/>
+            </map>
+        </property>
+    </bean>
+    <!-- FreeMarker视图解析 如返回userinfo。。在这里配置后缀名ftl和视图解析器。。 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="cache" value="true"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="requestContextAttribute" value="request"/>
+        <property name="allowSessionOverride" value="true"/>
+    </bean>
+</beans>
