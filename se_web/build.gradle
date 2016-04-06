@@ -35,7 +35,9 @@ dependencies {
     compile("com.alibaba:dubbo:${dubboVersion}") {
         exclude(group: "org.springframework", module: "spring")
     }
-    compile "com.101tec:zkclient:${zkclientVersion}"
+    compile("com.101tec:zkclient:${zkclientVersion}") {
+        exclude(group: "log4j")
+    }
 
     //velocity
     compile "org.apache.velocity:velocity:${velocityVersion}"

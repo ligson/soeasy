@@ -11,7 +11,7 @@
           class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
     <bean id="freemarkerConfigurer"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/ftl/"/>
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
         <property name="defaultEncoding" value="UTF-8"/>
         <!-- <property name="configLocation" ref="bmcConfig"></property> -->
         <property name="freemarkerSettings">
@@ -29,9 +29,9 @@
                 <entry key="block" value-ref="block"/>
                 <entry key="override" value-ref="override"/>
                 <entry key="extends" value-ref="extends"/>
-                <entry key="basePath" value="${appconfig.domain}/"/>
-                <entry key="assetsPath" value="${appconfig.domain}/"/>
-                <entry key="appName" value="${appconfig.name}"/>
+                <!-- <entry key="basePath" value="${appconfig.domain}/"/>
+                 <entry key="assetsPath" value="${appconfig.domain}/"/>
+                 <entry key="appName" value="${appconfig.name}"/>-->
             </map>
         </property>
     </bean>

@@ -29,9 +29,13 @@
     <import resource="spring-freemarker.xml"/>
 
 
-    <bean id="bmcConfig"
+    <bean id="config"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:conf/config.properties"/>
+    </bean>
+    <bean id="dubboConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:conf/dubbo.properties"/>
     </bean>
 
 

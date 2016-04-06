@@ -1,0 +1,31 @@
+.nav_top {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.jumbotron {
+    background: linear-gradient(45deg, #020031 0, #6d3353 100%);
+    margin-bottom: 0;
+}
+
+.text-white {
+    color: white;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+.idx_body {
+    background-color: #ffffff;
+    padding: 10px;
+    min-height: 500px;
+}
+
+/*******在整个window中垂直居中********/
+.vertical-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
