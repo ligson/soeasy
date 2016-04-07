@@ -258,6 +258,10 @@ public abstract class AbstractBiz<Q extends BaseRequestDto, R extends BaseRespon
             logger.debug("======================>业务处理完成,开始返回");
             return;
         }
+        //忘记调用setSuccessResult的再调用一次
+        if ((context.getResult() == null) && (responseDto.getSuccess() != null && responseDto.getSuccess())) {
+            setSuccessResult();
+        }
         logger.debug("======================>业务处理完成");
         logger.debug("======================>持久化开始");
         Boolean persistence = persistence();

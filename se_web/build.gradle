@@ -39,12 +39,6 @@ dependencies {
         exclude(group: "log4j")
     }
 
-    //velocity
-    compile "org.apache.velocity:velocity:${velocityVersion}"
-    compile("org.apache.velocity:velocity-tools:${velocityToolsVersion}") {
-        exclude(group: "org.apache.struts")
-    }
-
     //jackson
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
@@ -52,6 +46,11 @@ dependencies {
     //commons-fileupload
     compile "commons-fileupload:commons-fileupload:1.3"
 
+    //velocity
+    compile "org.apache.velocity:velocity:${velocityVersion}"
+    compile("org.apache.velocity:velocity-tools:${velocityToolsVersion}") {
+        exclude(group: "org.apache.struts")
+    }
     compile "org.apache.tiles:tiles-velocity:${tilesVersion}"
     compile "org.apache.tiles:tiles-template:${tilesVersion}"
 

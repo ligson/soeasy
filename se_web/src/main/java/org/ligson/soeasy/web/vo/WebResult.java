@@ -3,34 +3,15 @@ package org.ligson.soeasy.web.vo;
 
 import org.ligson.fw.core.facade.base.result.Result;
 
-import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by ligson on 2016/3/17.
  */
-public class WebResult implements Serializable {
-    private Map<String, Object> data = new HashMap<>();
+public class WebResult extends HashMap<String, Object> {
     private Boolean success = false;
     private String errorCode;
     private String errorMsg;
-
-    public void put(String key, Object value) {
-        data.put(key, value);
-    }
-
-    public Object get(String key) {
-        return data.get(key);
-    }
-
-    public Map<String, Object> getData() {
-        return data;
-    }
-
-    public void setData(Map<String, Object> data) {
-        this.data = data;
-    }
 
     public Boolean getSuccess() {
         return success;
@@ -38,10 +19,14 @@ public class WebResult implements Serializable {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+        if (success != null) {
+            put("success", success);
+        }
     }
 
+    @Override
     public void clear() {
-        data.clear();
+        super.clear();
         setSuccess(false);
         setErrorCode(null);
         setErrorMsg(null);
@@ -53,6 +38,9 @@ public class WebResult implements Serializable {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
+        if (errorCode != null) {
+            put("errorCode", errorCode);
+        }
     }
 
     public String getErrorMsg() {
@@ -61,6 +49,9 @@ public class WebResult implements Serializable {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+        if (errorMsg != null) {
+            put("errorMsg", errorMsg);
+        }
     }
 
     public void setError(Result errorResult) {

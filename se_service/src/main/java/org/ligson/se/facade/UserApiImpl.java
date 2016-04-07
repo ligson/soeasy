@@ -2,10 +2,9 @@ package org.ligson.se.facade;
 
 import org.ligson.fw.core.facade.base.result.Result;
 import org.ligson.se.api.UserApi;
-import org.ligson.se.api.dto.LoginRequestDto;
-import org.ligson.se.api.dto.LoginResponseDto;
-import org.ligson.se.api.dto.RegisterRequestDto;
-import org.ligson.se.api.dto.RegisterResponseDto;
+import org.ligson.se.api.dto.*;
+import org.ligson.se.api.enums.user.LoginNameTypeEnum;
+import org.ligson.se.biz.user.CheckLoginNameBiz;
 import org.ligson.se.biz.user.LoginBiz;
 import org.ligson.se.biz.user.RegisterBiz;
 import org.springframework.stereotype.Component;
@@ -25,6 +24,9 @@ public class UserApiImpl implements UserApi {
     @Resource
     private RegisterBiz registerBiz;
 
+    @Resource
+    private CheckLoginNameBiz checkLoginNameBiz;
+
     @Override
     public Result<LoginResponseDto> login(LoginRequestDto requestDto) {
         return loginBiz.operation(requestDto);
@@ -33,5 +35,10 @@ public class UserApiImpl implements UserApi {
     @Override
     public Result<RegisterResponseDto> register(RegisterRequestDto requestDto) {
         return registerBiz.operation(requestDto);
+    }
+
+    @Override
+    public Result<ChkLoginNameValidResponseDto> checkLoginName(ChkLoginNameValidRequestDto requestDto) {
+        return checkLoginNameBiz.operation(requestDto);
     }
 }

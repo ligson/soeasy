@@ -28,6 +28,8 @@
         /> </bean> -->
     <import resource="spring-freemarker.xml"/>
 
+    <import resource="consumer.xml"/>
+
 
     <bean id="config"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
