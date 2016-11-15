@@ -16,6 +16,7 @@ public class OrmConfig {
     private String entityName;
     private String entityPackage;
     private String servicePackage;
+    private String serviceName;
     private String mapperPath;
     private String servicePath;
     private String entityPath;
@@ -45,6 +46,7 @@ public class OrmConfig {
             setEntityName(config.getValue("entity_name"));
             setEntityPackage(config.getValue("entity_package"));
             setServicePackage(config.getValue("service_package"));
+            setServiceName(config.getValue("service_name"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,6 +146,13 @@ public class OrmConfig {
 
     public void setEntityPath(String entityPath) {
         this.entityPath = entityPath;
+    }
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     @Override
