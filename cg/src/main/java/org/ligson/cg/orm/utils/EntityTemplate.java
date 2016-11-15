@@ -17,7 +17,11 @@ public class EntityTemplate {
         map.put("tableInfo", tableInfo);
         map.put("entityPackage", ormConfig.getEntityPackage());
         map.put("entityName", ormConfig.getEntityName());
-        File dest = new File(ormConfig.getEntityPath(), ormConfig
+        File root = new File(ormConfig.getEntityPath());
+        if(!root.exists()){
+            root.mkdirs();
+        }
+        File dest = new File(root, ormConfig
                 .getEntityName() + ".java");
         TemplateEngine.write("Entity.ftl", map, dest);
     }

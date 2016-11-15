@@ -18,6 +18,10 @@ public class MapperTemplate {
         map.put("tableInfo", tableInfo);
         map.put("entityName", ormConfig.getEntityName());
         map.put("entityPackage", ormConfig.getEntityPackage());
+        File mapperPath = new File(ormConfig.getMapperPath());
+        if(!mapperPath.exists()){
+            mapperPath.mkdirs();
+        }
         File dest = new File(ormConfig.getMapperPath(), ormConfig.getEntityName() + "Mapper.xml");
         TemplateEngine.write("EntityMapper.ftl", map, dest);
     }
