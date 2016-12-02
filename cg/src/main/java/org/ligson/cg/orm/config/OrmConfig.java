@@ -264,7 +264,7 @@ public class OrmConfig {
     }
 
     public String getBasePackage() {
-        File file = new File(getBasePath(), basePackage.replaceAll("\\.", "/"));
+        File file = new File(getBasePath(), "src/main/java/"+basePackage.replaceAll("\\.", "/"));
         if (!file.exists()) {
             file.mkdirs();
         }
