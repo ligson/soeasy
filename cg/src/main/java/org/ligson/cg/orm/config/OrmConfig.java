@@ -1,6 +1,14 @@
 package org.ligson.cg.orm.config;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang.reflect.MethodUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * Created by ligson on 2016/1/28.
@@ -20,7 +28,16 @@ public class OrmConfig {
     private String mapperPath;
     private String servicePath;
     private String entityPath;
+    private String baseName;
+    private String basePackage;
+    private String basePath;
+    private String daoPath;
+    private String daoPackage;
+    private String daoName;
+
     private static OrmConfig ormConfig;
+
+    private static Logger logger = LoggerFactory.getLogger(OrmConfig.class);
 
     public static synchronized OrmConfig getInstance() {
         if (ormConfig == null) {
@@ -31,25 +48,93 @@ public class OrmConfig {
 
     private OrmConfig() {
         File file = new File(ConfigUtils.class.getClassLoader().getResource("./cgconf/orm.properties").getFile());
+        ConfigUtils config = null;
         try {
-            ConfigUtils config = new ConfigUtils(file);
-            setDatabaseName(config.getValue("database_name"));
-            setTableName(config.getValue("table_name"));
-            setDriverName(config.getValue("driver_name"));
-            setServicePath(config.getValue("service_path"));
-            setMapperPath(config.getValue("mapper_path"));
-            setEntityPath(config.getValue("entity_path"));
-
-            setUrl(config.getValue("url"));
-            setUsername(config.getValue("username"));
-            setPassword(config.getValue("password"));
-            setEntityName(config.getValue("entity_name"));
-            setEntityPackage(config.getValue("entity_package"));
-            setServicePackage(config.getValue("service_package"));
-            setServiceName(config.getValue("service_name"));
+            config = new ConfigUtils(file);
         } catch (Exception e) {
             e.printStackTrace();
+            return;
         }
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            char[] chars = field.getName().toCharArray();
+            int idx = -1;
+            for (int i = 0; i < chars.length; i++) {
+                if (Character.isUpperCase(chars[i])) {
+                    idx = i;
+                    break;
+                }
+            }
+            String configKey = null;
+            if (idx == -1) {
+                configKey = field.getName();
+            } else {
+                configKey = field.getName().substring(0, idx) + "_" + field.getName().substring(idx).toLowerCase();
+            }
+            try{
+                Method method = this.getClass().getMethod("set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1), String.class);
+                if (method != null) {
+                    method.invoke(this, config.getValue(configKey));
+                }
+            }catch (Exception e){
+                logger.warn("跳过字段:{}",field.getName());
+            }
+        }
+    }
+
+    private String packageToPath() {
+        return getBasePackage().replaceAll("\\.", "/");
+    }
+
+    public File getServiceDir() {
+        File serviceDir;
+        if (StringUtils.isEmpty(getServicePath())) {
+            serviceDir = new File(getBasePath(), "src/main/java/" + packageToPath() + "/service");
+        } else {
+            serviceDir = new File(getServicePath());
+        }
+        if (!serviceDir.exists()) {
+            logger.info("service文件夹{}创建{}", serviceDir.getAbsolutePath(), serviceDir.mkdirs() ? "成功" : "失败");
+        }
+        return serviceDir;
+    }
+    public File getDaoDir() {
+        File daoDir;
+        if (StringUtils.isEmpty(getDaoPath())) {
+            daoDir = new File(getBasePath(), "src/main/java/" + packageToPath() + "/dao");
+        } else {
+            daoDir = new File(getDaoPath());
+        }
+        if (!daoDir.exists()) {
+            logger.info("dao文件夹{}创建{}", daoDir.getAbsolutePath(), daoDir.mkdirs() ? "成功" : "失败");
+        }
+        return daoDir;
+    }
+
+    public File getEntityDir() {
+        File entityDir;
+        if (StringUtils.isEmpty(getEntityPath())) {
+            entityDir = new File(getBasePath(), "src/main/java/" + packageToPath() + "/entity");
+        } else {
+            entityDir = new File(getEntityPath());
+        }
+        if (!entityDir.exists()) {
+            logger.info("entity文件夹{}创建{}", entityDir.getAbsolutePath(), entityDir.mkdirs() ? "成功" : "失败");
+        }
+        return entityDir;
+    }
+
+    public File getMapperDir() {
+        File mapperDir;
+        if (StringUtils.isEmpty(getMapperPath())) {
+            mapperDir = new File(getBasePath(), "src/main/resources/META-INF/mybatis/mapper");
+        } else {
+            mapperDir = new File(getMapperPath());
+        }
+        if (!mapperDir.exists()) {
+            logger.info("mapper文件夹{}创建{}", mapperDir.getAbsolutePath(), mapperDir.mkdirs() ? "成功" : "失败");
+        }
+        return mapperDir;
     }
 
     public String getDriverName() {
@@ -117,6 +202,9 @@ public class OrmConfig {
     }
 
     public String getEntityName() {
+        if (StringUtils.isEmpty(entityName)) {
+            return getBaseName() + "Entity";
+        }
         return entityName;
     }
 
@@ -125,6 +213,10 @@ public class OrmConfig {
     }
 
     public String getEntityPackage() {
+        if (StringUtils.isEmpty(entityPackage)) {
+            entityPackage = getBasePackage() + ".entity";
+        }
+        getEntityDir();
         return entityPackage;
     }
 
@@ -133,6 +225,10 @@ public class OrmConfig {
     }
 
     public String getServicePackage() {
+        if (StringUtils.isEmpty(servicePackage)) {
+            servicePackage = getBasePackage() + ".service";
+        }
+        getServiceDir();
         return servicePackage;
     }
 
@@ -147,12 +243,75 @@ public class OrmConfig {
     public void setEntityPath(String entityPath) {
         this.entityPath = entityPath;
     }
+
     public String getServiceName() {
+        if (StringUtils.isEmpty(serviceName)) {
+            serviceName = getBaseName() + "Service";
+        }
         return serviceName;
     }
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public String getBaseName() {
+        return baseName;
+    }
+
+    public void setBaseName(String baseName) {
+        this.baseName = baseName;
+    }
+
+    public String getBasePackage() {
+        File file = new File(getBasePath(), basePackage.replaceAll("\\.", "/"));
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return basePackage;
+    }
+
+    public void setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
+    }
+
+    public String getBasePath() {
+        return basePath;
+    }
+
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
+    }
+
+    public String getDaoPath() {
+        return daoPath;
+    }
+
+    public void setDaoPath(String daoPath) {
+        this.daoPath = daoPath;
+    }
+
+    public String getDaoPackage() {
+        if (StringUtils.isEmpty(daoPackage)) {
+            daoPackage = getBasePackage() + ".dao";
+        }
+       getDaoDir();
+        return daoPackage;
+    }
+
+    public void setDaoPackage(String daoPackage) {
+        this.daoPackage = daoPackage;
+    }
+
+    public String getDaoName() {
+        if (StringUtils.isEmpty(daoName)) {
+            daoName = getBaseName() + "Dao";
+        }
+        return daoName;
+    }
+
+    public void setDaoName(String daoName) {
+        this.daoName = daoName;
     }
 
     @Override
@@ -167,9 +326,16 @@ public class OrmConfig {
                 ", entityName='" + entityName + '\'' +
                 ", entityPackage='" + entityPackage + '\'' +
                 ", servicePackage='" + servicePackage + '\'' +
+                ", serviceName='" + serviceName + '\'' +
                 ", mapperPath='" + mapperPath + '\'' +
                 ", servicePath='" + servicePath + '\'' +
                 ", entityPath='" + entityPath + '\'' +
+                ", baseName='" + baseName + '\'' +
+                ", basePackage='" + basePackage + '\'' +
+                ", basePath='" + basePath + '\'' +
+                ", daoPath='" + daoPath + '\'' +
+                ", daoPackage='" + daoPackage + '\'' +
+                ", daoName='" + daoName + '\'' +
                 '}';
     }
 

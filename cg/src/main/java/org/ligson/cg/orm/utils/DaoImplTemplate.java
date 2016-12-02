@@ -8,17 +8,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ligso on 2016/2/23.
+ * Created by ligson on 2016/12/2.
  */
-public class EntityTemplate {
+public class DaoImplTemplate {
     private static OrmConfig ormConfig = OrmConfig.getInstance();
+
     public static void write(TableInfo tableInfo) {
         Map<String, Object> map = new HashMap<>();
         map.put("tableInfo", tableInfo);
         map.put("entityPackage", ormConfig.getEntityPackage());
         map.put("entityName", ormConfig.getEntityName());
-        File dest = new File(ormConfig.getEntityDir(), ormConfig
-                .getEntityName() + ".java");
-        TemplateEngine.write("Entity.ftl", map, dest);
+        map.put("daoName", ormConfig.getDaoName());
+        map.put("daoPackage",ormConfig.getDaoPackage());
+        File daoImplDir = new File(ormConfig.getDaoDir(),"impl");
+        if(!daoImplDir.exists()){
+            daoImplDir.mkdirs();
+        }
+        File dest = new File(daoImplDir, ormConfig
+                .getDaoName() + "Impl.java");
+        TemplateEngine.write("DaoImpl.ftl", map, dest);
     }
 }

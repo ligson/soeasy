@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- call_log  -->
+<mapper namespace="nullEntityMapper">
+
+    <!--通用表字段列表-->
+    <resultMap id="BaseResultMap"
+               type="null.entity.nullEntity">
+        <result column="id" property="id"
+                jdbcType="VARCHAR"/>
+        <result column="caller" property="caller"
+                jdbcType="VARCHAR"/>
+        <result column="called" property="called"
+                jdbcType="VARCHAR"/>
+        <result column="call_id" property="callId"
+                jdbcType="VARCHAR"/>
+        <result column="start_time" property="startTime"
+                jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime"
+                jdbcType="TIMESTAMP"/>
+        <result column="connect_time" property="connectTime"
+                jdbcType="TIMESTAMP"/>
+        <result column="hot_line_id" property="hotLineId"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--通用表字段列表-->
+
+    <!--通用查询条件组装-->
+    <sql id="whereCondition">
+        <if test="id != null">
+            AND id=#{id,jdbcType=VARCHAR}
+        </if>
+        <if test="caller != null">
+            AND caller=#{caller,jdbcType=VARCHAR}
+        </if>
+        <if test="called != null">
+            AND called=#{called,jdbcType=VARCHAR}
+        </if>
+        <if test="callId != null">
+            AND call_id=#{callId,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null">
+            AND start_time=#{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            AND end_time=#{endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="connectTime != null">
+            AND connect_time=#{connectTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="hotLineId != null">
+            AND hot_line_id=#{hotLineId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <!--查询字段列表拼装-->
+    <sql id="baseColumnList">
+        id,
+        caller,
+        called,
+        call_id,
+        start_time,
+        end_time,
+        connect_time,
+        hot_line_id
+    </sql>
+
+    <!--
+    方法名称: insert
+    调用路径: nullEntityMapper.insert
+    开发信息:
+    处理信息: 保存记录
+    -->
+    <insert id="insert"
+            parameterType="null.entity.nullEntity">
+        INSERT INTO call_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="caller != null">
+                caller,
+            </if>
+            <if test="called != null">
+                called,
+            </if>
+            <if test="callId != null">
+                call_id,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="connectTime != null">
+                connect_time,
+            </if>
+            <if test="hotLineId != null">
+                hot_line_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="caller != null">
+                #{caller,jdbcType=VARCHAR},
+            </if>
+            <if test="called != null">
+                #{called,jdbcType=VARCHAR},
+            </if>
+            <if test="callId != null">
+                #{callId,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="connectTime != null">
+                #{connectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hotLineId != null">
+                #{hotLineId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--
+    方法名称: update
+    调用路径: nullEntityMapper.update
+    开发信息:
+    处理信息: 修改记录
+    -->
+    <update id="update"
+            parameterType="null.entity.nullEntity">
+        UPDATE call_log
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="caller != null">
+                caller = #{caller,jdbcType=VARCHAR},
+            </if>
+            <if test="called != null">
+                called = #{called,jdbcType=VARCHAR},
+            </if>
+            <if test="callId != null">
+                call_id = #{callId,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="connectTime != null">
+                connect_time = #{connectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hotLineId != null">
+                hot_line_id = #{hotLineId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </update>
+
+    <!--
+    方法名称: updateBak
+    调用路径: nullEntityMapper.updateBak
+    开发信息:
+    处理信息: 修改记录
+    -->
+    <update id="updateBak"
+            parameterType="null.entity.nullEntity">
+        UPDATE call_log
+        <set>
+            id = #{id,jdbcType=VARCHAR},
+            caller = #{caller,jdbcType=VARCHAR},
+            called = #{called,jdbcType=VARCHAR},
+            call_id = #{callId,jdbcType=VARCHAR},
+            start_time = #{startTime,jdbcType=TIMESTAMP},
+            end_time = #{endTime,jdbcType=TIMESTAMP},
+            connect_time = #{connectTime,jdbcType=TIMESTAMP},
+            hot_line_id = #{hotLineId,jdbcType=VARCHAR},
+        </set>
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </update>
+
+    <!--
+    方法名称: delete
+    调用路径:nullEntityMapper.delete
+    开发信息:
+    处理信息: 删除记录
+    -->
+    <delete id="delete"
+            parameterType="null.entity.nullEntity">
+        DELETE FROM call_log
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </delete>
+
+    <!--
+    方法名称: findBy
+    调用路径: nullEntityMapper.findBy
+    开发信息:
+    处理信息: 根据主键查询记录
+    -->
+    <select id="findBy"
+            parameterType="null.entity.nullEntity"
+            resultType="null.entity.nullEntity">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM call_log
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </select>
+
+    <!--
+    方法名称: countBy
+    调用路径: nullEntityMapper.countBy
+    开发信息:
+    处理信息: 根据主键统计记录
+    -->
+    <select id="countBy"
+            parameterType="null.entity.nullEntity"
+            resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM call_log
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </select>
+
+    <!--
+    方法名称: getPaginationList
+    调用路径: nullEntityMapper.getPaginationList
+    开发信息:
+    处理信息: 分页查询记录
+    -->
+    <select id="getPaginationList"
+            parameterType="null.entity.nullEntity"
+            resultType="null.entity.nullEntity">
+        <!-- 分页条 -->
+        <include refid="CommonEntity.paginationPrefix"/>
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM call_log
+        WHERE 1=1
+        <include refid="whereCondition"/>
+        <if test="sort != null and order != null">
+            ORDER BY ${sort} ${order}
+        </if>
+        <!-- 分页条 -->
+        <include refid="CommonEntity.paginationSuffix"/>
+    </select>
+
+    <!--
+    方法名称: getPaginationList-count
+    调用路径: nullEntityMapper.getPaginationList-count
+    开发信息:
+    处理信息: 查询记录数
+    -->
+    <select id="getPaginationList-count"
+            parameterType="null.entity.nullEntity"
+            resultType="int">
+        SELECT count(1) FROM call_log
+        WHERE 1=1
+        <include refid="whereCondition"/>
+    </select>
+
+    <!--
+    方法名称: getList
+    调用路径: nullEntityMapper.getList
+    开发信息:
+    处理信息: 根据条件查询记录
+    -->
+    <select id="getList"
+            parameterType="null.entity.nullEntity"
+            resultType="null.entity.nullEntity">
+        SELECT
+        <include refid="baseColumnList"/>
+        FROM call_log
+        WHERE 1=1
+        <include refid="whereCondition"/>
+        <if test="sort != null and order != null">
+            ORDER BY ${sort} ${order}
+        </if>
+        limit 0,100
+    </select>
+
+    <!--用户自定义代码开始-->
+
+    <!--用户自定义代码结束-->
+</mapper>

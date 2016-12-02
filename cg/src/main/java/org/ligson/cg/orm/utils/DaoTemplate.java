@@ -1,6 +1,5 @@
 package org.ligson.cg.orm.utils;
 
-import org.apache.commons.lang.StringUtils;
 import org.ligson.cg.orm.bean.TableInfo;
 import org.ligson.cg.orm.config.OrmConfig;
 
@@ -9,17 +8,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ligson on 2016/2/22.
+ * Created by ligson on 2016/12/2.
  */
-public class MapperTemplate {
+public class DaoTemplate {
     private static OrmConfig ormConfig = OrmConfig.getInstance();
 
     public static void write(TableInfo tableInfo) {
         Map<String, Object> map = new HashMap<>();
         map.put("tableInfo", tableInfo);
-        map.put("entityName", ormConfig.getEntityName());
         map.put("entityPackage", ormConfig.getEntityPackage());
-        File dest = new File(ormConfig.getMapperDir(), ormConfig.getEntityName() + "Mapper.xml");
-        TemplateEngine.write("EntityMapper.ftl", map, dest);
+        map.put("entityName", ormConfig.getEntityName());
+        map.put("daoName", ormConfig.getDaoName());
+        map.put("daoPackage",ormConfig.getDaoPackage());
+        File dest = new File(ormConfig.getDaoDir(), ormConfig
+                .getDaoName() + ".java");
+        TemplateEngine.write("Dao.ftl", map, dest);
     }
 }

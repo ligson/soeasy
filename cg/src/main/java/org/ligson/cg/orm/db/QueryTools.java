@@ -3,8 +3,7 @@ package org.ligson.cg.orm.db;
 import org.ligson.cg.orm.bean.ColumnInfo;
 import org.ligson.cg.orm.bean.TableInfo;
 import org.ligson.cg.orm.config.OrmConfig;
-import org.ligson.cg.orm.utils.EntityTemplate;
-import org.ligson.cg.orm.utils.MapperTemplate;
+import org.ligson.cg.orm.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,6 +124,14 @@ public class QueryTools {
         logger.info("实体Mapper生成成功.....");
         EntityTemplate.write(ti);
         logger.info("实体生成成功.....");
+        ServiceTemplate.write(ti);
+        logger.info("服务生成成功.....");
+        DaoTemplate.write(ti);
+        logger.info("dao生成成功.....");
+        DaoImplTemplate.write(ti);
+        logger.info("dao impl生成成功.....");
+        ServiceImplTemplate.write(ti);
+        logger.info("service impl生成成功.....");
         qt = null;
         System.gc();
     }

@@ -144,7 +144,7 @@
     开发信息:
     处理信息: 分页查询记录
     -->
-    <select id="getPagenationList"
+    <select id="getPaginationList"
             parameterType="${entityPackage}.${entityName}"
             resultType="${entityPackage}.${entityName}">
         <!-- 分页条 -->
@@ -167,7 +167,7 @@
     开发信息:
     处理信息: 查询记录数
     -->
-    <select id="getPagenationList-count"
+    <select id="getPaginationList-count"
             parameterType="${entityPackage}.${entityName}"
             resultType="int">
         SELECT count(1) FROM ${tableInfo.tableName}
